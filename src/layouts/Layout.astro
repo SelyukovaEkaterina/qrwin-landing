@@ -1,0 +1,73 @@
+---
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import YandexMetrika from '../components/YandexMetrika.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  /** If true, title is used as-is without appending " | QrStars" */
+  fullTitle?: boolean;
+  canonical?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = 'QR-экосистема для локального бизнеса. Динамические QR-коды для отзывов, меню, визиток и оплаты.',
+  fullTitle = false,
+  canonical,
+  ogImage = 'https://qrstars.ru/og-default.jpg',
+} = Astro.props;
+
+const pageTitle = fullTitle ? title : `${title} | QrStars`;
+const canonicalUrl = canonical ?? new URL(Astro.url.pathname, 'https://qrstars.ru').href;
+---
+
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:site_name" content="QrStars" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style is:global>
+      .gradient-text {
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .feature-card:hover i {
+        transform: scale(1.1);
+        transition: transform 0.3s;
+      }
+      @tailwind base;
+      @tailwind components;
+      @tailwind utilities;
+    </style>
+  </head>
+  <body class="font-sans text-slate-800 bg-slate-50 antialiased flex flex-col min-h-screen">
+    <Nav />
+    <main class="flex-grow">
+      <slot />
+    </main>
+    <Footer />
+    <YandexMetrika />
+  </body>
+</html>

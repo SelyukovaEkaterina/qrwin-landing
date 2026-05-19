@@ -1,0 +1,166 @@
+---
+import Layout from '../layouts/Layout.astro';
+import DemoQrScan from '../components/DemoQrScan.astro';
+
+const DEMO_SCAN_URL = 'https://app.qrstars.ru/scan/demo-business-card';
+---
+
+<Layout title="QR-визитки для сотрудников" description="Цифровые визитки для команды: контакты в один клик и кнопка чаевых через CloudTips, Netmonet или СБП. Модуль Pro в QrStars.">
+    <section class="pt-32 pb-16 lg:pt-40 lg:pb-20 overflow-hidden bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="z-10">
+                    <div class="flex flex-wrap items-center gap-2 mb-6">
+                        <div class="inline-block bg-primary/10 text-primary font-semibold px-4 py-1.5 rounded-full text-sm border border-primary/20">
+                            📇 Забудьте про бумажные визитки
+                        </div>
+                        <div class="inline-block bg-amber-100 text-amber-800 font-semibold px-3 py-1.5 rounded-full text-xs border border-amber-200">
+                            Pro-модуль
+                        </div>
+                    </div>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight mb-6">
+                        Цифровые <span class="text-primary">QR-визитки</span> <br/>
+                        для вашей команды
+                    </h1>
+                    <p class="text-lg md:text-xl text-slate-600 mb-8 max-w-lg leading-relaxed">
+                        Цифровая визитка, которая работает: клиент сохраняет контакты в Apple/Google Wallet и оставляет чаевые напрямую через привычный сервис (CloudTips, СБП и др.). Никаких комиссий QrStars — только удобство и аналитика.
+                    </p>
+                    
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start gap-3"><i class="fa-solid fa-check-circle text-green-500 mt-1"></i> <span class="text-slate-700 font-medium">Сохранение в Apple Wallet / Google Pay</span></li>
+                        <li class="flex items-start gap-3"><i class="fa-solid fa-check-circle text-green-500 mt-1"></i> <span class="text-slate-700 font-medium">Кнопка «Оставить чаевые» — переход в CloudTips, Netmonet или по СБП</span></li>
+                        <li class="flex items-start gap-3"><i class="fa-solid fa-check-circle text-green-500 mt-1"></i> <span class="text-slate-700 font-medium">Кнопка «Записаться онлайн» на визитке</span></li>
+                        <li class="flex items-start gap-3"><i class="fa-solid fa-check-circle text-green-500 mt-1"></i> <span class="text-slate-700 font-medium">Форма связи — получение сообщений с визитки в Telegram (с гео и IP)</span></li>
+                        <li class="flex items-start gap-3"><i class="fa-solid fa-check-circle text-green-500 mt-1"></i> <span class="text-slate-700 font-medium">Аналитика сканов и кликов по чаевым в личном кабинете</span></li>
+                    </ul>
+
+                    <p class="text-sm text-slate-500 mb-6 max-w-lg">
+                        QrStars не принимает платежи и не удерживает комиссию с чаевых — деньги поступают сотруднику через выбранный вами сервис.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="/#buy" class="inline-flex items-center justify-center bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-indigo-700 transition shadow-lg shadow-indigo-500/30">
+                            Подключить Pro
+                        </a>
+                        <a href="/#buy" class="inline-flex items-center justify-center bg-slate-100 text-slate-800 px-8 py-4 rounded-xl font-bold text-lg hover:bg-slate-200 transition">
+                            Смотреть тарифы
+                        </a>
+                    </div>
+                </div>
+
+                <div class="relative flex justify-center">
+                    <img src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&q=80&w=800" alt="QR визитка мастера" class="rounded-3xl shadow-2xl rotate-3 hover:rotate-0 transition duration-500" />
+                    <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-xl shadow-xl border border-slate-100 flex items-center gap-4 max-w-[220px]">
+                        <i class="fa-solid fa-arrow-up-right-from-square text-2xl text-primary shrink-0"></i>
+                        <div>
+                            <div class="font-bold text-sm text-slate-800">Переход к оплате</div>
+                            <div class="text-slate-500 text-xs">CloudTips · Netmonet · СБП</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <DemoQrScan
+        scanUrl={DEMO_SCAN_URL}
+        modeLabel="QR-визитка"
+        title="Отсканируйте демо визитки"
+        subtitle="Цифровая визитка сотрудника: контакты, запись онлайн и кнопка чаевых — как у вашей команды"
+    />
+
+    <section class="py-16 lg:py-20 bg-slate-50 border-y border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 max-w-2xl mx-auto">
+                <h2 class="text-3xl font-bold mb-4">Как работают чаевые</h2>
+                <p class="text-slate-600">Без своего эквайринга: вы подключаете привычный сервис, мы даём кнопку на визитке и считаем конверсию.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+                    <div class="w-10 h-10 bg-primary/10 text-primary rounded-lg flex items-center justify-center font-bold mb-4">1</div>
+                    <h3 class="font-bold text-lg mb-2">Настройка в кабинете</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Владелец создаёт визитку мастера и вставляет ссылку на профиль CloudTips, Netmonet или СБП-перевод банка.</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+                    <div class="w-10 h-10 bg-primary/10 text-primary rounded-lg flex items-center justify-center font-bold mb-4">2</div>
+                    <h3 class="font-bold text-lg mb-2">Клиент сканирует QR</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">На экране визитки — контакты, запись онлайн и кнопка «Оставить чаевые».</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+                    <div class="w-10 h-10 bg-primary/10 text-primary rounded-lg flex items-center justify-center font-bold mb-4">3</div>
+                    <h3 class="font-bold text-lg mb-2">Оплата у партнёра</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Клиент переходит в выбранный сервис и платит напрямую сотруднику. QrStars фиксирует клик, не деньги.</p>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-4 text-sm text-slate-600">
+                <span class="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full border border-slate-200"><i class="fa-solid fa-building-columns text-slate-400"></i> CloudTips</span>
+                <span class="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full border border-slate-200"><i class="fa-solid fa-wallet text-slate-400"></i> Netmonet</span>
+                <span class="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full border border-slate-200"><i class="fa-solid fa-mobile-screen text-slate-400"></i> СБП и банковские ссылки</span>
+                <span class="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full border border-slate-200"><i class="fa-solid fa-link text-slate-400"></i> Любая своя ссылка на оплату</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 lg:py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="order-2 lg:order-1 relative bg-slate-50 rounded-3xl p-8 border border-slate-100 shadow-inner">
+                    <div class="bg-white rounded-2xl shadow-lg border border-slate-100 p-6 max-w-sm mx-auto">
+                        <div class="flex items-center gap-3 mb-4 pb-4 border-b border-slate-100">
+                            <div class="w-10 h-10 bg-[#0088cc]/10 rounded-full flex items-center justify-center text-[#0088cc]">
+                                <i class="fa-brands fa-telegram text-xl"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-sm">Новое сообщение с визитки</div>
+                                <div class="text-xs text-slate-500">Только что</div>
+                            </div>
+                        </div>
+                        <div class="space-y-3 text-sm">
+                            <p><strong>От:</strong> Александр</p>
+                            <p><strong>Сообщение:</strong> Здравствуйте! Мы познакомились на конференции, хочу обсудить сотрудничество.</p>
+                            <div class="bg-slate-50 p-3 rounded-lg text-xs text-slate-500 font-mono">
+                                <div>IP: 192.168.1.1 (Москва, РФ)</div>
+                                <div>Устройство: iPhone 14 Pro, Safari</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2">
+                    <div class="inline-block bg-[#0088cc]/10 text-[#0088cc] font-semibold px-3 py-1.5 rounded-full text-xs border border-[#0088cc]/20 mb-4">
+                        <i class="fa-brands fa-telegram mr-1"></i> Интеграция с Telegram / Макс
+                    </div>
+                    <h2 class="text-3xl font-bold mb-6">Получайте сообщения прямо с визитки</h2>
+                    <p class="text-slate-600 mb-6 text-lg leading-relaxed">
+                        Подключите свой Telegram или Макс, и в вашей QR-визитке появится кнопка <strong>«Написать человеку»</strong>. Клиент оставляет имя и сообщение, а вы получаете не только текст, но и важную аналитику.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <div class="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center shrink-0 mt-0.5"><i class="fa-solid fa-check text-xs"></i></div>
+                            <span class="text-slate-700"><strong>Мгновенная связь:</strong> Удобная форма прямо на странице визитки — сообщение моментально пересылается вам.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center shrink-0 mt-0.5"><i class="fa-solid fa-check text-xs"></i></div>
+                            <span class="text-slate-700"><strong>Больше данных о лидах:</strong> Вместе с сообщением мы передадим IP-адрес, регион, модель устройства и браузер отправителя.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center shrink-0 mt-0.5"><i class="fa-solid fa-check text-xs"></i></div>
+                            <span class="text-slate-700"><strong>Конфиденциальность:</strong> Вы можете получать сообщения, не раскрывая свой реальный номер телефона или никнейм.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-white">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-2xl font-bold mb-4">Доступно в подписке Pro</h2>
+            <p class="text-slate-600 mb-8">QR-визитки входят в экосистему QrStars вместе с умной ротацией отзывов, white label и расширенной аналитикой. При покупке NFC-таблички — 3 месяца Pro в подарок.</p>
+            <a href="/#buy" class="inline-block bg-slate-900 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-slate-800 transition shadow-lg">
+                Выбрать тариф
+            </a>
+        </div>
+    </section>
+</Layout>

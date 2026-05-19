@@ -1,0 +1,55 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import SeoCta from '../../components/seo/SeoCta.astro';
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection('blog');
+  return blogEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const d = entry.data;
+const displayTitle = d.h1 ?? d.title.replace(/\s*\|\s*QrStars\s*$/i, '');
+---
+
+<Layout
+  title={d.title}
+  description={d.description}
+  fullTitle={d.fullTitle ?? false}
+  canonical={`https://qrstars.ru/blog/${entry.slug}.html`}
+>
+  <article class="pt-32 pb-12 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <header class="mb-8">
+      {d.tags && d.tags.length > 0 && (
+        <div class="flex flex-wrap gap-2 mb-4">
+          {d.tags.map((tag: string) => (
+            <span class="text-xs font-semibold bg-primary/10 text-primary px-3 py-1 rounded-full">{tag}</span>
+          ))}
+        </div>
+      )}
+      <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">{displayTitle}</h1>
+      <time class="text-slate-500" datetime={d.pubDate.toISOString()}>
+        {d.pubDate.toLocaleDateString('ru-RU', { year: 'numeric', month: 'long', day: 'numeric' })}
+      </time>
+    </header>
+    {d.image && (
+      <div class="w-full h-64 md:h-96 rounded-2xl overflow-hidden mb-12">
+        <img src={d.image} alt={displayTitle} class="w-full h-full object-cover" />
+      </div>
+    )}
+    <div class="prose prose-slate lg:prose-lg max-w-none">
+      <Content />
+    </div>
+  </article>
+  <SeoCta
+    ctaText={d.ctaText ?? 'Создать QR-код бесплатно'}
+    ctaHref={d.ctaHref ?? '/#features'}
+    title="Готовы попробовать?"
+    text="Создайте QR-код в QrStars за 30 секунд — динамический, с логотипом и аналитикой."
+  />
+</Layout>

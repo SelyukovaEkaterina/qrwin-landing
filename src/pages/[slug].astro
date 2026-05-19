@@ -1,0 +1,80 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import SeoHero from '../components/seo/SeoHero.astro';
+import HowItWorks from '../components/seo/HowItWorks.astro';
+import ForWhom from '../components/seo/ForWhom.astro';
+import Faq from '../components/seo/Faq.astro';
+import QrExamples from '../components/seo/QrExamples.astro';
+import DemoQrScan from '../components/DemoQrScan.astro';
+import SeoCta from '../components/seo/SeoCta.astro';
+import RelatedPages from '../components/seo/RelatedPages.astro';
+
+export async function getStaticPaths() {
+  const seoPages = await getCollection('seo');
+  return seoPages.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const d = entry.data;
+
+const defaultSteps = [
+  { icon: 'fa-solid fa-link', title: 'Вставьте ссылку', text: 'Укажите URL, контакты или выберите шаблон для отзывов, меню или WiFi.' },
+  { icon: 'fa-solid fa-palette', title: 'Настройте дизайн', text: 'Добавьте логотип, фирменные цвета и рамку — код останется читаемым.' },
+  { icon: 'fa-solid fa-download', title: 'Скачайте QR', text: 'Получите PNG или SVG для печати на табличках, визитках и меню.' },
+  { icon: 'fa-solid fa-chart-line', title: 'Смотрите аналитику', text: 'Отслеживайте сканирования и меняйте ссылку без перепечатки (динамический QR).' },
+];
+
+const defaultIndustries = [
+  { icon: 'fa-solid fa-utensils', name: 'Кафе и рестораны' },
+  { icon: 'fa-solid fa-scissors', name: 'Салоны красоты' },
+  { icon: 'fa-solid fa-hospital', name: 'Клиники' },
+  { icon: 'fa-solid fa-store', name: 'Магазины' },
+  { icon: 'fa-solid fa-calendar', name: 'Мероприятия' },
+];
+---
+
+<Layout
+  title={d.title}
+  description={d.description}
+  fullTitle={d.fullTitle}
+  canonical={`https://qrstars.ru/${entry.slug}.html`}
+>
+  <SeoHero
+    badge={d.badge}
+    h1={d.h1}
+    intro={d.intro}
+    ctaText={d.ctaText}
+    ctaHref={d.ctaHref}
+    ctaSecondaryText={d.ctaSecondaryText}
+    ctaSecondaryHref={d.ctaSecondaryHref}
+  />
+
+  {d.demoScanUrl && (
+    <DemoQrScan
+      scanUrl={d.demoScanUrl}
+      modeLabel={d.demoScanLabel ?? d.h1}
+      title={d.demoScanTitle}
+      subtitle={d.demoScanSubtitle}
+    />
+  )}
+
+  <section class="py-12 lg:py-16 bg-white">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <article class="prose prose-slate lg:prose-lg max-w-none">
+        <Content />
+      </article>
+    </div>
+  </section>
+
+  <HowItWorks steps={d.howItWorks ?? defaultSteps} />
+  <ForWhom industries={d.forWhom ?? defaultIndustries} />
+  {!d.demoScanUrl && <QrExamples />}
+  <Faq items={d.faq} />
+  {d.related && <RelatedPages links={d.related} />}
+  <SeoCta ctaText={d.ctaText} ctaHref={d.ctaHref} />
+</Layout>
