@@ -255,7 +255,7 @@ const qrByPath = Object.fromEntries(
               class="phone-shell relative shrink-0 w-full max-w-[390px] aspect-[390/844] bg-slate-900 rounded-[2.75rem] shadow-2xl p-[10px] overflow-hidden"
             >
               <div class="absolute top-[10px] left-1/2 -translate-x-1/2 w-28 h-5 bg-slate-900 rounded-b-2xl z-10 pointer-events-none"></div>
-              <div class="phone-screen relative w-full h-full bg-white rounded-[2rem] overflow-hidden">
+              <div class="phone-screen relative w-full h-full bg-white overflow-hidden" style="border-radius: 2rem; clip-path: inset(0 round 2rem);">
                 <iframe
                   data-demo-iframe={v.id}
                   data-src={micrositeUrl}
@@ -265,7 +265,7 @@ const qrByPath = Object.fromEntries(
                   referrerpolicy="no-referrer-when-downgrade"
                   sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
                   class="phone-iframe absolute top-0 left-0 border-0 bg-white"
-                  style="width: 390px; height: 844px; transform-origin: top left;"
+                  style="width: 390px; height: 844px; transform-origin: top left; border-radius: 2.1rem;"
                 ></iframe>
               </div>
             </div>
