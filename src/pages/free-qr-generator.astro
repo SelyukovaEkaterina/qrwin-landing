@@ -1,0 +1,1416 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Бесплатный генератор QR-кодов с цветами и логотипом" description="Бесплатный онлайн-генератор красивых QR-кодов: цвета, градиенты, стили точек и глазков, логотип в центре, рамки. URL, WiFi, текст, email, телефон. Скачайте PNG за секунды.">
+
+    <section class="pt-24 pb-8 lg:pt-32 lg:pb-10 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-block bg-primary/10 text-primary font-semibold px-4 py-1.5 rounded-full text-sm mb-6 border border-primary/20">
+                100% бесплатно &middot; Без регистрации
+            </div>
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight mb-4 max-w-4xl mx-auto">
+                Генератор <span class="bg-gradient-to-r from-primary to-purple-500 gradient-text">красивых QR-кодов</span>
+            </h1>
+            <p class="text-lg text-slate-600 mb-0 max-w-2xl mx-auto">
+                Цвета, градиенты, стили точек, логотип в центре и рамки. Бесплатно и без регистрации.
+            </p>
+        </div>
+    </section>
+
+    <section class="pb-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-slate-50 rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="p-6 md:p-8">
+                    <!-- Type Tabs -->
+                    <div class="flex flex-wrap gap-2 mb-6" id="qr-tabs">
+                        <button data-type="url" class="qr-tab active-tab px-4 py-2.5 rounded-xl text-sm font-semibold transition">
+                            <i class="fa-solid fa-link mr-1.5"></i>URL
+                        </button>
+                        <button data-type="wifi" class="qr-tab px-4 py-2.5 rounded-xl text-sm font-semibold transition">
+                            <i class="fa-solid fa-wifi mr-1.5"></i>WiFi
+                        </button>
+                        <button data-type="text" class="qr-tab px-4 py-2.5 rounded-xl text-sm font-semibold transition">
+                            <i class="fa-solid fa-font mr-1.5"></i>Текст
+                        </button>
+                        <button data-type="email" class="qr-tab px-4 py-2.5 rounded-xl text-sm font-semibold transition">
+                            <i class="fa-solid fa-envelope mr-1.5"></i>Email
+                        </button>
+                        <button data-type="phone" class="qr-tab px-4 py-2.5 rounded-xl text-sm font-semibold transition">
+                            <i class="fa-solid fa-phone mr-1.5"></i>Телефон
+                        </button>
+                        <button data-type="vcard" class="qr-tab px-4 py-2.5 rounded-xl text-sm font-semibold transition">
+                            <i class="fa-solid fa-id-card mr-1.5"></i>Контакт
+                        </button>
+                        <button data-type="sms" class="qr-tab px-4 py-2.5 rounded-xl text-sm font-semibold transition">
+                            <i class="fa-solid fa-comment-sms mr-1.5"></i>SMS
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-8">
+                        <!-- LEFT: Inputs + Styling -->
+                        <div>
+                            <!-- URL Form -->
+                            <div id="form-url" class="qr-form">
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">Адрес ссылки</label>
+                                <input type="url" id="input-url" placeholder="https://example.com" class="qr-input" />
+                                <p class="mt-2 text-xs text-slate-500 leading-relaxed">
+                                    <i class="fa-solid fa-circle-info text-primary/70 mr-1"></i>
+                                    Этот код «зашьёт» ссылку навсегда — поменять её после печати нельзя.
+                                    <a href="https://app.qrstars.ru/register" class="text-primary font-semibold hover:underline">Сделайте динамический QR бесплатно</a> — ссылку можно менять, видна статистика сканирований.
+                                </p>
+                            </div>
+
+                            <!-- WiFi Form -->
+                            <div id="form-wifi" class="qr-form hidden">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-semibold text-slate-700 mb-2">Название сети (SSID)</label>
+                                        <input type="text" id="input-wifi-ssid" placeholder="MyNetwork" class="qr-input" />
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold text-slate-700 mb-2">Пароль</label>
+                                        <input type="text" id="input-wifi-pass" placeholder="••••••••" class="qr-input" />
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold text-slate-700 mb-2">Тип шифрования</label>
+                                        <select id="input-wifi-enc" class="qr-input bg-white">
+                                            <option value="WPA">WPA/WPA2</option>
+                                            <option value="WEP">WEP</option>
+                                            <option value="nopass">Без пароля</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Text Form -->
+                            <div id="form-text" class="qr-form hidden">
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">Произвольный текст</label>
+                                <textarea id="input-text" rows="5" placeholder="Введите текст..." class="qr-input resize-none"></textarea>
+                            </div>
+
+                            <!-- Email Form -->
+                            <div id="form-email" class="qr-form hidden">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-semibold text-slate-700 mb-2">Email-адрес</label>
+                                        <input type="email" id="input-email-addr" placeholder="hello@example.com" class="qr-input" />
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold text-slate-700 mb-2">Тема (необязательно)</label>
+                                        <input type="text" id="input-email-subj" placeholder="Тема письма" class="qr-input" />
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold text-slate-700 mb-2">Сообщение (необязательно)</label>
+                                        <textarea id="input-email-body" rows="3" placeholder="Текст письма..." class="qr-input resize-none"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Phone Form -->
+                            <div id="form-phone" class="qr-form hidden">
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">Номер телефона</label>
+                                <input type="tel" id="input-phone" placeholder="+7 (999) 123-45-67" class="qr-input" />
+                            </div>
+
+                            <!-- vCard Form -->
+                            <div id="form-vcard" class="qr-form hidden">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-semibold text-slate-700 mb-2">Имя</label>
+                                        <input type="text" id="input-vcard-fname" placeholder="Иван" class="qr-input" />
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold text-slate-700 mb-2">Фамилия</label>
+                                        <input type="text" id="input-vcard-lname" placeholder="Иванов" class="qr-input" />
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold text-slate-700 mb-2">Телефон</label>
+                                        <input type="tel" id="input-vcard-phone" placeholder="+7 999 123-45-67" class="qr-input" />
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold text-slate-700 mb-2">Email</label>
+                                        <input type="email" id="input-vcard-email" placeholder="ivan@mail.ru" class="qr-input" />
+                                    </div>
+                                    <div class="sm:col-span-2">
+                                        <label class="block text-sm font-semibold text-slate-700 mb-2">Организация</label>
+                                        <input type="text" id="input-vcard-org" placeholder="ООО Ромашка" class="qr-input" />
+                                    </div>
+                                    <div class="sm:col-span-2">
+                                        <label class="block text-sm font-semibold text-slate-700 mb-2">Сайт</label>
+                                        <input type="url" id="input-vcard-url" placeholder="https://example.com" class="qr-input" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- SMS Form -->
+                            <div id="form-sms" class="qr-form hidden">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-semibold text-slate-700 mb-2">Номер получателя</label>
+                                        <input type="tel" id="input-sms-phone" placeholder="+7 999 123-45-67" class="qr-input" />
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold text-slate-700 mb-2">Текст сообщения</label>
+                                        <textarea id="input-sms-body" rows="3" placeholder="Здравствуйте..." class="qr-input resize-none"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Generate Button (mobile) -->
+                            <button id="btn-generate-mobile" class="mt-6 w-full bg-primary text-white px-6 py-3.5 rounded-xl font-bold text-base hover:bg-indigo-700 transition shadow-lg shadow-indigo-500/30 flex items-center justify-center gap-2 lg:hidden">
+                                <i class="fa-solid fa-qrcode"></i>
+                                Сгенерировать QR-код
+                            </button>
+
+                            <!-- ─── Styling sections ─── -->
+                            <div class="mt-8 space-y-6">
+
+                                <!-- Dot style -->
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-3">
+                                        <i class="fa-solid fa-shapes mr-1.5 text-primary"></i>Стиль точек
+                                    </label>
+                                    <div class="grid grid-cols-4 sm:grid-cols-7 gap-2" id="style-picker">
+                                        <button data-style="classic" class="style-btn active-style style-thumb-btn"><canvas width="40" height="40" class="style-canvas rounded"></canvas><span class="thumb-label">Квадраты</span></button>
+                                        <button data-style="rounded" class="style-btn style-thumb-btn"><canvas width="40" height="40" class="style-canvas rounded"></canvas><span class="thumb-label">Скруглённые</span></button>
+                                        <button data-style="dots" class="style-btn style-thumb-btn"><canvas width="40" height="40" class="style-canvas rounded"></canvas><span class="thumb-label">Точки</span></button>
+                                        <button data-style="diamond" class="style-btn style-thumb-btn"><canvas width="40" height="40" class="style-canvas rounded"></canvas><span class="thumb-label">Ромбы</span></button>
+                                        <button data-style="star" class="style-btn style-thumb-btn"><canvas width="40" height="40" class="style-canvas rounded"></canvas><span class="thumb-label">Звёзды</span></button>
+                                        <button data-style="heart" class="style-btn style-thumb-btn"><canvas width="40" height="40" class="style-canvas rounded"></canvas><span class="thumb-label">Сердца</span></button>
+                                        <button data-style="cross" class="style-btn style-thumb-btn"><canvas width="40" height="40" class="style-canvas rounded"></canvas><span class="thumb-label">Крестики</span></button>
+                                    </div>
+                                </div>
+
+                                <!-- Eye (finder) style -->
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-3">
+                                        <i class="fa-solid fa-eye mr-1.5 text-primary"></i>Стиль глазков
+                                    </label>
+                                    <div class="grid grid-cols-3 sm:grid-cols-5 gap-2" id="eye-picker">
+                                        <button data-eye="square" class="eye-btn active-eye style-thumb-btn"><canvas width="40" height="40" class="eye-canvas rounded"></canvas><span class="thumb-label">Квадрат</span></button>
+                                        <button data-eye="rounded" class="eye-btn style-thumb-btn"><canvas width="40" height="40" class="eye-canvas rounded"></canvas><span class="thumb-label">Скруглён.</span></button>
+                                        <button data-eye="circle" class="eye-btn style-thumb-btn"><canvas width="40" height="40" class="eye-canvas rounded"></canvas><span class="thumb-label">Круг</span></button>
+                                        <button data-eye="leaf" class="eye-btn style-thumb-btn"><canvas width="40" height="40" class="eye-canvas rounded"></canvas><span class="thumb-label">Лист</span></button>
+                                        <button data-eye="dot" class="eye-btn style-thumb-btn"><canvas width="40" height="40" class="eye-canvas rounded"></canvas><span class="thumb-label">Точка</span></button>
+                                    </div>
+                                </div>
+
+                                <!-- Color presets -->
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-3">
+                                        <i class="fa-solid fa-palette mr-1.5 text-primary"></i>Цветовые пресеты
+                                    </label>
+                                    <div class="grid grid-cols-5 sm:grid-cols-10 gap-2" id="preset-picker"></div>
+                                </div>
+
+                                <!-- Colors -->
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-semibold text-slate-700 mb-2">Цвет точек</label>
+                                        <div class="flex items-center gap-2">
+                                            <input type="color" id="input-fg" value="#1e293b" class="color-input" />
+                                            <input type="text" id="input-fg-text" value="#1e293b" class="qr-input flex-1 font-mono text-sm" />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold text-slate-700 mb-2">Цвет фона</label>
+                                        <div class="flex items-center gap-2">
+                                            <input type="color" id="input-bg" value="#ffffff" class="color-input" />
+                                            <input type="text" id="input-bg-text" value="#ffffff" class="qr-input flex-1 font-mono text-sm" />
+                                            <button id="btn-bg-transparent" type="button" class="px-3 py-2 text-xs rounded-lg border border-slate-300 bg-white hover:bg-slate-100 transition" title="Прозрачный фон"><i class="fa-solid fa-border-none"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Gradient -->
+                                <div>
+                                    <label class="flex items-center gap-2 text-sm font-semibold text-slate-700 mb-3 cursor-pointer">
+                                        <input type="checkbox" id="input-gradient" class="w-4 h-4 accent-primary" />
+                                        <i class="fa-solid fa-fill-drip text-primary"></i>
+                                        Градиент точек
+                                    </label>
+                                    <div id="gradient-controls" class="hidden grid grid-cols-1 sm:grid-cols-3 gap-3 pl-6">
+                                        <div>
+                                            <label class="block text-xs font-medium text-slate-600 mb-1">Цвет 1</label>
+                                            <input type="color" id="input-grad1" value="#4f46e5" class="color-input w-full" />
+                                        </div>
+                                        <div>
+                                            <label class="block text-xs font-medium text-slate-600 mb-1">Цвет 2</label>
+                                            <input type="color" id="input-grad2" value="#a855f7" class="color-input w-full" />
+                                        </div>
+                                        <div>
+                                            <label class="block text-xs font-medium text-slate-600 mb-1">Тип</label>
+                                            <select id="input-grad-type" class="qr-input bg-white text-sm">
+                                                <option value="linear-tb">Линейный ↓</option>
+                                                <option value="linear-lr">Линейный →</option>
+                                                <option value="linear-diag">Диагональный</option>
+                                                <option value="radial">Радиальный</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Eye color -->
+                                <div>
+                                    <label class="flex items-center gap-2 text-sm font-semibold text-slate-700 mb-3 cursor-pointer">
+                                        <input type="checkbox" id="input-eye-custom" class="w-4 h-4 accent-primary" />
+                                        Отдельный цвет глазков
+                                    </label>
+                                    <div id="eye-color-controls" class="hidden flex items-center gap-2 pl-6">
+                                        <input type="color" id="input-eye-color" value="#4f46e5" class="color-input" />
+                                        <span class="text-xs text-slate-500">используется для трёх угловых маркеров</span>
+                                    </div>
+                                </div>
+
+                                <!-- Logo -->
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-3">
+                                        <i class="fa-solid fa-image mr-1.5 text-primary"></i>Логотип в центре
+                                    </label>
+                                    <div class="flex flex-wrap items-center gap-3">
+                                        <label class="cursor-pointer inline-flex items-center gap-2 px-4 py-2 bg-white border border-slate-300 rounded-xl text-sm font-medium text-slate-700 hover:border-primary hover:text-primary transition">
+                                            <i class="fa-solid fa-upload"></i>
+                                            <span id="logo-label">Загрузить изображение</span>
+                                            <input type="file" id="input-logo" accept="image/*" class="hidden" />
+                                        </label>
+                                        <button id="btn-logo-clear" type="button" class="hidden px-3 py-2 text-xs rounded-lg border border-slate-300 bg-white hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition">Убрать</button>
+                                        <label class="ml-auto flex items-center gap-2 text-xs text-slate-600 cursor-pointer">
+                                            <input type="checkbox" id="input-watermark" checked class="w-4 h-4 accent-primary" />
+                                            Подпись qrstars.ru
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Frame / caption -->
+                                <div>
+                                    <label class="flex items-center gap-2 text-sm font-semibold text-slate-700 mb-3 cursor-pointer">
+                                        <input type="checkbox" id="input-frame" class="w-4 h-4 accent-primary" />
+                                        <i class="fa-solid fa-vector-square text-primary"></i>
+                                        Рамка с подписью
+                                    </label>
+                                    <div id="frame-controls" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-3 pl-6">
+                                        <div>
+                                            <label class="block text-xs font-medium text-slate-600 mb-1">Текст</label>
+                                            <input type="text" id="input-frame-text" value="СКАНИРУЙ МЕНЯ" maxlength="32" class="qr-input text-sm" />
+                                        </div>
+                                        <div>
+                                            <label class="block text-xs font-medium text-slate-600 mb-1">Стиль</label>
+                                            <select id="input-frame-style" class="qr-input bg-white text-sm">
+                                                <option value="bottom">Подпись снизу</option>
+                                                <option value="rounded">Скруглённая рамка</option>
+                                                <option value="ribbon">Лента сверху</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Advanced -->
+                                <details class="group">
+                                    <summary class="flex items-center gap-2 text-sm font-semibold text-slate-700 cursor-pointer select-none">
+                                        <i class="fa-solid fa-sliders text-primary"></i>
+                                        Дополнительно
+                                        <i class="fa-solid fa-chevron-down ml-auto text-xs text-slate-400 group-open:rotate-180 transition"></i>
+                                    </summary>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3 pl-6">
+                                        <div>
+                                            <label class="block text-xs font-medium text-slate-600 mb-1">Уровень коррекции</label>
+                                            <select id="input-ecc" class="qr-input bg-white text-sm">
+                                                <option value="L">L (7%)</option>
+                                                <option value="M">M (15%)</option>
+                                                <option value="Q">Q (25%)</option>
+                                                <option value="H" selected>H (30%)</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label class="block text-xs font-medium text-slate-600 mb-1">Поля (отступ)</label>
+                                            <input type="range" id="input-margin" min="0" max="6" value="2" class="w-full accent-primary" />
+                                        </div>
+                                    </div>
+                                </details>
+                            </div>
+                        </div>
+
+                        <!-- RIGHT: Preview -->
+                        <div class="lg:sticky lg:top-24 lg:self-start">
+                            <div class="bg-white border-2 border-slate-200 rounded-2xl p-6 flex items-center justify-center w-full aspect-square relative qr-preview-checker" id="qr-preview-wrapper">
+                                <div id="qr-placeholder" class="text-center text-slate-400">
+                                    <i class="fa-solid fa-qrcode text-5xl mb-3 opacity-30"></i>
+                                    <p class="text-sm">Заполните поля и нажмите «Сгенерировать»</p>
+                                </div>
+                                <canvas id="qr-canvas" class="hidden max-w-full max-h-full"></canvas>
+                            </div>
+                            <button id="btn-generate" class="mt-4 w-full bg-primary text-white px-6 py-3 rounded-xl font-bold text-base hover:bg-indigo-700 transition shadow-lg shadow-indigo-500/30 flex items-center justify-center gap-2 hidden lg:flex">
+                                <i class="fa-solid fa-qrcode"></i>
+                                Сгенерировать QR-код
+                            </button>
+                            <div class="mt-3 grid grid-cols-2 gap-2">
+                                <button id="btn-download-png" class="bg-slate-900 text-white px-4 py-2.5 rounded-xl font-bold text-sm hover:bg-slate-800 transition flex items-center justify-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed" disabled>
+                                    <i class="fa-solid fa-download"></i> PNG
+                                </button>
+                                <button id="btn-download-jpg" class="bg-white text-slate-900 border border-slate-300 px-4 py-2.5 rounded-xl font-bold text-sm hover:bg-slate-100 transition flex items-center justify-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed" disabled>
+                                    <i class="fa-solid fa-download"></i> JPG
+                                </button>
+                            </div>
+                            <p class="mt-3 text-xs text-slate-500 text-center">
+                                Изменения в стиле применяются автоматически
+                            </p>
+
+                            <!-- Inline cross-sell to dynamic QR -->
+                            <div class="mt-4 rounded-2xl border border-primary/20 bg-primary/5 p-4">
+                                <p class="text-sm font-semibold text-slate-800 mb-1 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-chart-line text-primary"></i>
+                                    Нужна статистика сканирований?
+                                </p>
+                                <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                                    Сделайте динамический QR — ссылку можно менять без перепечатки, видны сканирования, гео и устройства. На тарифе FREE — бесплатно.
+                                </p>
+                                <a href="https://app.qrstars.ru/register" class="inline-flex items-center gap-1.5 text-sm font-bold text-primary hover:underline">
+                                    Создать динамический QR бесплатно
+                                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Static vs Dynamic comparison -->
+    <section class="py-16 bg-slate-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-3">Статический или динамический QR — что выбрать</h2>
+            <p class="text-slate-600 text-center max-w-2xl mx-auto mb-10 leading-relaxed">
+                Статический код «зашивает» данные в картинку навсегда. Динамический ведёт на короткую ссылку, которой управляете вы — её можно менять, видеть статистику и подключать сценарии. <span class="font-semibold text-slate-800">У нас динамические QR доступны бесплатно</span> на тарифе FREE.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                <!-- Static -->
+                <div class="bg-white rounded-2xl p-6 border border-slate-200 flex flex-col">
+                    <div class="mb-4">
+                        <div class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full mb-3">
+                            <i class="fa-solid fa-image"></i> Статический PNG
+                        </div>
+                        <p class="text-sm text-slate-500">Эта страница</p>
+                    </div>
+                    <ul class="space-y-2.5 text-sm text-slate-600 mb-6 flex-1">
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-500 mt-0.5 shrink-0"></i> Без регистрации</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-500 mt-0.5 shrink-0"></i> Работает вечно, без серверов</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-500 mt-0.5 shrink-0"></i> Цвета, логотип, рамка</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-xmark text-red-500 mt-0.5 shrink-0"></i> Нельзя менять после печати</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-xmark text-red-500 mt-0.5 shrink-0"></i> Нет статистики сканирований</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-xmark text-red-500 mt-0.5 shrink-0"></i> Нет сценариев и страниц</li>
+                    </ul>
+                    <div class="text-center text-xs text-slate-400 font-medium">Вы уже здесь ↑</div>
+                </div>
+
+                <!-- Dynamic FREE -->
+                <div class="bg-white rounded-2xl p-6 border-2 border-primary shadow-lg shadow-primary/10 flex flex-col relative">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap">
+                        Рекомендуем
+                    </div>
+                    <div class="mb-4">
+                        <div class="inline-flex items-center gap-1.5 text-xs font-semibold text-primary bg-primary/10 px-2.5 py-1 rounded-full mb-3">
+                            <i class="fa-solid fa-bolt"></i> Динамический &middot; FREE
+                        </div>
+                        <p class="text-sm text-slate-500">Бесплатный аккаунт QrStars</p>
+                    </div>
+                    <ul class="space-y-2.5 text-sm text-slate-600 mb-6 flex-1">
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-500 mt-0.5 shrink-0"></i> Меняете ссылку без перепечатки</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-500 mt-0.5 shrink-0"></i> Статистика сканирований и гео</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-500 mt-0.5 shrink-0"></i> Микро-лендинг, меню, визитка, Wi-Fi</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-500 mt-0.5 shrink-0"></i> Сбор отзывов на Яндекс / 2GIS</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-500 mt-0.5 shrink-0"></i> Цвета, логотип, рамка</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-circle-info text-slate-400 mt-0.5 shrink-0"></i> 1 площадка для 5★ отзывов</li>
+                    </ul>
+                    <a href="https://app.qrstars.ru/register" class="block text-center bg-primary text-white px-5 py-3 rounded-xl font-bold text-sm hover:bg-indigo-700 transition shadow-lg shadow-indigo-500/30">
+                        Создать бесплатно
+                    </a>
+                </div>
+
+                <!-- Dynamic PRO -->
+                <div class="bg-slate-900 rounded-2xl p-6 border border-slate-800 flex flex-col text-white">
+                    <div class="mb-4">
+                        <div class="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-300 bg-amber-400/10 px-2.5 py-1 rounded-full mb-3">
+                            <i class="fa-solid fa-crown"></i> Динамический &middot; PRO
+                        </div>
+                        <p class="text-sm text-slate-400">от 490 ₽/мес</p>
+                    </div>
+                    <ul class="space-y-2.5 text-sm text-slate-300 mb-6 flex-1">
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-amber-300 mt-0.5 shrink-0"></i> Всё из FREE</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-amber-300 mt-0.5 shrink-0"></i> Умная ротация Яндекс / 2GIS / Авито</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-amber-300 mt-0.5 shrink-0"></i> White Label — логотип вместо нашей подписи</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-amber-300 mt-0.5 shrink-0"></i> SMS / звонок / VK при жалобе</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-amber-300 mt-0.5 shrink-0"></i> Промокоды и чаевые</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-amber-300 mt-0.5 shrink-0"></i> Дашборд аналитики для сети</li>
+                    </ul>
+                    <a href="https://app.qrstars.ru/register" class="block text-center bg-white text-slate-900 px-5 py-3 rounded-xl font-bold text-sm hover:bg-slate-100 transition">
+                        Попробовать PRO
+                    </a>
+                </div>
+            </div>
+
+            <!-- Final CTA -->
+            <div class="mt-12 bg-white rounded-2xl border border-slate-200 p-6 md:p-8 text-center">
+                <h3 class="font-bold text-xl md:text-2xl mb-3">Динамические QR-коды — тоже бесплатно</h3>
+                <p class="text-slate-600 mb-6 max-w-2xl mx-auto leading-relaxed">
+                    На тарифе FREE: меняйте ссылку без перепечатки, смотрите статистику сканирований, подключайте меню, визитку, Wi-Fi и сбор отзывов. Без срока пробного периода и без карты при регистрации.
+                </p>
+                <a href="https://app.qrstars.ru/register" class="inline-flex items-center gap-2 bg-primary text-white px-8 py-3.5 rounded-xl font-bold text-base hover:bg-indigo-700 transition shadow-lg shadow-indigo-500/30">
+                    Создать динамический QR бесплатно
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <p class="mt-4 text-xs text-slate-400">Регистрация за 30 секунд &middot; Без привязки карты</p>
+            </div>
+        </div>
+    </section>
+
+</Layout>
+
+<style>
+    .qr-tab {
+        background: white;
+        color: #475569;
+        border: 1px solid #e2e8f0;
+    }
+    .qr-tab:hover {
+        border-color: #4F46E5;
+        color: #4F46E5;
+    }
+    .active-tab {
+        background: #4F46E5 !important;
+        color: white !important;
+        border-color: #4F46E5 !important;
+    }
+    .qr-input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1px solid #cbd5e1;
+        border-radius: 0.75rem;
+        outline: none;
+        transition: all 0.15s;
+        font-size: 1rem;
+        background: white;
+    }
+    .qr-input:focus {
+        border-color: #4F46E5;
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+    }
+    .style-thumb-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+        padding: 0.5rem;
+        border-radius: 0.75rem;
+        border: 2px solid #e2e8f0;
+        background: white;
+        transition: all 0.15s;
+        cursor: pointer;
+    }
+    .style-btn:hover,
+    .eye-btn:hover,
+    .preset-btn:hover {
+        border-color: #4F46E5;
+    }
+    .active-style,
+    .active-eye,
+    .active-preset {
+        border-color: #4F46E5 !important;
+        background: rgba(79, 70, 229, 0.05) !important;
+    }
+    .thumb-label {
+        font-size: 0.625rem;
+        font-weight: 500;
+        color: #475569;
+        line-height: 1.1;
+        text-align: center;
+    }
+    @media (min-width: 640px) {
+        .thumb-label { font-size: 0.7rem; }
+    }
+    .color-input {
+        width: 3rem;
+        height: 2.75rem;
+        border-radius: 0.625rem;
+        border: 1px solid #cbd5e1;
+        background: white;
+        cursor: pointer;
+        padding: 0.2rem;
+    }
+    .color-input::-webkit-color-swatch-wrapper { padding: 0; }
+    .color-input::-webkit-color-swatch { border: none; border-radius: 0.4rem; }
+    .preset-btn {
+        aspect-ratio: 1;
+        border-radius: 0.625rem;
+        border: 2px solid #e2e8f0;
+        cursor: pointer;
+        transition: all 0.15s;
+        position: relative;
+        overflow: hidden;
+    }
+    .qr-preview-checker {
+        background-image:
+            linear-gradient(45deg, #f1f5f9 25%, transparent 25%),
+            linear-gradient(-45deg, #f1f5f9 25%, transparent 25%),
+            linear-gradient(45deg, transparent 75%, #f1f5f9 75%),
+            linear-gradient(-45deg, transparent 75%, #f1f5f9 75%);
+        background-size: 20px 20px;
+        background-position: 0 0, 0 10px, 10px -10px, 10px 0px;
+    }
+</style>
+
+<script>
+    import QRCode from 'qrcode';
+
+    type QrType = 'url' | 'wifi' | 'text' | 'email' | 'phone' | 'vcard' | 'sms';
+    type DotStyle = 'classic' | 'rounded' | 'dots' | 'diamond' | 'star' | 'heart' | 'cross';
+    type EyeStyle = 'square' | 'rounded' | 'circle' | 'leaf' | 'dot';
+    type GradType = 'linear-tb' | 'linear-lr' | 'linear-diag' | 'radial';
+
+    const state = {
+        type: 'url' as QrType,
+        dotStyle: 'classic' as DotStyle,
+        eyeStyle: 'square' as EyeStyle,
+        fg: '#1e293b',
+        bg: '#ffffff',
+        bgTransparent: false,
+        gradient: false,
+        grad1: '#4f46e5',
+        grad2: '#a855f7',
+        gradType: 'linear-tb' as GradType,
+        eyeCustom: false,
+        eyeColor: '#4f46e5',
+        logoImage: null as HTMLImageElement | null,
+        watermark: true,
+        frame: false,
+        frameText: 'СКАНИРУЙ МЕНЯ',
+        frameStyle: 'bottom' as 'bottom' | 'rounded' | 'ribbon',
+        ecc: 'H' as 'L' | 'M' | 'Q' | 'H',
+        margin: 2,
+    };
+
+    // ── Presets ───────────────────────────────────────────
+    const PRESETS = [
+        { name: 'Классика',       fg: '#1e293b', bg: '#ffffff', gradient: false },
+        { name: 'Индиго',          fg: '#4f46e5', bg: '#ffffff', gradient: false },
+        { name: 'Океан',           fg: '#0284c7', bg: '#f0f9ff', gradient: false },
+        { name: 'Изумруд',         fg: '#059669', bg: '#ffffff', gradient: false },
+        { name: 'Закат',           gradient: true, grad1: '#f97316', grad2: '#dc2626', gradType: 'linear-diag' as GradType, bg: '#ffffff' },
+        { name: 'Фиолет',          gradient: true, grad1: '#4f46e5', grad2: '#a855f7', gradType: 'linear-tb' as GradType, bg: '#ffffff' },
+        { name: 'Неон',            gradient: true, grad1: '#06b6d4', grad2: '#8b5cf6', gradType: 'linear-lr' as GradType, bg: '#0f172a' },
+        { name: 'Розовый',         gradient: true, grad1: '#ec4899', grad2: '#f43f5e', gradType: 'radial' as GradType, bg: '#ffffff' },
+        { name: 'Полночь',         fg: '#f8fafc', bg: '#0f172a', gradient: false },
+        { name: 'Золото',          gradient: true, grad1: '#ca8a04', grad2: '#fbbf24', gradType: 'linear-tb' as GradType, bg: '#1c1917' },
+    ];
+
+    // ── DOM refs ──────────────────────────────────────────
+    const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
+
+    const tabs = document.querySelectorAll<HTMLButtonElement>('.qr-tab');
+    const forms = document.querySelectorAll<HTMLDivElement>('.qr-form');
+    const canvas = $('qr-canvas') as HTMLCanvasElement;
+    const placeholder = $('qr-placeholder');
+    const previewWrapper = $('qr-preview-wrapper');
+    const btnGenerate = $('btn-generate') as HTMLButtonElement;
+    const btnGenerateMobile = $('btn-generate-mobile') as HTMLButtonElement;
+    const btnDownloadPng = $('btn-download-png') as HTMLButtonElement;
+    const btnDownloadJpg = $('btn-download-jpg') as HTMLButtonElement;
+    const styleBtns = document.querySelectorAll<HTMLButtonElement>('.style-btn');
+    const eyeBtns = document.querySelectorAll<HTMLButtonElement>('.eye-btn');
+    const styleCanvases = document.querySelectorAll<HTMLCanvasElement>('.style-canvas');
+    const eyeCanvases = document.querySelectorAll<HTMLCanvasElement>('.eye-canvas');
+
+    let qrCanvasDataUrl: string | null = null;
+    let lastPayload: string | null = null;
+    let autoUpdate = false;
+
+    // ── Tabs ──────────────────────────────────────────────
+    function switchTab(type: QrType) {
+        state.type = type;
+        tabs.forEach(t => t.classList.toggle('active-tab', t.dataset.type === type));
+        forms.forEach(f => f.classList.add('hidden'));
+        $(`form-${type}`)?.classList.remove('hidden');
+    }
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => switchTab(tab.dataset.type as QrType));
+    });
+
+    // ── Style buttons ─────────────────────────────────────
+    styleBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            state.dotStyle = btn.dataset.style as DotStyle;
+            styleBtns.forEach(b => b.classList.toggle('active-style', b.dataset.style === state.dotStyle));
+            scheduleUpdate();
+        });
+    });
+
+    eyeBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            state.eyeStyle = btn.dataset.eye as EyeStyle;
+            eyeBtns.forEach(b => b.classList.toggle('active-eye', b.dataset.eye === state.eyeStyle));
+            scheduleUpdate();
+        });
+    });
+
+    // ── Presets ───────────────────────────────────────────
+    const presetPicker = $('preset-picker');
+    PRESETS.forEach((p, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'preset-btn' + (i === 0 ? ' active-preset' : '');
+        btn.dataset.idx = String(i);
+        btn.title = p.name;
+        if (p.gradient) {
+            const angle = p.gradType === 'linear-tb' ? '180deg' : p.gradType === 'linear-lr' ? '90deg' : p.gradType === 'linear-diag' ? '135deg' : 'circle';
+            if (p.gradType === 'radial') {
+                btn.style.background = `radial-gradient(circle, ${p.grad1}, ${p.grad2})`;
+            } else {
+                btn.style.background = `linear-gradient(${angle}, ${p.grad1}, ${p.grad2})`;
+            }
+        } else {
+            btn.style.background = p.fg!;
+        }
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active-preset'));
+            btn.classList.add('active-preset');
+            applyPreset(i);
+        });
+        presetPicker.appendChild(btn);
+    });
+
+    function applyPreset(i: number) {
+        const p = PRESETS[i];
+        if (p.gradient) {
+            state.gradient = true;
+            state.grad1 = p.grad1!;
+            state.grad2 = p.grad2!;
+            state.gradType = p.gradType!;
+            ($('input-gradient') as HTMLInputElement).checked = true;
+            ($('input-grad1') as HTMLInputElement).value = p.grad1!;
+            ($('input-grad2') as HTMLInputElement).value = p.grad2!;
+            ($('input-grad-type') as HTMLSelectElement).value = p.gradType!;
+            $('gradient-controls').classList.remove('hidden');
+            $('gradient-controls').classList.add('grid');
+        } else {
+            state.gradient = false;
+            state.fg = p.fg!;
+            ($('input-gradient') as HTMLInputElement).checked = false;
+            ($('input-fg') as HTMLInputElement).value = p.fg!;
+            ($('input-fg-text') as HTMLInputElement).value = p.fg!;
+            $('gradient-controls').classList.add('hidden');
+            $('gradient-controls').classList.remove('grid');
+        }
+        state.bg = p.bg!;
+        state.bgTransparent = false;
+        ($('input-bg') as HTMLInputElement).value = p.bg!;
+        ($('input-bg-text') as HTMLInputElement).value = p.bg!;
+        scheduleUpdate();
+    }
+
+    // ── Color inputs ──────────────────────────────────────
+    function syncColorPair(colorEl: HTMLInputElement, textEl: HTMLInputElement, key: 'fg' | 'bg') {
+        colorEl.addEventListener('input', () => {
+            textEl.value = colorEl.value;
+            state[key] = colorEl.value;
+            if (key === 'bg') state.bgTransparent = false;
+            scheduleUpdate();
+        });
+        textEl.addEventListener('change', () => {
+            const v = textEl.value.trim();
+            if (/^#[0-9a-fA-F]{6}$/.test(v)) {
+                colorEl.value = v;
+                state[key] = v;
+                if (key === 'bg') state.bgTransparent = false;
+                scheduleUpdate();
+            } else {
+                textEl.value = state[key];
+            }
+        });
+    }
+    syncColorPair($('input-fg') as HTMLInputElement, $('input-fg-text') as HTMLInputElement, 'fg');
+    syncColorPair($('input-bg') as HTMLInputElement, $('input-bg-text') as HTMLInputElement, 'bg');
+
+    $('btn-bg-transparent').addEventListener('click', () => {
+        state.bgTransparent = !state.bgTransparent;
+        ($('btn-bg-transparent') as HTMLButtonElement).classList.toggle('!bg-primary', state.bgTransparent);
+        ($('btn-bg-transparent') as HTMLButtonElement).classList.toggle('!text-white', state.bgTransparent);
+        scheduleUpdate();
+    });
+
+    // ── Gradient ──────────────────────────────────────────
+    ($('input-gradient') as HTMLInputElement).addEventListener('change', e => {
+        state.gradient = (e.target as HTMLInputElement).checked;
+        const ctrl = $('gradient-controls');
+        ctrl.classList.toggle('hidden', !state.gradient);
+        ctrl.classList.toggle('grid', state.gradient);
+        scheduleUpdate();
+    });
+    ($('input-grad1') as HTMLInputElement).addEventListener('input', e => { state.grad1 = (e.target as HTMLInputElement).value; scheduleUpdate(); });
+    ($('input-grad2') as HTMLInputElement).addEventListener('input', e => { state.grad2 = (e.target as HTMLInputElement).value; scheduleUpdate(); });
+    ($('input-grad-type') as HTMLSelectElement).addEventListener('change', e => { state.gradType = (e.target as HTMLSelectElement).value as GradType; scheduleUpdate(); });
+
+    // ── Eye color ─────────────────────────────────────────
+    ($('input-eye-custom') as HTMLInputElement).addEventListener('change', e => {
+        state.eyeCustom = (e.target as HTMLInputElement).checked;
+        const ctrl = $('eye-color-controls');
+        ctrl.classList.toggle('hidden', !state.eyeCustom);
+        ctrl.classList.toggle('flex', state.eyeCustom);
+        scheduleUpdate();
+    });
+    ($('input-eye-color') as HTMLInputElement).addEventListener('input', e => { state.eyeColor = (e.target as HTMLInputElement).value; scheduleUpdate(); });
+
+    // ── Logo ──────────────────────────────────────────────
+    ($('input-logo') as HTMLInputElement).addEventListener('change', e => {
+        const file = (e.target as HTMLInputElement).files?.[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = ev => {
+            const img = new Image();
+            img.onload = () => {
+                state.logoImage = img;
+                $('logo-label').textContent = file.name.length > 18 ? file.name.slice(0, 16) + '…' : file.name;
+                $('btn-logo-clear').classList.remove('hidden');
+                scheduleUpdate();
+            };
+            img.src = ev.target?.result as string;
+        };
+        reader.readAsDataURL(file);
+    });
+    $('btn-logo-clear').addEventListener('click', () => {
+        state.logoImage = null;
+        ($('input-logo') as HTMLInputElement).value = '';
+        $('logo-label').textContent = 'Загрузить изображение';
+        $('btn-logo-clear').classList.add('hidden');
+        scheduleUpdate();
+    });
+    ($('input-watermark') as HTMLInputElement).addEventListener('change', e => {
+        state.watermark = (e.target as HTMLInputElement).checked;
+        scheduleUpdate();
+    });
+
+    // ── Frame ─────────────────────────────────────────────
+    ($('input-frame') as HTMLInputElement).addEventListener('change', e => {
+        state.frame = (e.target as HTMLInputElement).checked;
+        const ctrl = $('frame-controls');
+        ctrl.classList.toggle('hidden', !state.frame);
+        ctrl.classList.toggle('grid', state.frame);
+        scheduleUpdate();
+    });
+    ($('input-frame-text') as HTMLInputElement).addEventListener('input', e => {
+        state.frameText = (e.target as HTMLInputElement).value || 'СКАНИРУЙ МЕНЯ';
+        scheduleUpdate();
+    });
+    ($('input-frame-style') as HTMLSelectElement).addEventListener('change', e => {
+        state.frameStyle = (e.target as HTMLSelectElement).value as 'bottom' | 'rounded' | 'ribbon';
+        scheduleUpdate();
+    });
+
+    // ── Advanced ──────────────────────────────────────────
+    ($('input-ecc') as HTMLSelectElement).addEventListener('change', e => {
+        state.ecc = (e.target as HTMLSelectElement).value as 'L' | 'M' | 'Q' | 'H';
+        scheduleUpdate();
+    });
+    ($('input-margin') as HTMLInputElement).addEventListener('input', e => {
+        state.margin = parseInt((e.target as HTMLInputElement).value, 10);
+        scheduleUpdate();
+    });
+
+    // ── Drawing helpers ───────────────────────────────────
+    function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number) {
+        ctx.beginPath();
+        ctx.moveTo(x + r, y);
+        ctx.lineTo(x + w - r, y);
+        ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+        ctx.lineTo(x + w, y + h - r);
+        ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+        ctx.lineTo(x + r, y + h);
+        ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+        ctx.lineTo(x, y + r);
+        ctx.quadraticCurveTo(x, y, x + r, y);
+        ctx.closePath();
+        ctx.fill();
+    }
+
+    function strokeRoundRect(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number) {
+        ctx.beginPath();
+        ctx.moveTo(x + r, y);
+        ctx.lineTo(x + w - r, y);
+        ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+        ctx.lineTo(x + w, y + h - r);
+        ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+        ctx.lineTo(x + r, y + h);
+        ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+        ctx.lineTo(x, y + r);
+        ctx.quadraticCurveTo(x, y, x + r, y);
+        ctx.closePath();
+        ctx.stroke();
+    }
+
+    function drawDot(ctx: CanvasRenderingContext2D, x: number, y: number, size: number, style: DotStyle) {
+        const cx = x + size / 2;
+        const cy = y + size / 2;
+        const gap = style === 'classic' ? 0 : size * 0.1;
+        const s = size - gap * 2;
+        const r = s / 2;
+
+        switch (style) {
+            case 'classic': ctx.fillRect(x, y, size, size); break;
+            case 'rounded': roundRect(ctx, x + gap, y + gap, s, s, s * 0.3); break;
+            case 'dots':
+                ctx.beginPath();
+                ctx.arc(cx, cy, r * 0.9, 0, Math.PI * 2);
+                ctx.fill();
+                break;
+            case 'diamond':
+                ctx.beginPath();
+                ctx.moveTo(cx, cy - r);
+                ctx.lineTo(cx + r, cy);
+                ctx.lineTo(cx, cy + r);
+                ctx.lineTo(cx - r, cy);
+                ctx.closePath();
+                ctx.fill();
+                break;
+            case 'star': {
+                ctx.beginPath();
+                for (let i = 0; i < 8; i++) {
+                    const rad = i % 2 === 0 ? r : r * 0.38;
+                    const angle = (Math.PI * i) / 4 - Math.PI / 2;
+                    const px = cx + rad * Math.cos(angle);
+                    const py = cy + rad * Math.sin(angle);
+                    if (i === 0) ctx.moveTo(px, py);
+                    else ctx.lineTo(px, py);
+                }
+                ctx.closePath();
+                ctx.fill();
+                break;
+            }
+            case 'heart': {
+                const hs = r * 0.85;
+                ctx.beginPath();
+                ctx.moveTo(cx, cy + hs * 0.9);
+                ctx.bezierCurveTo(cx - hs * 1.5, cy + hs * 0.2, cx - hs, cy - hs, cx, cy - hs * 0.35);
+                ctx.bezierCurveTo(cx + hs, cy - hs, cx + hs * 1.5, cy + hs * 0.2, cx, cy + hs * 0.9);
+                ctx.closePath();
+                ctx.fill();
+                break;
+            }
+            case 'cross': {
+                const arm = r * 0.32;
+                ctx.beginPath();
+                ctx.moveTo(cx - arm, y + gap);
+                ctx.lineTo(cx + arm, y + gap);
+                ctx.lineTo(cx + arm, cy - arm);
+                ctx.lineTo(x + size - gap, cy - arm);
+                ctx.lineTo(x + size - gap, cy + arm);
+                ctx.lineTo(cx + arm, cy + arm);
+                ctx.lineTo(cx + arm, y + size - gap);
+                ctx.lineTo(cx - arm, y + size - gap);
+                ctx.lineTo(cx - arm, cy + arm);
+                ctx.lineTo(x + gap, cy + arm);
+                ctx.lineTo(x + gap, cy - arm);
+                ctx.lineTo(cx - arm, cy - arm);
+                ctx.closePath();
+                ctx.fill();
+                break;
+            }
+        }
+    }
+
+    // ── Finder patterns (with eye styles) ─────────────────
+    function isInFinder(row: number, col: number, count: number): boolean {
+        if (row < 8 && col < 8) return true;
+        if (row < 8 && col >= count - 8) return true;
+        if (row >= count - 8 && col < 8) return true;
+        return false;
+    }
+
+    function drawFinderPattern(
+        ctx: CanvasRenderingContext2D,
+        startRow: number, startCol: number,
+        cellSize: number, offX: number, offY: number,
+        eye: EyeStyle, bgColor: string,
+    ) {
+        const x = offX + startCol * cellSize;
+        const y = offY + startRow * cellSize;
+        const s7 = 7 * cellSize;
+        const s5 = 5 * cellSize;
+        const s3 = 3 * cellSize;
+        const x5 = x + cellSize, y5 = y + cellSize;
+        const x3 = x + 2 * cellSize, y3 = y + 2 * cellSize;
+
+        // Determine corner identity (TL, TR, BL) for "leaf" style
+        const isTL = startRow === 0 && startCol === 0;
+        const isTR = startRow === 0 && startCol !== 0;
+        const isBL = startRow !== 0 && startCol === 0;
+
+        const drawOuter = () => {
+            switch (eye) {
+                case 'square':  ctx.fillRect(x, y, s7, s7); break;
+                case 'rounded': roundRect(ctx, x, y, s7, s7, cellSize * 1.6); break;
+                case 'circle':
+                    ctx.beginPath();
+                    ctx.arc(x + s7 / 2, y + s7 / 2, s7 / 2, 0, Math.PI * 2);
+                    ctx.fill();
+                    break;
+                case 'leaf': {
+                    const r = cellSize * 2.2;
+                    const small = cellSize * 0.5;
+                    const tl = isTL ? r : isTR ? small : r;
+                    const tr = isTL ? r : isTR ? r : small;
+                    const br = isTL ? small : isTR ? r : r;
+                    const bl = isTL ? r : isTR ? small : small;
+                    ctx.beginPath();
+                    ctx.moveTo(x + tl, y);
+                    ctx.lineTo(x + s7 - tr, y);
+                    ctx.quadraticCurveTo(x + s7, y, x + s7, y + tr);
+                    ctx.lineTo(x + s7, y + s7 - br);
+                    ctx.quadraticCurveTo(x + s7, y + s7, x + s7 - br, y + s7);
+                    ctx.lineTo(x + bl, y + s7);
+                    ctx.quadraticCurveTo(x, y + s7, x, y + s7 - bl);
+                    ctx.lineTo(x, y + tl);
+                    ctx.quadraticCurveTo(x, y, x + tl, y);
+                    ctx.closePath();
+                    ctx.fill();
+                    break;
+                }
+                case 'dot':
+                    ctx.beginPath();
+                    ctx.arc(x + s7 / 2, y + s7 / 2, s7 / 2, 0, Math.PI * 2);
+                    ctx.fill();
+                    break;
+            }
+        };
+        const drawInnerHole = () => {
+            switch (eye) {
+                case 'square':  ctx.fillRect(x5, y5, s5, s5); break;
+                case 'rounded': roundRect(ctx, x5, y5, s5, s5, cellSize * 1.0); break;
+                case 'circle':
+                    ctx.beginPath();
+                    ctx.arc(x5 + s5 / 2, y5 + s5 / 2, s5 / 2, 0, Math.PI * 2);
+                    ctx.fill();
+                    break;
+                case 'leaf': {
+                    const r = cellSize * 1.4;
+                    const small = cellSize * 0.35;
+                    const tl = isTL ? r : isTR ? small : r;
+                    const tr = isTL ? r : isTR ? r : small;
+                    const br = isTL ? small : isTR ? r : r;
+                    const bl = isTL ? r : isTR ? small : small;
+                    ctx.beginPath();
+                    ctx.moveTo(x5 + tl, y5);
+                    ctx.lineTo(x5 + s5 - tr, y5);
+                    ctx.quadraticCurveTo(x5 + s5, y5, x5 + s5, y5 + tr);
+                    ctx.lineTo(x5 + s5, y5 + s5 - br);
+                    ctx.quadraticCurveTo(x5 + s5, y5 + s5, x5 + s5 - br, y5 + s5);
+                    ctx.lineTo(x5 + bl, y5 + s5);
+                    ctx.quadraticCurveTo(x5, y5 + s5, x5, y5 + s5 - bl);
+                    ctx.lineTo(x5, y5 + tl);
+                    ctx.quadraticCurveTo(x5, y5, x5 + tl, y5);
+                    ctx.closePath();
+                    ctx.fill();
+                    break;
+                }
+                case 'dot':
+                    ctx.beginPath();
+                    ctx.arc(x5 + s5 / 2, y5 + s5 / 2, s5 / 2, 0, Math.PI * 2);
+                    ctx.fill();
+                    break;
+            }
+        };
+        const drawCenter = () => {
+            switch (eye) {
+                case 'square':  ctx.fillRect(x3, y3, s3, s3); break;
+                case 'rounded': roundRect(ctx, x3, y3, s3, s3, cellSize * 0.7); break;
+                case 'circle':
+                    ctx.beginPath();
+                    ctx.arc(x3 + s3 / 2, y3 + s3 / 2, s3 / 2, 0, Math.PI * 2);
+                    ctx.fill();
+                    break;
+                case 'leaf': {
+                    const r = cellSize * 0.9;
+                    const small = cellSize * 0.25;
+                    const tl = isTL ? r : isTR ? small : r;
+                    const tr = isTL ? r : isTR ? r : small;
+                    const br = isTL ? small : isTR ? r : r;
+                    const bl = isTL ? r : isTR ? small : small;
+                    ctx.beginPath();
+                    ctx.moveTo(x3 + tl, y3);
+                    ctx.lineTo(x3 + s3 - tr, y3);
+                    ctx.quadraticCurveTo(x3 + s3, y3, x3 + s3, y3 + tr);
+                    ctx.lineTo(x3 + s3, y3 + s3 - br);
+                    ctx.quadraticCurveTo(x3 + s3, y3 + s3, x3 + s3 - br, y3 + s3);
+                    ctx.lineTo(x3 + bl, y3 + s3);
+                    ctx.quadraticCurveTo(x3, y3 + s3, x3, y3 + s3 - bl);
+                    ctx.lineTo(x3, y3 + tl);
+                    ctx.quadraticCurveTo(x3, y3, x3 + tl, y3);
+                    ctx.closePath();
+                    ctx.fill();
+                    break;
+                }
+                case 'dot':
+                    ctx.beginPath();
+                    ctx.arc(x3 + s3 / 2, y3 + s3 / 2, s3 * 0.45, 0, Math.PI * 2);
+                    ctx.fill();
+                    break;
+            }
+        };
+
+        const savedFill = ctx.fillStyle;
+        drawOuter();
+        ctx.fillStyle = bgColor;
+        drawInnerHole();
+        ctx.fillStyle = savedFill;
+        drawCenter();
+    }
+
+    // ── Style preview thumbnails ──────────────────────────
+    function renderDotPreview(previewCanvas: HTMLCanvasElement, style: DotStyle) {
+        const size = previewCanvas.width;
+        const ctx = previewCanvas.getContext('2d')!;
+        const cellSize = size / 5;
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, size, size);
+        const pattern = [
+            [1, 0, 1, 0, 1],
+            [0, 1, 1, 1, 0],
+            [1, 1, 1, 1, 1],
+            [0, 1, 1, 1, 0],
+            [1, 0, 1, 0, 1],
+        ];
+        ctx.fillStyle = '#1e293b';
+        for (let row = 0; row < 5; row++) {
+            for (let col = 0; col < 5; col++) {
+                if (pattern[row][col]) {
+                    drawDot(ctx, col * cellSize, row * cellSize, cellSize, style);
+                }
+            }
+        }
+    }
+
+    function renderEyePreview(c: HTMLCanvasElement, eye: EyeStyle) {
+        const size = c.width;
+        const ctx = c.getContext('2d')!;
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, size, size);
+        const cell = size / 8;
+        const offX = cell / 2;
+        const offY = cell / 2;
+        ctx.fillStyle = '#1e293b';
+        drawFinderPattern(ctx, 0, 0, cell, offX, offY, eye, '#ffffff');
+    }
+
+    const allStyles: DotStyle[] = ['classic', 'rounded', 'dots', 'diamond', 'star', 'heart', 'cross'];
+    styleCanvases.forEach((c, i) => renderDotPreview(c, allStyles[i]));
+
+    const allEyes: EyeStyle[] = ['square', 'rounded', 'circle', 'leaf', 'dot'];
+    eyeCanvases.forEach((c, i) => renderEyePreview(c, allEyes[i]));
+
+    // ── Payload builder ───────────────────────────────────
+    function escapeWifiField(val: string): string {
+        return val.replace(/([\\;,:"'])/g, '\\$1');
+    }
+
+    function buildPayload(): string | null {
+        switch (state.type) {
+            case 'url': {
+                const v = ($('input-url') as HTMLInputElement).value.trim();
+                return v || null;
+            }
+            case 'wifi': {
+                const ssid = ($('input-wifi-ssid') as HTMLInputElement).value.trim();
+                const pass = ($('input-wifi-pass') as HTMLInputElement).value.trim();
+                const enc = ($('input-wifi-enc') as HTMLSelectElement).value;
+                if (!ssid) return null;
+                return `WIFI:T:${enc};S:${escapeWifiField(ssid)};P:${escapeWifiField(pass)};;`;
+            }
+            case 'text': {
+                const v = ($('input-text') as HTMLTextAreaElement).value.trim();
+                return v || null;
+            }
+            case 'email': {
+                const addr = ($('input-email-addr') as HTMLInputElement).value.trim();
+                if (!addr) return null;
+                const subj = ($('input-email-subj') as HTMLInputElement).value.trim();
+                const body = ($('input-email-body') as HTMLTextAreaElement).value.trim();
+                let mailto = `mailto:${addr}`;
+                const params: string[] = [];
+                if (subj) params.push(`subject=${encodeURIComponent(subj)}`);
+                if (body) params.push(`body=${encodeURIComponent(body)}`);
+                if (params.length) mailto += '?' + params.join('&');
+                return mailto;
+            }
+            case 'phone': {
+                const v = ($('input-phone') as HTMLInputElement).value.trim();
+                if (!v) return null;
+                const digits = v.replace(/[^\d+\-() ]/g, '').replace(/[\-() ]/g, '');
+                return `tel:${digits}`;
+            }
+            case 'vcard': {
+                const fname = ($('input-vcard-fname') as HTMLInputElement).value.trim();
+                const lname = ($('input-vcard-lname') as HTMLInputElement).value.trim();
+                if (!fname && !lname) return null;
+                const phone = ($('input-vcard-phone') as HTMLInputElement).value.trim();
+                const email = ($('input-vcard-email') as HTMLInputElement).value.trim();
+                const org = ($('input-vcard-org') as HTMLInputElement).value.trim();
+                const url = ($('input-vcard-url') as HTMLInputElement).value.trim();
+                const lines = ['BEGIN:VCARD', 'VERSION:3.0'];
+                lines.push(`N:${lname};${fname};;;`);
+                lines.push(`FN:${[fname, lname].filter(Boolean).join(' ')}`);
+                if (org) lines.push(`ORG:${org}`);
+                if (phone) lines.push(`TEL;TYPE=CELL:${phone}`);
+                if (email) lines.push(`EMAIL:${email}`);
+                if (url) lines.push(`URL:${url}`);
+                lines.push('END:VCARD');
+                return lines.join('\n');
+            }
+            case 'sms': {
+                const phone = ($('input-sms-phone') as HTMLInputElement).value.trim();
+                if (!phone) return null;
+                const body = ($('input-sms-body') as HTMLTextAreaElement).value.trim();
+                const digits = phone.replace(/[^\d+]/g, '');
+                return body ? `SMSTO:${digits}:${body}` : `sms:${digits}`;
+            }
+        }
+        return null;
+    }
+
+    // ── Gradient builder ──────────────────────────────────
+    function makeFgFill(ctx: CanvasRenderingContext2D, x0: number, y0: number, x1: number, y1: number): CanvasGradient | string {
+        if (!state.gradient) return state.fg;
+        const cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
+        let g: CanvasGradient;
+        switch (state.gradType) {
+            case 'linear-tb': g = ctx.createLinearGradient(x0, y0, x0, y1); break;
+            case 'linear-lr': g = ctx.createLinearGradient(x0, y0, x1, y0); break;
+            case 'linear-diag': g = ctx.createLinearGradient(x0, y0, x1, y1); break;
+            case 'radial': g = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(x1 - x0, y1 - y0) / 2); break;
+        }
+        g.addColorStop(0, state.grad1);
+        g.addColorStop(1, state.grad2);
+        return g;
+    }
+
+    // ── Center label / logo overlay ───────────────────────
+    function drawCenterLabel(ctx: CanvasRenderingContext2D, canvasSize: number, qrLeft: number, qrTop: number, qrSize: number) {
+        const label = 'qrstars.ru';
+        const fontSize = Math.round(qrSize * 0.048);
+        const cx = qrLeft + qrSize / 2;
+        const cy = qrTop + qrSize / 2;
+
+        ctx.save();
+        ctx.font = `700 ${fontSize}px Inter, sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.shadowColor = 'rgba(255,255,255,0.95)';
+        ctx.shadowBlur = fontSize * 0.35;
+        ctx.fillStyle = '#1e293b';
+        ctx.fillText(label, cx, cy + 1);
+        ctx.shadowBlur = fontSize * 0.15;
+        ctx.fillText(label, cx, cy + 1);
+        ctx.restore();
+    }
+
+    function drawLogo(ctx: CanvasRenderingContext2D, img: HTMLImageElement, qrLeft: number, qrTop: number, qrSize: number, bgColor: string) {
+        const logoSize = qrSize * 0.22;
+        const padding = qrSize * 0.02;
+        const boxSize = logoSize + padding * 2;
+        const cx = qrLeft + qrSize / 2;
+        const cy = qrTop + qrSize / 2;
+        const boxX = cx - boxSize / 2;
+        const boxY = cy - boxSize / 2;
+
+        ctx.save();
+        ctx.fillStyle = bgColor;
+        roundRect(ctx, boxX, boxY, boxSize, boxSize, boxSize * 0.18);
+
+        const iw = img.naturalWidth || img.width;
+        const ih = img.naturalHeight || img.height;
+        const ratio = iw / ih;
+        let dw = logoSize, dh = logoSize;
+        if (ratio > 1) dh = logoSize / ratio;
+        else dw = logoSize * ratio;
+        ctx.drawImage(img, cx - dw / 2, cy - dh / 2, dw, dh);
+        ctx.restore();
+    }
+
+    // ── Render ────────────────────────────────────────────
+    async function generate() {
+        const payload = buildPayload();
+        if (!payload) {
+            if (autoUpdate) return;
+            previewWrapper.classList.add('!border-red-300');
+            setTimeout(() => previewWrapper.classList.remove('!border-red-300'), 1500);
+            return;
+        }
+        lastPayload = payload;
+        autoUpdate = true;
+        btnGenerate.classList.add('hidden');
+        btnGenerateMobile.classList.add('hidden');
+
+        const qrSize = 600;
+        const hasFrame = state.frame;
+        const captionH = hasFrame && state.frameStyle !== 'rounded' ? 80 : 0;
+        const ribbonH = hasFrame && state.frameStyle === 'ribbon' ? 80 : 0;
+        const framePad = hasFrame && state.frameStyle === 'rounded' ? 36 : 0;
+        const canvasW = qrSize + framePad * 2;
+        const canvasH = qrSize + framePad * 2 + (state.frameStyle === 'bottom' ? captionH : 0) + (state.frameStyle === 'ribbon' ? ribbonH : 0);
+
+        canvas.width = canvasW;
+        canvas.height = canvasH;
+        const ctx = canvas.getContext('2d')!;
+
+        const bgColor = state.bgTransparent ? '#ffffff00' : state.bg;
+
+        // Outer canvas fill (frame background)
+        if (!state.bgTransparent) {
+            ctx.fillStyle = state.bg;
+            ctx.fillRect(0, 0, canvasW, canvasH);
+        } else {
+            ctx.clearRect(0, 0, canvasW, canvasH);
+        }
+
+        const qrLeft = framePad;
+        const qrTop = framePad + (state.frameStyle === 'ribbon' ? ribbonH : 0);
+
+        // QR background
+        if (state.bgTransparent) {
+            // leave transparent
+        } else {
+            ctx.fillStyle = state.bg;
+            ctx.fillRect(qrLeft, qrTop, qrSize, qrSize);
+        }
+
+        const qrData = QRCode.create(payload, { errorCorrectionLevel: state.ecc });
+        const modules = qrData.modules;
+        const count = modules.size;
+        const margin = state.margin;
+        const cellSize = qrSize / (count + margin * 2);
+        const offX = qrLeft + margin * cellSize;
+        const offY = qrTop + margin * cellSize;
+
+        const fgFill = makeFgFill(ctx, qrLeft, qrTop, qrLeft + qrSize, qrTop + qrSize);
+        ctx.fillStyle = fgFill;
+
+        for (let row = 0; row < count; row++) {
+            for (let col = 0; col < count; col++) {
+                if (modules.data[row * count + col] && !isInFinder(row, col, count)) {
+                    drawDot(ctx, offX + col * cellSize, offY + row * cellSize, cellSize, state.dotStyle);
+                }
+            }
+        }
+
+        const eyeBgForHole = state.bgTransparent ? '#ffffff' : state.bg;
+        ctx.fillStyle = state.eyeCustom ? state.eyeColor : (typeof fgFill === 'string' ? fgFill : state.grad1);
+        drawFinderPattern(ctx, 0, 0, cellSize, offX, offY, state.eyeStyle, eyeBgForHole);
+        drawFinderPattern(ctx, 0, count - 7, cellSize, offX, offY, state.eyeStyle, eyeBgForHole);
+        drawFinderPattern(ctx, count - 7, 0, cellSize, offX, offY, state.eyeStyle, eyeBgForHole);
+
+        // Logo or watermark
+        if (state.logoImage) {
+            drawLogo(ctx, state.logoImage, qrLeft, qrTop, qrSize, state.bgTransparent ? '#ffffff' : state.bg);
+        } else if (state.watermark) {
+            drawCenterLabel(ctx, qrSize, qrLeft, qrTop, qrSize);
+        }
+
+        // Frame decorations
+        if (hasFrame) {
+            const frameColor = state.eyeCustom ? state.eyeColor : (state.gradient ? state.grad1 : state.fg);
+            if (state.frameStyle === 'rounded') {
+                ctx.save();
+                ctx.strokeStyle = frameColor;
+                ctx.lineWidth = 12;
+                strokeRoundRect(ctx, 6, 6, canvasW - 12, canvasH - 12, 36);
+                ctx.restore();
+            } else if (state.frameStyle === 'bottom') {
+                ctx.save();
+                ctx.fillStyle = frameColor;
+                ctx.fillRect(0, qrTop + qrSize, canvasW, captionH);
+                ctx.fillStyle = '#ffffff';
+                ctx.font = `800 ${Math.round(captionH * 0.42)}px Inter, sans-serif`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(state.frameText, canvasW / 2, qrTop + qrSize + captionH / 2);
+                ctx.restore();
+            } else if (state.frameStyle === 'ribbon') {
+                ctx.save();
+                ctx.fillStyle = frameColor;
+                // ribbon at top
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.lineTo(canvasW, 0);
+                ctx.lineTo(canvasW, ribbonH - 14);
+                ctx.lineTo(canvasW / 2, ribbonH);
+                ctx.lineTo(0, ribbonH - 14);
+                ctx.closePath();
+                ctx.fill();
+                ctx.fillStyle = '#ffffff';
+                ctx.font = `800 ${Math.round(ribbonH * 0.4)}px Inter, sans-serif`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(state.frameText, canvasW / 2, (ribbonH - 14) / 2);
+                ctx.restore();
+            }
+        }
+
+        canvas.classList.remove('hidden');
+        placeholder.classList.add('hidden');
+        previewWrapper.classList.remove('border-dashed');
+
+        qrCanvasDataUrl = canvas.toDataURL('image/png');
+        btnDownloadPng.disabled = false;
+        btnDownloadJpg.disabled = false;
+    }
+
+    // ── Throttled auto-update ─────────────────────────────
+    let updateTimer: number | null = null;
+    function scheduleUpdate() {
+        if (!autoUpdate) return;
+        if (updateTimer) window.clearTimeout(updateTimer);
+        updateTimer = window.setTimeout(generate, 120);
+    }
+
+    // ── Event listeners ───────────────────────────────────
+    btnGenerate.addEventListener('click', generate);
+    btnGenerateMobile.addEventListener('click', generate);
+
+    btnDownloadPng.addEventListener('click', () => {
+        if (!qrCanvasDataUrl) return;
+        const a = document.createElement('a');
+        a.href = qrCanvasDataUrl;
+        a.download = `qrstars-qr-${state.type}.png`;
+        a.click();
+    });
+
+    btnDownloadJpg.addEventListener('click', () => {
+        // For JPG we need to flatten transparent bg to white
+        const tmp = document.createElement('canvas');
+        tmp.width = canvas.width;
+        tmp.height = canvas.height;
+        const tctx = tmp.getContext('2d')!;
+        tctx.fillStyle = '#ffffff';
+        tctx.fillRect(0, 0, tmp.width, tmp.height);
+        tctx.drawImage(canvas, 0, 0);
+        const url = tmp.toDataURL('image/jpeg', 0.92);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `qrstars-qr-${state.type}.jpg`;
+        a.click();
+    });
+
+    // Live regenerate on input change
+    document.querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>(
+        '#input-url, #input-wifi-ssid, #input-wifi-pass, #input-wifi-enc, #input-text, ' +
+        '#input-email-addr, #input-email-subj, #input-email-body, #input-phone, ' +
+        '#input-vcard-fname, #input-vcard-lname, #input-vcard-phone, #input-vcard-email, #input-vcard-org, #input-vcard-url, ' +
+        '#input-sms-phone, #input-sms-body'
+    ).forEach(el => {
+        el.addEventListener('input', () => scheduleUpdate());
+        el.addEventListener('keydown', e => {
+            if (e.key === 'Enter' && el.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+                generate();
+            }
+        });
+    });
+</script>

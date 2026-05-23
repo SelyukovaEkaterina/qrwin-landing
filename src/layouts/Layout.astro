@@ -10,6 +10,8 @@ interface Props {
   fullTitle?: boolean;
   canonical?: string;
   ogImage?: string;
+  /** Schema.org type for structured data. 'WebSite' on homepage, 'WebPage' elsewhere */
+  pageType?: 'WebSite' | 'WebPage';
 }
 
 const {
@@ -17,11 +19,38 @@ const {
   description = 'QR-экосистема для локального бизнеса. Динамические QR-коды для отзывов, меню, визиток и оплаты.',
   fullTitle = false,
   canonical,
+  // Замените og-default.jpg на реальную OG-картинку 1200×630 px
   ogImage = 'https://qrstars.ru/og-default.jpg',
 } = Astro.props;
 
 const pageTitle = fullTitle ? title : `${title} | QrStars`;
 const canonicalUrl = canonical ?? new URL(Astro.url.pathname, 'https://qrstars.ru').href;
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': 'https://qrstars.ru/#organization',
+      name: 'QrStars',
+      url: 'https://qrstars.ru',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://qrstars.ru/favicon.ico',
+      },
+      sameAs: [],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://qrstars.ru/#website',
+      url: 'https://qrstars.ru',
+      name: 'QrStars',
+      description: 'QR-экосистема для локального бизнеса',
+      publisher: { '@id': 'https://qrstars.ru/#organization' },
+      inLanguage: 'ru-RU',
+    },
+  ],
+};
 ---
 
 <!DOCTYPE html>
@@ -44,8 +73,15 @@ const canonicalUrl = canonical ?? new URL(Astro.url.pathname, 'https://qrstars.r
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <!-- Preconnect для ускорения загрузки шрифтов и иконок -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Глобальная структурированная разметка: Organization + WebSite -->
+    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
 
     <style is:global>
       .gradient-text {

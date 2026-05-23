@@ -23,7 +23,7 @@ posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
                     <article class="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-md transition flex flex-col">
                         {post.data.image && (
                             <div class="h-48 bg-slate-200 shrink-0">
-                                <img src={post.data.image} class="w-full h-full object-cover" alt={post.data.title} />
+                                <img src={post.data.image} class="w-full h-full object-cover" loading="lazy" alt={post.data.title} />
                             </div>
                         )}
                         <div class="p-6 flex flex-col flex-grow">

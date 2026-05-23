@@ -1,0 +1,432 @@
+---
+import { generateBrandedQrDataUrl } from '../lib/brandedQr';
+
+const APP_BASE = 'https://app.qrstars.ru';
+
+interface DemoScenario {
+  name: string;
+  path: string;
+  badge: string;
+  button: string;
+  featured?: boolean;
+  external?: boolean;
+  showDisclaimer?: boolean;
+}
+
+const scenariosCoffee: DemoScenario[] = [
+  {
+    name: 'Микросайт (Всё в одном)',
+    path: '/scan/demo-landing',
+    badge: 'Главное демо · PRO · Рекомендуем',
+    button: 'Открыть демо-микросайт',
+    featured: true,
+  },
+  {
+    name: 'Умные отзывы',
+    path: '/scan/demo-review',
+    badge: 'Хит · Рост рейтинга',
+    button: 'Оценить заведение',
+    showDisclaimer: true,
+  },
+  {
+    name: 'Электронное QR-меню',
+    path: '/scan/demo-menu',
+    badge: 'PRO · С фото блюд',
+    button: 'Изучить меню',
+  },
+  {
+    name: 'Визитка сотрудника',
+    path: '/scan/demo-business-card',
+    badge: 'Контакты и чаевые',
+    button: 'Сохранить контакт',
+  },
+  {
+    name: 'Быстрый Wi-Fi',
+    path: '/scan/demo-wifi',
+    badge: 'Подключение за 1 клик',
+    button: 'Подключиться к демо',
+  },
+  {
+    name: 'Скачивание файла',
+    path: '/scan/demo-file',
+    badge: 'PDF-меню и инструкции',
+    button: 'Скачать PDF-файл',
+  },
+  {
+    name: 'Умный редирект',
+    path: '/scan/demo-redirect',
+    badge: 'Внешняя ссылка (Карты)',
+    button: 'Перейти на Яндекс.Карты ↗',
+    external: true,
+  },
+];
+
+const scenariosTire: DemoScenario[] = [
+  {
+    name: 'Микросайт (Всё в одном)',
+    path: '/scan/demo2-landing',
+    badge: 'Главное демо · PRO · Рекомендуем',
+    button: 'Открыть демо-микросайт',
+    featured: true,
+  },
+  {
+    name: 'Умные отзывы',
+    path: '/scan/demo2-review',
+    badge: 'Хит · Рост рейтинга',
+    button: 'Оценить сервис',
+    showDisclaimer: true,
+  },
+  {
+    name: 'Прайс-лист услуг',
+    path: '/scan/demo2-menu',
+    badge: 'PRO · 15 услуг',
+    button: 'Изучить прайс-лист',
+  },
+  {
+    name: 'Визитка сотрудника',
+    path: '/scan/demo2-business-card',
+    badge: 'Контакты и чаевые',
+    button: 'Сохранить контакт',
+  },
+  {
+    name: 'Быстрый Wi-Fi',
+    path: '/scan/demo2-wifi',
+    badge: 'Подключение за 1 клик',
+    button: 'Подключиться к демо',
+  },
+  {
+    name: 'Скачивание файла',
+    path: '/scan/demo2-file',
+    badge: 'PDF-прайс и документы',
+    button: 'Скачать PDF-файл',
+  },
+  {
+    name: 'Умный редирект',
+    path: '/scan/demo2-redirect',
+    badge: 'Внешняя ссылка (Карты)',
+    button: 'Перейти на Яндекс.Карты ↗',
+    external: true,
+  },
+];
+
+const scenariosClinic: DemoScenario[] = [
+  {
+    name: 'Микросайт (Всё в одном)',
+    path: '/scan/demo3-landing',
+    badge: 'Главное демо · PRO · Рекомендуем',
+    button: 'Открыть демо-микросайт',
+    featured: true,
+  },
+  {
+    name: 'Умные отзывы',
+    path: '/scan/demo3-review',
+    badge: 'Хит · Рост рейтинга',
+    button: 'Оценить приём',
+    showDisclaimer: true,
+  },
+  {
+    name: 'Прайс-лист услуг',
+    path: '/scan/demo3-menu',
+    badge: 'PRO · 15 услуг',
+    button: 'Изучить прайс-лист',
+  },
+  {
+    name: 'Визитка сотрудника',
+    path: '/scan/demo3-business-card',
+    badge: 'Контакты и запись',
+    button: 'Сохранить контакт',
+  },
+  {
+    name: 'Быстрый Wi-Fi',
+    path: '/scan/demo3-wifi',
+    badge: 'Подключение за 1 клик',
+    button: 'Подключиться к демо',
+  },
+  {
+    name: 'Скачивание файла',
+    path: '/scan/demo3-file',
+    badge: 'PDF-прейскурант',
+    button: 'Скачать PDF-файл',
+  },
+  {
+    name: 'Умный редирект',
+    path: '/scan/demo3-redirect',
+    badge: 'Внешняя ссылка (Карты)',
+    button: 'Перейти на Яндекс.Карты ↗',
+    external: true,
+  },
+];
+
+interface Vertical {
+  id: 'coffee' | 'tire' | 'clinic';
+  icon: string;
+  label: string;
+  micrositePath: string;
+  scenarios: DemoScenario[];
+  accentRing: string;
+  accentBadge: string;
+  accentBtn: string;
+  qrBadgeBg: string;
+}
+
+const verticals: Vertical[] = [
+  {
+    id: 'coffee',
+    icon: 'fa-mug-hot',
+    label: 'Кофейня',
+    micrositePath: '/scan/demo-landing',
+    scenarios: scenariosCoffee,
+    accentRing: 'border-primary/30 ring-2 ring-primary/15',
+    accentBadge: 'bg-primary/10 text-primary border-primary/20',
+    accentBtn: 'bg-primary hover:bg-indigo-700 shadow-indigo-500/20',
+    qrBadgeBg: 'bg-primary',
+  },
+  {
+    id: 'tire',
+    icon: 'fa-wrench',
+    label: 'Шиномонтаж',
+    micrositePath: '/scan/demo2-landing',
+    scenarios: scenariosTire,
+    accentRing: 'border-amber-400/30 ring-2 ring-amber-500/15',
+    accentBadge: 'bg-amber-50 text-amber-700 border-amber-200',
+    accentBtn: 'bg-amber-500 hover:bg-amber-600 shadow-amber-500/20',
+    qrBadgeBg: 'bg-amber-500',
+  },
+  {
+    id: 'clinic',
+    icon: 'fa-tooth',
+    label: 'Стоматология',
+    micrositePath: '/scan/demo3-landing',
+    scenarios: scenariosClinic,
+    accentRing: 'border-sky-400/30 ring-2 ring-sky-500/15',
+    accentBadge: 'bg-sky-50 text-sky-700 border-sky-200',
+    accentBtn: 'bg-sky-500 hover:bg-sky-600 shadow-sky-500/20',
+    qrBadgeBg: 'bg-sky-500',
+  },
+];
+
+const allScenarios = verticals.flatMap((v) => v.scenarios);
+
+const qrByPath = Object.fromEntries(
+  await Promise.all(
+    allScenarios.map(async (s) => {
+      const url = `${APP_BASE}${s.path}`;
+      const qr = await generateBrandedQrDataUrl(url, s.featured ? 200 : 140);
+      return [s.path, { url, qr }] as const;
+    }),
+  ),
+);
+---
+
+<section id="demo" class="py-20 lg:py-28 bg-gradient-to-b from-indigo-50/60 via-white to-white border-y border-indigo-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12 lg:mb-16">
+      <div class="inline-flex items-center gap-2 bg-primary/10 text-primary font-semibold px-4 py-1.5 rounded-full text-sm mb-5 border border-primary/20">
+        <i class="fa-solid fa-mobile-screen-button"></i>
+        Живые сценарии
+      </div>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Попробуйте демо</h2>
+      <p class="text-slate-600 max-w-2xl mx-auto leading-relaxed">
+        Отсканируйте QR с экрана или взаимодействуйте с микросайтом прямо здесь — это реальное приложение, как у клиентов. Выберите отрасль, чтобы увидеть разницу.
+      </p>
+
+      <div class="flex justify-center mt-8 px-2">
+        <div class="flex flex-wrap justify-center bg-slate-100 rounded-2xl p-1.5 gap-1 max-w-full">
+          {verticals.map((v, i) => (
+            <button
+              type="button"
+              data-demo-mode={v.id}
+              class:list={['demo-mode-btn', i === 0 && 'active', 'relative flex items-center gap-2 px-3.5 sm:px-5 py-2.5 rounded-xl text-sm font-semibold transition-all']}
+            >
+              <i class:list={['fa-solid', v.icon, 'text-base']}></i>
+              {v.label}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    {verticals.map((v, vIdx) => {
+      const micrositeUrl = `${APP_BASE}${v.micrositePath}`;
+      return (
+        <div data-demo-content={v.id} class:list={[vIdx !== 0 && 'hidden']}>
+          <div class="flex flex-col items-center mb-16 lg:mb-20">
+            <div class="relative shrink-0">
+              <div
+                class="w-[min(100%,390px)] aspect-[390/844] bg-white rounded-[2.75rem] shadow-2xl border-[10px] border-slate-900 overflow-hidden flex flex-col"
+                style="max-height: min(80vh, 844px);"
+              >
+                <div class="h-7 bg-slate-900 shrink-0 flex justify-center items-end pb-1">
+                  <div class="w-28 h-4 bg-slate-900 rounded-b-2xl"></div>
+                </div>
+                <div class="flex-1 relative bg-slate-50">
+                  <iframe
+                    data-demo-iframe={v.id}
+                    data-src={micrositeUrl}
+                    src={vIdx === 0 ? micrositeUrl : undefined}
+                    title={`Демо: ${v.label}`}
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
+                    class="absolute inset-0 w-full h-full border-0 bg-white"
+                  ></iframe>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 mt-4 text-xs text-slate-500">
+              <span class="font-medium">Живой микросайт · {APP_BASE.replace('https://', '')}{v.micrositePath}</span>
+              <a
+                href={micrositeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1 font-semibold text-primary hover:underline"
+              >
+                Открыть в новой вкладке <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+            {v.scenarios.map((scenario) => {
+              const { url, qr } = qrByPath[scenario.path];
+              return (
+                <article
+                  class:list={[
+                    'bg-white rounded-2xl border shadow-sm flex flex-col overflow-hidden transition hover:shadow-md',
+                    scenario.featured
+                      ? `sm:col-span-2 lg:col-span-2 lg:row-span-1 ${v.accentRing} p-1`
+                      : 'border-slate-200',
+                  ]}
+                >
+                  <div
+                    class:list={[
+                      'flex flex-col h-full',
+                      scenario.featured ? 'p-6 md:p-8 md:flex-row md:gap-8 md:items-center' : 'p-5',
+                    ]}
+                  >
+                    <div
+                      class:list={[
+                        'shrink-0 flex flex-col items-center',
+                        scenario.featured ? 'md:w-48' : 'mb-4',
+                      ]}
+                    >
+                      <div class="relative inline-block p-2 bg-slate-50 rounded-xl border border-slate-100">
+                        <img
+                          src={qr}
+                          width={scenario.featured ? 200 : 140}
+                          height={scenario.featured ? 200 : 140}
+                          alt={`QR: ${scenario.name}`}
+                          class="rounded-lg block"
+                          loading="lazy"
+                        />
+                        <div
+                          class:list={[
+                            'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-lg flex items-center justify-center text-white font-extrabold text-[10px] shadow ring-2 ring-white pointer-events-none',
+                            v.qrBadgeBg,
+                          ]}
+                          aria-hidden="true"
+                        >
+                          QR
+                        </div>
+                      </div>
+                      <p class="mt-2 text-[10px] font-semibold uppercase tracking-wide text-slate-400">app.qrstars.ru</p>
+                    </div>
+
+                    <div class="flex-1 flex flex-col min-w-0">
+                      <span
+                        class:list={[
+                          'inline-flex self-start items-center font-semibold rounded-full border mb-3',
+                          scenario.featured
+                            ? `text-xs px-3 py-1 ${v.accentBadge}`
+                            : 'text-[11px] px-2.5 py-0.5 bg-slate-100 text-slate-600 border-slate-200',
+                        ]}
+                      >
+                        {scenario.badge}
+                      </span>
+                      <h3
+                        class:list={[
+                          'font-bold text-slate-900 mb-2',
+                          scenario.featured ? 'text-xl md:text-2xl' : 'text-lg',
+                        ]}
+                      >
+                        {scenario.name}
+                      </h3>
+
+                      {scenario.external && (
+                        <p class="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 mb-3 leading-relaxed">
+                          <i class="fa-solid fa-triangle-exclamation mr-1"></i>
+                          После сканирования откроется внешняя ссылка (Яндекс.Карты), не страница QrStars.
+                        </p>
+                      )}
+
+                      <a
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class:list={[
+                          'inline-flex items-center justify-center gap-2 rounded-xl font-bold transition mt-auto w-full',
+                          scenario.featured
+                            ? `text-white px-6 py-3.5 text-base shadow-lg ${v.accentBtn}`
+                            : 'bg-slate-900 text-white px-5 py-3 text-sm hover:bg-slate-800',
+                        ]}
+                      >
+                        {scenario.button}
+                        {scenario.external && <span class="text-xs opacity-80" aria-hidden="true">↗</span>}
+                      </a>
+
+                      {scenario.showDisclaimer && (
+                        <p class="text-xs text-slate-400 mt-3 leading-relaxed">
+                          * Демонстрационный режим: оценки и отзывы не сохраняются в базу данных и не отправляются в Telegram.
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      );
+    })}
+  </div>
+</section>
+
+<style>
+  .demo-mode-btn {
+    color: rgb(100 116 139);
+  }
+  .demo-mode-btn.active {
+    background: white;
+    color: rgb(15 23 42);
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const modeBtns = document.querySelectorAll<HTMLButtonElement>('.demo-mode-btn');
+    const contents = document.querySelectorAll<HTMLElement>('[data-demo-content]');
+    const iframes = document.querySelectorAll<HTMLIFrameElement>('iframe[data-demo-iframe]');
+
+    function showMode(mode: string) {
+      contents.forEach((el) => {
+        el.classList.toggle('hidden', el.dataset.demoContent !== mode);
+      });
+      // Lazy-load iframe src on first activation
+      iframes.forEach((frame) => {
+        if (frame.dataset.demoIframe === mode && !frame.src && frame.dataset.src) {
+          frame.src = frame.dataset.src;
+        }
+      });
+    }
+
+    modeBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const mode = btn.dataset.demoMode;
+        modeBtns.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        if (mode) showMode(mode);
+      });
+    });
+  });
+</script>

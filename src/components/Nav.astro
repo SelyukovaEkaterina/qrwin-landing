@@ -1,24 +1,80 @@
 ---
-// Nav.astro
+const links = [
+  { href: '/smart-reviews.html', label: 'Умные отзывы' },
+  { href: '/qr-business-cards.html', label: 'QR-визитки' },
+  { href: '/qr-menu.html', label: 'QR-меню' },
+  { href: '/file-sharing.html', label: 'QR-файлы' },
+  { href: '/blog.html', label: 'Блог' },
+  { href: '/marketplace.html', label: 'Наборы' },
+];
+const APP_URL = 'https://app.qrstars.ru';
 ---
 
 <nav class="fixed w-full bg-white/90 backdrop-blur-md z-50 border-b border-slate-200">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between h-16 items-center">
-          <a href="/" class="flex-shrink-0 flex items-center gap-2">
-              <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold">QR</div>
-              <span class="font-bold text-xl tracking-tight">QrStars</span>
-          </a>
-          <div class="hidden md:flex space-x-8">
-              <a href="/smart-reviews.html" class="text-slate-600 hover:text-primary transition font-medium">Умные отзывы</a>
-              <a href="/qr-business-cards.html" class="text-slate-600 hover:text-primary transition font-medium">QR-визитки</a>
-              <a href="/qr-menu.html" class="text-slate-600 hover:text-primary transition font-medium">QR-меню</a>
-              <a href="/file-sharing.html" class="text-slate-600 hover:text-primary transition font-medium">QR-файлы</a>
-              <a href="/blog.html" class="text-slate-600 hover:text-primary transition font-medium">Блог</a>
-          </div>
-          <div>
-              <a href="https://app.qrstars.ru" class="bg-slate-900 text-white px-5 py-2 rounded-full font-medium hover:bg-slate-800 transition shadow-md">Кабинет</a>
-          </div>
+    <div class="flex justify-between h-16 items-center">
+      <a href="/" class="flex-shrink-0 flex items-center gap-2">
+        <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold">QR</div>
+        <span class="font-bold text-xl tracking-tight">QrStars</span>
+      </a>
+
+      <div class="hidden lg:flex space-x-7 items-center">
+        {links.map((link) => (
+          <a href={link.href} class="text-slate-600 hover:text-primary transition font-medium text-[15px]">{link.label}</a>
+        ))}
+        <a href="/free-qr-generator.html" class="text-emerald-600 hover:text-emerald-700 transition font-bold text-[15px]">
+          Бесплатный генератор
+        </a>
       </div>
+
+      <div class="hidden lg:flex items-center gap-3">
+        <a href={APP_URL} class="text-slate-600 hover:text-primary transition font-medium text-[15px]">Войти</a>
+        <a href={APP_URL} class="bg-primary text-white px-5 py-2 rounded-full font-semibold hover:bg-indigo-700 transition shadow-md shadow-indigo-500/20">
+          Начать бесплатно
+        </a>
+      </div>
+
+      <button
+        id="nav-toggle"
+        type="button"
+        aria-label="Меню"
+        class="lg:hidden w-10 h-10 flex items-center justify-center text-slate-700 rounded-lg hover:bg-slate-100 transition"
+      >
+        <i id="nav-icon" class="fa-solid fa-bars text-lg"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Мобильное меню -->
+  <div id="nav-mobile" class="hidden lg:hidden border-t border-slate-200 bg-white">
+    <div class="px-4 py-4 space-y-1">
+      {links.map((link) => (
+        <a href={link.href} class="block px-3 py-2.5 rounded-lg text-slate-700 font-medium hover:bg-slate-50 transition">{link.label}</a>
+      ))}
+      <a href="/free-qr-generator.html" class="block px-3 py-2.5 rounded-lg text-emerald-600 font-bold hover:bg-emerald-50 transition">
+        Бесплатный генератор QR
+      </a>
+      <div class="pt-3 mt-2 border-t border-slate-100 space-y-2">
+        <a href={APP_URL} class="block text-center px-4 py-2.5 rounded-xl border border-slate-200 text-slate-700 font-semibold hover:bg-slate-50 transition">
+          Войти
+        </a>
+        <a href={APP_URL} class="block text-center px-4 py-2.5 rounded-xl bg-primary text-white font-bold hover:bg-indigo-700 transition">
+          Начать бесплатно
+        </a>
+      </div>
+    </div>
   </div>
 </nav>
+
+<script is:inline>
+  (function () {
+    const toggle = document.getElementById('nav-toggle');
+    const menu = document.getElementById('nav-mobile');
+    const icon = document.getElementById('nav-icon');
+    if (!toggle || !menu || !icon) return;
+    toggle.addEventListener('click', function () {
+      const open = menu.classList.toggle('hidden') === false;
+      icon.className = open ? 'fa-solid fa-xmark text-lg' : 'fa-solid fa-bars text-lg';
+    });
+  })();
+</script>

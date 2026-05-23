@@ -22,6 +22,17 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 const d = entry.data;
 
+const pageCanonical = `https://qrstars.ru/${entry.slug}.html`;
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Главная', item: 'https://qrstars.ru/' },
+    { '@type': 'ListItem', position: 2, name: d.h1, item: pageCanonical },
+  ],
+};
+
 const defaultSteps = [
   { icon: 'fa-solid fa-link', title: 'Вставьте ссылку', text: 'Укажите URL, контакты или выберите шаблон для отзывов, меню или WiFi.' },
   { icon: 'fa-solid fa-palette', title: 'Настройте дизайн', text: 'Добавьте логотип, фирменные цвета и рамку — код останется читаемым.' },
@@ -42,8 +53,9 @@ const defaultIndustries = [
   title={d.title}
   description={d.description}
   fullTitle={d.fullTitle}
-  canonical={`https://qrstars.ru/${entry.slug}.html`}
+  canonical={pageCanonical}
 >
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
   <SeoHero
     badge={d.badge}
     h1={d.h1}
