@@ -22,7 +22,6 @@ import Layout from '../layouts/Layout.astro';
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="bg-slate-50 rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
                 <div class="p-6 md:p-8">
-                    <!-- Type Tabs -->
                     <div class="flex flex-wrap gap-2 mb-6" id="qr-tabs">
                         <button data-type="url" class="qr-tab active-tab px-4 py-2.5 rounded-xl text-sm font-semibold transition">
                             <i class="fa-solid fa-link mr-1.5"></i>URL
@@ -48,20 +47,17 @@ import Layout from '../layouts/Layout.astro';
                     </div>
 
                     <div class="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-8">
-                        <!-- LEFT: Inputs + Styling -->
                         <div>
-                            <!-- URL Form -->
                             <div id="form-url" class="qr-form">
                                 <label class="block text-sm font-semibold text-slate-700 mb-2">Адрес ссылки</label>
-                                <input type="url" id="input-url" placeholder="https://example.com" class="qr-input" />
+                                <input type="url" id="input-url" placeholder="https://example.com" value="https://qrstars.ru" class="qr-input" />
                                 <p class="mt-2 text-xs text-slate-500 leading-relaxed">
                                     <i class="fa-solid fa-circle-info text-primary/70 mr-1"></i>
                                     Этот код «зашьёт» ссылку навсегда — поменять её после печати нельзя.
-                                    <a href="https://app.qrstars.ru/register" class="text-primary font-semibold hover:underline">Сделайте динамический QR бесплатно</a> — ссылку можно менять, видна статистика сканирований.
+                                    <a href="https://app.qrstars.ru/register" data-goal="qr_dynamic_cta" data-goal-params='{"source":"url_hint"}' class="text-primary font-semibold hover:underline">Сделайте динамический QR бесплатно</a> — ссылку можно менять, видна статистика сканирований.
                                 </p>
                             </div>
 
-                            <!-- WiFi Form -->
                             <div id="form-wifi" class="qr-form hidden">
                                 <div class="space-y-4">
                                     <div>
@@ -83,13 +79,11 @@ import Layout from '../layouts/Layout.astro';
                                 </div>
                             </div>
 
-                            <!-- Text Form -->
                             <div id="form-text" class="qr-form hidden">
                                 <label class="block text-sm font-semibold text-slate-700 mb-2">Произвольный текст</label>
                                 <textarea id="input-text" rows="5" placeholder="Введите текст..." class="qr-input resize-none"></textarea>
                             </div>
 
-                            <!-- Email Form -->
                             <div id="form-email" class="qr-form hidden">
                                 <div class="space-y-4">
                                     <div>
@@ -107,13 +101,11 @@ import Layout from '../layouts/Layout.astro';
                                 </div>
                             </div>
 
-                            <!-- Phone Form -->
                             <div id="form-phone" class="qr-form hidden">
                                 <label class="block text-sm font-semibold text-slate-700 mb-2">Номер телефона</label>
                                 <input type="tel" id="input-phone" placeholder="+7 (999) 123-45-67" class="qr-input" />
                             </div>
 
-                            <!-- vCard Form -->
                             <div id="form-vcard" class="qr-form hidden">
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     <div>
@@ -143,7 +135,6 @@ import Layout from '../layouts/Layout.astro';
                                 </div>
                             </div>
 
-                            <!-- SMS Form -->
                             <div id="form-sms" class="qr-form hidden">
                                 <div class="space-y-4">
                                     <div>
@@ -157,32 +148,23 @@ import Layout from '../layouts/Layout.astro';
                                 </div>
                             </div>
 
-                            <!-- Generate Button (mobile) -->
                             <button id="btn-generate-mobile" class="mt-6 w-full bg-primary text-white px-6 py-3.5 rounded-xl font-bold text-base hover:bg-indigo-700 transition shadow-lg shadow-indigo-500/30 flex items-center justify-center gap-2 lg:hidden">
                                 <i class="fa-solid fa-qrcode"></i>
                                 Сгенерировать QR-код
                             </button>
 
-                            <!-- ─── Styling sections ─── -->
                             <div class="mt-8 space-y-6">
 
-                                <!-- Dot style -->
                                 <div>
                                     <label class="block text-sm font-semibold text-slate-700 mb-3">
                                         <i class="fa-solid fa-shapes mr-1.5 text-primary"></i>Стиль точек
                                     </label>
-                                    <div class="grid grid-cols-4 sm:grid-cols-7 gap-2" id="style-picker">
+                                    <div class="grid grid-cols-2 sm:grid-cols-2 gap-2" id="style-picker">
                                         <button data-style="classic" class="style-btn active-style style-thumb-btn"><canvas width="40" height="40" class="style-canvas rounded"></canvas><span class="thumb-label">Квадраты</span></button>
                                         <button data-style="rounded" class="style-btn style-thumb-btn"><canvas width="40" height="40" class="style-canvas rounded"></canvas><span class="thumb-label">Скруглённые</span></button>
-                                        <button data-style="dots" class="style-btn style-thumb-btn"><canvas width="40" height="40" class="style-canvas rounded"></canvas><span class="thumb-label">Точки</span></button>
-                                        <button data-style="diamond" class="style-btn style-thumb-btn"><canvas width="40" height="40" class="style-canvas rounded"></canvas><span class="thumb-label">Ромбы</span></button>
-                                        <button data-style="star" class="style-btn style-thumb-btn"><canvas width="40" height="40" class="style-canvas rounded"></canvas><span class="thumb-label">Звёзды</span></button>
-                                        <button data-style="heart" class="style-btn style-thumb-btn"><canvas width="40" height="40" class="style-canvas rounded"></canvas><span class="thumb-label">Сердца</span></button>
-                                        <button data-style="cross" class="style-btn style-thumb-btn"><canvas width="40" height="40" class="style-canvas rounded"></canvas><span class="thumb-label">Крестики</span></button>
                                     </div>
                                 </div>
 
-                                <!-- Eye (finder) style -->
                                 <div>
                                     <label class="block text-sm font-semibold text-slate-700 mb-3">
                                         <i class="fa-solid fa-eye mr-1.5 text-primary"></i>Стиль глазков
@@ -196,7 +178,6 @@ import Layout from '../layouts/Layout.astro';
                                     </div>
                                 </div>
 
-                                <!-- Color presets -->
                                 <div>
                                     <label class="block text-sm font-semibold text-slate-700 mb-3">
                                         <i class="fa-solid fa-palette mr-1.5 text-primary"></i>Цветовые пресеты
@@ -204,7 +185,6 @@ import Layout from '../layouts/Layout.astro';
                                     <div class="grid grid-cols-5 sm:grid-cols-10 gap-2" id="preset-picker"></div>
                                 </div>
 
-                                <!-- Colors -->
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     <div>
                                         <label class="block text-sm font-semibold text-slate-700 mb-2">Цвет точек</label>
@@ -223,7 +203,6 @@ import Layout from '../layouts/Layout.astro';
                                     </div>
                                 </div>
 
-                                <!-- Gradient -->
                                 <div>
                                     <label class="flex items-center gap-2 text-sm font-semibold text-slate-700 mb-3 cursor-pointer">
                                         <input type="checkbox" id="input-gradient" class="w-4 h-4 accent-primary" />
@@ -251,7 +230,6 @@ import Layout from '../layouts/Layout.astro';
                                     </div>
                                 </div>
 
-                                <!-- Eye color -->
                                 <div>
                                     <label class="flex items-center gap-2 text-sm font-semibold text-slate-700 mb-3 cursor-pointer">
                                         <input type="checkbox" id="input-eye-custom" class="w-4 h-4 accent-primary" />
@@ -263,26 +241,76 @@ import Layout from '../layouts/Layout.astro';
                                     </div>
                                 </div>
 
-                                <!-- Logo -->
                                 <div>
-                                    <label class="block text-sm font-semibold text-slate-700 mb-3">
-                                        <i class="fa-solid fa-image mr-1.5 text-primary"></i>Логотип в центре
+                                    <label class="flex items-center gap-2 text-sm font-semibold text-slate-700 mb-2 cursor-pointer">
+                                        <input type="checkbox" id="input-scatter" class="w-4 h-4 accent-primary" />
+                                        <i class="fa-solid fa-braille text-primary"></i>
+                                        Точки вокруг кода
                                     </label>
-                                    <div class="flex flex-wrap items-center gap-3">
-                                        <label class="cursor-pointer inline-flex items-center gap-2 px-4 py-2 bg-white border border-slate-300 rounded-xl text-sm font-medium text-slate-700 hover:border-primary hover:text-primary transition">
-                                            <i class="fa-solid fa-upload"></i>
-                                            <span id="logo-label">Загрузить изображение</span>
-                                            <input type="file" id="input-logo" accept="image/*" class="hidden" />
-                                        </label>
-                                        <button id="btn-logo-clear" type="button" class="hidden px-3 py-2 text-xs rounded-lg border border-slate-300 bg-white hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition">Убрать</button>
-                                        <label class="ml-auto flex items-center gap-2 text-xs text-slate-600 cursor-pointer">
-                                            <input type="checkbox" id="input-watermark" checked class="w-4 h-4 accent-primary" />
-                                            Подпись qrstars.ru
-                                        </label>
+                                    <div id="scatter-controls" class="hidden space-y-3 pl-6">
+                                        <div>
+                                            <label class="block text-xs font-medium text-slate-600 mb-1">Расстояние</label>
+                                            <input type="range" id="input-scatter-size" min="1" max="10" value="3" class="w-full accent-primary" />
+                                        </div>
+                                        <div>
+                                            <label class="block text-xs font-medium text-slate-600 mb-1">Форма контура</label>
+                                            <div class="flex flex-wrap gap-2">
+                                                <button data-sshape="square" class="sshape-btn px-3 py-1.5 rounded-lg border-2 border-primary bg-primary/5 text-xs font-medium text-slate-700">Квадрат</button>
+                                                <button data-sshape="circle" class="sshape-btn px-3 py-1.5 rounded-lg border-2 border-slate-200 text-xs font-medium text-slate-700">Круг</button>
+                                                <button data-sshape="star" class="sshape-btn px-3 py-1.5 rounded-lg border-2 border-slate-200 text-xs font-medium text-slate-700">Звезда</button>
+                                                <button data-sshape="diamond" class="sshape-btn px-3 py-1.5 rounded-lg border-2 border-slate-200 text-xs font-medium text-slate-700">Ромб</button>
+                                                <button data-sshape="hexagon" class="sshape-btn px-3 py-1.5 rounded-lg border-2 border-slate-200 text-xs font-medium text-slate-700">Шестиуг.</button>
+                                                <button data-sshape="heart" class="sshape-btn px-3 py-1.5 rounded-lg border-2 border-slate-200 text-xs font-medium text-slate-700">Сердце</button>
+                                                <button data-sshape="cross" class="sshape-btn px-3 py-1.5 rounded-lg border-2 border-slate-200 text-xs font-medium text-slate-700">Крест</button>
+                                                <button data-sshape="octagon" class="sshape-btn px-3 py-1.5 rounded-lg border-2 border-slate-200 text-xs font-medium text-slate-700">Восьмиуг.</button>
+                                                <button data-sshape="triangle" class="sshape-btn px-3 py-1.5 rounded-lg border-2 border-slate-200 text-xs font-medium text-slate-700">Треуг.</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <!-- Frame / caption -->
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-2">
+                                        <i class="fa-solid fa-image mr-1.5 text-primary"></i>Картинка в центре
+                                    </label>
+                                    <div class="grid grid-cols-6 sm:grid-cols-10 gap-2 mb-2" id="logo-presets"></div>
+                                    <div class="flex flex-wrap items-center gap-3">
+                                        <label class="cursor-pointer inline-flex items-center gap-2 px-4 py-2 bg-white border border-slate-300 rounded-xl text-sm font-medium text-slate-700 hover:border-primary hover:text-primary transition">
+                                            <i class="fa-solid fa-upload"></i>
+                                            <span id="logo-label">Загрузить свой</span>
+                                            <input type="file" id="input-logo" accept="image/*" class="hidden" />
+                                        </label>
+                                        <button id="btn-logo-clear" type="button" class="px-3 py-2 text-xs rounded-lg border border-slate-300 bg-white hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition">Убрать</button>
+                                        <label class="flex items-center gap-2 text-xs text-slate-600 cursor-pointer">
+                                            <input type="checkbox" id="input-logo-fill" checked class="w-4 h-4 accent-primary" />
+                                            Точки под логотипом
+                                        </label>
+                                        <div class="flex items-center gap-2">
+                                            <label class="text-xs text-slate-600">Размер</label>
+                                            <input type="range" id="input-logo-size" min="10" max="30" value="22" class="w-20 accent-primary" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-2">
+                                        <i class="fa-solid fa-camera mr-1.5 text-primary"></i>Фото-режим
+                                    </label>
+                                    <div class="grid grid-cols-6 sm:grid-cols-11 gap-2 mb-3" id="photo-presets"></div>
+                                    <div class="flex flex-wrap items-center gap-3">
+                                        <label class="cursor-pointer inline-flex items-center gap-2 px-4 py-2 bg-white border border-slate-300 rounded-xl text-sm font-medium text-slate-700 hover:border-primary hover:text-primary transition">
+                                            <i class="fa-solid fa-upload"></i>
+                                            <span id="photo-label">Загрузить своё</span>
+                                            <input type="file" id="input-photo" accept="image/*" class="hidden" />
+                                        </label>
+                                        <button id="btn-photo-clear" type="button" class="hidden px-3 py-2 text-xs rounded-lg border border-slate-300 bg-white hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition">Убрать</button>
+                                        <div class="flex items-center gap-2 ml-auto">
+                                            <label class="text-xs text-slate-600">Отступ</label>
+                                            <input type="range" id="input-margin" min="0" max="6" value="2" class="w-20 accent-primary" />
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div>
                                     <label class="flex items-center gap-2 text-sm font-semibold text-slate-700 mb-3 cursor-pointer">
                                         <input type="checkbox" id="input-frame" class="w-4 h-4 accent-primary" />
@@ -305,33 +333,25 @@ import Layout from '../layouts/Layout.astro';
                                     </div>
                                 </div>
 
-                                <!-- Advanced -->
                                 <details class="group">
                                     <summary class="flex items-center gap-2 text-sm font-semibold text-slate-700 cursor-pointer select-none">
                                         <i class="fa-solid fa-sliders text-primary"></i>
                                         Дополнительно
                                         <i class="fa-solid fa-chevron-down ml-auto text-xs text-slate-400 group-open:rotate-180 transition"></i>
                                     </summary>
-                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3 pl-6">
-                                        <div>
-                                            <label class="block text-xs font-medium text-slate-600 mb-1">Уровень коррекции</label>
-                                            <select id="input-ecc" class="qr-input bg-white text-sm">
-                                                <option value="L">L (7%)</option>
-                                                <option value="M">M (15%)</option>
-                                                <option value="Q">Q (25%)</option>
-                                                <option value="H" selected>H (30%)</option>
-                                            </select>
-                                        </div>
-                                        <div>
-                                            <label class="block text-xs font-medium text-slate-600 mb-1">Поля (отступ)</label>
-                                            <input type="range" id="input-margin" min="0" max="6" value="2" class="w-full accent-primary" />
-                                        </div>
+                                    <div class="mt-3 pl-6">
+                                        <label class="block text-xs font-medium text-slate-600 mb-1">Уровень коррекции</label>
+                                        <select id="input-ecc" class="qr-input bg-white text-sm">
+                                            <option value="L">L (7%)</option>
+                                            <option value="M">M (15%)</option>
+                                            <option value="Q">Q (25%)</option>
+                                            <option value="H" selected>H (30%)</option>
+                                        </select>
                                     </div>
                                 </details>
                             </div>
                         </div>
 
-                        <!-- RIGHT: Preview -->
                         <div class="lg:sticky lg:top-24 lg:self-start">
                             <div class="bg-white border-2 border-slate-200 rounded-2xl p-6 flex items-center justify-center w-full aspect-square relative qr-preview-checker" id="qr-preview-wrapper">
                                 <div id="qr-placeholder" class="text-center text-slate-400">
@@ -340,7 +360,16 @@ import Layout from '../layouts/Layout.astro';
                                 </div>
                                 <canvas id="qr-canvas" class="hidden max-w-full max-h-full"></canvas>
                             </div>
-                            <button id="btn-generate" class="mt-4 w-full bg-primary text-white px-6 py-3 rounded-xl font-bold text-base hover:bg-indigo-700 transition shadow-lg shadow-indigo-500/30 flex items-center justify-center gap-2 hidden lg:flex">
+                            <div id="qr-readability-warning" class="hidden mt-3 rounded-xl border border-amber-300 bg-amber-50 px-4 py-2.5 text-sm text-amber-800 flex items-start gap-2">
+                                <i class="fa-solid fa-triangle-exclamation mt-0.5 shrink-0"></i>
+                                <span>Это фото может ухудшить читаемость QR-кода. Попробуйте фото с более тёмными тонами или загрузите другое.</span>
+                            </div>
+                            <div id="qr-scan-alerts" class="hidden mt-3 space-y-1.5"></div>
+                            <button id="btn-random" class="mt-4 w-full bg-white text-slate-700 border border-slate-300 px-6 py-3 rounded-xl font-bold text-base hover:bg-slate-100 hover:border-primary transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-shuffle"></i>
+                                Случайное оформление
+                            </button>
+                            <button id="btn-generate" class="mt-2 w-full bg-primary text-white px-6 py-3 rounded-xl font-bold text-base hover:bg-indigo-700 transition shadow-lg shadow-indigo-500/30 flex items-center justify-center gap-2 hidden lg:flex">
                                 <i class="fa-solid fa-qrcode"></i>
                                 Сгенерировать QR-код
                             </button>
@@ -352,11 +381,7 @@ import Layout from '../layouts/Layout.astro';
                                     <i class="fa-solid fa-download"></i> JPG
                                 </button>
                             </div>
-                            <p class="mt-3 text-xs text-slate-500 text-center">
-                                Изменения в стиле применяются автоматически
-                            </p>
 
-                            <!-- Inline cross-sell to dynamic QR -->
                             <div class="mt-4 rounded-2xl border border-primary/20 bg-primary/5 p-4">
                                 <p class="text-sm font-semibold text-slate-800 mb-1 flex items-center gap-1.5">
                                     <i class="fa-solid fa-chart-line text-primary"></i>
@@ -365,7 +390,7 @@ import Layout from '../layouts/Layout.astro';
                                 <p class="text-xs text-slate-600 leading-relaxed mb-3">
                                     Сделайте динамический QR — ссылку можно менять без перепечатки, видны сканирования, гео и устройства. На тарифе FREE — бесплатно.
                                 </p>
-                                <a href="https://app.qrstars.ru/register" class="inline-flex items-center gap-1.5 text-sm font-bold text-primary hover:underline">
+                                <a href="https://app.qrstars.ru/register" data-goal="qr_dynamic_cta" data-goal-params='{"source":"sidebar"}' class="inline-flex items-center gap-1.5 text-sm font-bold text-primary hover:underline">
                                     Создать динамический QR бесплатно
                                     <i class="fa-solid fa-arrow-right text-xs"></i>
                                 </a>
@@ -377,7 +402,6 @@ import Layout from '../layouts/Layout.astro';
         </div>
     </section>
 
-    <!-- Static vs Dynamic comparison -->
     <section class="py-16 bg-slate-50">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-2xl md:text-3xl font-bold text-center mb-3">Статический или динамический QR — что выбрать</h2>
@@ -386,7 +410,6 @@ import Layout from '../layouts/Layout.astro';
             </p>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-                <!-- Static -->
                 <div class="bg-white rounded-2xl p-6 border border-slate-200 flex flex-col">
                     <div class="mb-4">
                         <div class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full mb-3">
@@ -405,7 +428,6 @@ import Layout from '../layouts/Layout.astro';
                     <div class="text-center text-xs text-slate-400 font-medium">Вы уже здесь ↑</div>
                 </div>
 
-                <!-- Dynamic FREE -->
                 <div class="bg-white rounded-2xl p-6 border-2 border-primary shadow-lg shadow-primary/10 flex flex-col relative">
                     <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap">
                         Рекомендуем
@@ -424,18 +446,17 @@ import Layout from '../layouts/Layout.astro';
                         <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-500 mt-0.5 shrink-0"></i> Цвета, логотип, рамка</li>
                         <li class="flex items-start gap-2"><i class="fa-solid fa-circle-info text-slate-400 mt-0.5 shrink-0"></i> 1 площадка для 5★ отзывов</li>
                     </ul>
-                    <a href="https://app.qrstars.ru/register" class="block text-center bg-primary text-white px-5 py-3 rounded-xl font-bold text-sm hover:bg-indigo-700 transition shadow-lg shadow-indigo-500/30">
+                    <a href="https://app.qrstars.ru/register" data-goal="qr_dynamic_cta" data-goal-params='{"source":"comparison_free"}' class="block text-center bg-primary text-white px-5 py-3 rounded-xl font-bold text-sm hover:bg-indigo-700 transition shadow-lg shadow-indigo-500/30">
                         Создать бесплатно
                     </a>
                 </div>
 
-                <!-- Dynamic PRO -->
                 <div class="bg-slate-900 rounded-2xl p-6 border border-slate-800 flex flex-col text-white">
                     <div class="mb-4">
                         <div class="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-300 bg-amber-400/10 px-2.5 py-1 rounded-full mb-3">
                             <i class="fa-solid fa-crown"></i> Динамический &middot; PRO
                         </div>
-                        <p class="text-sm text-slate-400">от 490 ₽/мес</p>
+                        <p class="text-sm text-slate-400">от 575 ₽/мес</p>
                     </div>
                     <ul class="space-y-2.5 text-sm text-slate-300 mb-6 flex-1">
                         <li class="flex items-start gap-2"><i class="fa-solid fa-check text-amber-300 mt-0.5 shrink-0"></i> Всё из FREE</li>
@@ -451,13 +472,12 @@ import Layout from '../layouts/Layout.astro';
                 </div>
             </div>
 
-            <!-- Final CTA -->
             <div class="mt-12 bg-white rounded-2xl border border-slate-200 p-6 md:p-8 text-center">
                 <h3 class="font-bold text-xl md:text-2xl mb-3">Динамические QR-коды — тоже бесплатно</h3>
                 <p class="text-slate-600 mb-6 max-w-2xl mx-auto leading-relaxed">
                     На тарифе FREE: меняйте ссылку без перепечатки, смотрите статистику сканирований, подключайте меню, визитку, Wi-Fi и сбор отзывов. Без срока пробного периода и без карты при регистрации.
                 </p>
-                <a href="https://app.qrstars.ru/register" class="inline-flex items-center gap-2 bg-primary text-white px-8 py-3.5 rounded-xl font-bold text-base hover:bg-indigo-700 transition shadow-lg shadow-indigo-500/30">
+                <a href="https://app.qrstars.ru/register" data-goal="qr_dynamic_cta" data-goal-params='{"source":"bottom_cta"}' class="inline-flex items-center gap-2 bg-primary text-white px-8 py-3.5 rounded-xl font-bold text-base hover:bg-indigo-700 transition shadow-lg shadow-indigo-500/30">
                     Создать динамический QR бесплатно
                     <i class="fa-solid fa-arrow-right"></i>
                 </a>
@@ -563,9 +583,10 @@ import Layout from '../layouts/Layout.astro';
 
 <script>
     import QRCode from 'qrcode';
+    import jsQR from 'jsqr';
 
     type QrType = 'url' | 'wifi' | 'text' | 'email' | 'phone' | 'vcard' | 'sms';
-    type DotStyle = 'classic' | 'rounded' | 'dots' | 'diamond' | 'star' | 'heart' | 'cross';
+    type DotStyle = 'classic' | 'rounded';
     type EyeStyle = 'square' | 'rounded' | 'circle' | 'leaf' | 'dot';
     type GradType = 'linear-tb' | 'linear-lr' | 'linear-diag' | 'radial';
 
@@ -583,10 +604,15 @@ import Layout from '../layouts/Layout.astro';
         eyeCustom: false,
         eyeColor: '#4f46e5',
         logoImage: null as HTMLImageElement | null,
-        watermark: true,
+        logoSize: 22,
+        logoFill: true,
+        photoImage: null as HTMLImageElement | null,
         frame: false,
         frameText: 'СКАНИРУЙ МЕНЯ',
         frameStyle: 'bottom' as 'bottom' | 'rounded' | 'ribbon',
+        scatter: false,
+        scatterDensity: 3,
+        scatterShape: 'square' as 'square' | 'circle' | 'star' | 'diamond' | 'hexagon' | 'heart' | 'cross' | 'octagon' | 'triangle',
         ecc: 'H' as 'L' | 'M' | 'Q' | 'H',
         margin: 2,
     };
@@ -626,12 +652,139 @@ import Layout from '../layouts/Layout.astro';
     let lastPayload: string | null = null;
     let autoUpdate = false;
 
+    const LOGO_PRESETS: { name: string; emoji?: string; src?: string }[] = [
+        { name: 'QrStars', src: '/logo.svg' },
+        { name: 'Клиника', emoji: '🏥' },
+        { name: 'Стоматология', emoji: '🦷' },
+        { name: 'Аптека', emoji: '💊' },
+        { name: 'Ветеринар', emoji: '🐾' },
+        { name: 'Кафе', emoji: '☕' },
+        { name: 'Ресторан', emoji: '🍽️' },
+        { name: 'Пиццерия', emoji: '🍕' },
+        { name: 'Суши', emoji: '🍣' },
+        { name: 'Бургерная', emoji: '🍔' },
+        { name: 'Пивной бар', emoji: '🍺' },
+        { name: 'Кондитерская', emoji: '🎂' },
+        { name: 'Парикмахерская', emoji: '💈' },
+        { name: 'Бьюти', emoji: '💅' },
+        { name: 'Фитнес', emoji: '🏋️' },
+        { name: 'Йога', emoji: '🧘' },
+        { name: 'Отель', emoji: '🏨' },
+        { name: 'Авто', emoji: '🚗' },
+        { name: 'Магазин', emoji: '🛍️' },
+        { name: 'Банк', emoji: '🏦' },
+        { name: 'Юрист', emoji: '⚖️' },
+        { name: 'Образование', emoji: '🎓' },
+        { name: 'Строительство', emoji: '🏗️' },
+        { name: 'Цветы', emoji: '🌸' },
+        { name: 'Музыка', emoji: '🎵' },
+        { name: 'Фото', emoji: '📷' },
+        { name: 'Собака', emoji: '🐕' },
+        { name: 'Корона', emoji: '👑' },
+        { name: 'Ракета', emoji: '🚀' },
+        { name: 'Молния', emoji: '⚡' },
+        { name: 'Глаз', emoji: '👁️' },
+        { name: 'Такси', emoji: '🚕' },
+        { name: 'Самолёт', emoji: '✈️' },
+        { name: 'Дом', emoji: '🏠' },
+        { name: 'Ключ', emoji: '🔑' },
+        { name: 'Подарок', emoji: '🎁' },
+        { name: 'Сердце', emoji: '❤️' },
+        { name: 'Звезда', emoji: '⭐' },
+        { name: 'Огонь', emoji: '🔥' },
+        { name: 'Кошка', emoji: '🐱' },
+        { name: 'Круг', emoji: '🎯' },
+    ];
+
+    function emojiToImage(emoji: string): HTMLImageElement {
+        const size = 200;
+        const c = document.createElement('canvas');
+        c.width = size;
+        c.height = size;
+        const ectx = c.getContext('2d')!;
+        ectx.clearRect(0, 0, size, size);
+        ectx.font = `${size * 0.7}px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif`;
+        ectx.textAlign = 'center';
+        ectx.textBaseline = 'middle';
+        ectx.fillText(emoji, size / 2, size / 2);
+        const img = new Image();
+        img.src = c.toDataURL();
+        return img;
+    }
+
+    function loadLogoImage(p: { emoji?: string; src?: string }, cb: (img: HTMLImageElement) => void) {
+        if (p.src) {
+            const img = new Image();
+            img.src = p.src;
+            img.onload = () => cb(img);
+        } else if (p.emoji) {
+            const img = emojiToImage(p.emoji);
+            if (img.complete) cb(img);
+            else img.onload = () => cb(img);
+        }
+    }
+
+    function renderLogoPresets() {
+        const container = $('logo-presets');
+        LOGO_PRESETS.forEach((p, i) => {
+            const btn = document.createElement('button');
+            btn.className = 'logo-preset-btn';
+            btn.title = p.name;
+            if (p.emoji) {
+                btn.textContent = p.emoji;
+                Object.assign(btn.style, {
+                    aspectRatio: '1',
+                    borderRadius: '0.625rem',
+                    border: '2px solid #e2e8f0',
+                    cursor: 'pointer',
+                    fontSize: '1.4rem',
+                    lineHeight: '1',
+                    background: '#f8fafc',
+                    transition: 'all 0.15s',
+                });
+            } else {
+                Object.assign(btn.style, {
+                    aspectRatio: '1',
+                    borderRadius: '0.625rem',
+                    border: i === 0 ? '2px solid #4F46E5' : '2px solid #e2e8f0',
+                    cursor: 'pointer',
+                    backgroundImage: `url(${p.src})`,
+                    backgroundSize: 'contain',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundColor: '#f8fafc',
+                    transition: 'all 0.15s',
+                });
+            }
+            btn.addEventListener('mouseenter', () => { if (btn.style.borderColor !== '#4F46E5') btn.style.borderColor = '#4F46E5'; });
+            btn.addEventListener('mouseleave', () => { if (btn.style.borderColor !== 'rgb(79, 70, 229)') btn.style.borderColor = '#e2e8f0'; });
+            btn.addEventListener('click', () => {
+                loadLogoImage(p, (img) => {
+                    state.logoImage = img;
+                    document.querySelectorAll('.logo-preset-btn').forEach(b => ((b as HTMLElement).style.borderColor = '#e2e8f0'));
+                    btn.style.borderColor = '#4F46E5';
+                    scheduleUpdate();
+                });
+            });
+            container.appendChild(btn);
+        });
+    }
+    renderLogoPresets();
+
+    const defaultLogo = new Image();
+    defaultLogo.src = '/logo.svg';
+    defaultLogo.onload = () => {
+        state.logoImage = defaultLogo;
+        generate();
+    };
+
     // ── Tabs ──────────────────────────────────────────────
     function switchTab(type: QrType) {
         state.type = type;
         tabs.forEach(t => t.classList.toggle('active-tab', t.dataset.type === type));
         forms.forEach(f => f.classList.add('hidden'));
         $(`form-${type}`)?.classList.remove('hidden');
+        saveToHash();
     }
     tabs.forEach(tab => {
         tab.addEventListener('click', () => switchTab(tab.dataset.type as QrType));
@@ -770,7 +923,7 @@ import Layout from '../layouts/Layout.astro';
             img.onload = () => {
                 state.logoImage = img;
                 $('logo-label').textContent = file.name.length > 18 ? file.name.slice(0, 16) + '…' : file.name;
-                $('btn-logo-clear').classList.remove('hidden');
+                document.querySelectorAll('.logo-preset-btn').forEach(b => ((b as HTMLElement).style.borderColor = '#e2e8f0'));
                 scheduleUpdate();
             };
             img.src = ev.target?.result as string;
@@ -780,14 +933,89 @@ import Layout from '../layouts/Layout.astro';
     $('btn-logo-clear').addEventListener('click', () => {
         state.logoImage = null;
         ($('input-logo') as HTMLInputElement).value = '';
-        $('logo-label').textContent = 'Загрузить изображение';
-        $('btn-logo-clear').classList.add('hidden');
+        $('logo-label').textContent = 'Загрузить свой';
+        document.querySelectorAll('.logo-preset-btn').forEach(b => ((b as HTMLElement).style.borderColor = '#e2e8f0'));
         scheduleUpdate();
     });
-    ($('input-watermark') as HTMLInputElement).addEventListener('change', e => {
-        state.watermark = (e.target as HTMLInputElement).checked;
+    ($('input-logo-size') as HTMLInputElement).addEventListener('input', e => {
+        state.logoSize = parseInt((e.target as HTMLInputElement).value, 10);
         scheduleUpdate();
     });
+    ($('input-logo-fill') as HTMLInputElement).addEventListener('change', e => {
+        state.logoFill = (e.target as HTMLInputElement).checked;
+        scheduleUpdate();
+    });
+
+    ($('input-photo') as HTMLInputElement).addEventListener('change', e => {
+        const file = (e.target as HTMLInputElement).files?.[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = ev => {
+            const img = new Image();
+            img.onload = () => {
+                state.photoImage = img;
+                $('photo-label').textContent = file.name.length > 18 ? file.name.slice(0, 16) + '…' : file.name;
+                $('btn-photo-clear').classList.remove('hidden');
+                document.querySelectorAll('.photo-preset-btn').forEach(b => b.classList.remove('active-preset'));
+                scheduleUpdate();
+            };
+            img.src = ev.target?.result as string;
+        };
+        reader.readAsDataURL(file);
+    });
+    $('btn-photo-clear').addEventListener('click', () => {
+        state.photoImage = null;
+        ($('input-photo') as HTMLInputElement).value = '';
+        $('photo-label').textContent = 'Загрузить своё';
+        $('btn-photo-clear').classList.add('hidden');
+        document.querySelectorAll('.photo-preset-btn').forEach(b => b.classList.remove('active-preset'));
+        scheduleUpdate();
+    });
+
+    // ── Photo presets ────────────────────────────────────
+    const PHOTO_PRESETS = [
+        { name: 'Космос',  src: '/photo-presets/cosmos.jpg' },
+        { name: 'Закат',   src: '/photo-presets/sunset.jpg' },
+        { name: 'Лес',     src: '/photo-presets/forest.jpg' },
+        { name: 'Мрамор',  src: '/photo-presets/marble.jpg' },
+        { name: 'Цветы',   src: '/photo-presets/flowers.jpg' },
+    ];
+
+    function renderPhotoPresets() {
+        const container = $('photo-presets');
+        PHOTO_PRESETS.forEach((p) => {
+            const btn = document.createElement('button');
+            btn.className = 'photo-preset-btn';
+            btn.title = p.name;
+            Object.assign(btn.style, {
+                aspectRatio: '1',
+                borderRadius: '0.625rem',
+                border: '2px solid #e2e8f0',
+                cursor: 'pointer',
+                backgroundImage: `url(${p.src})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                transition: 'all 0.15s',
+            });
+            btn.addEventListener('mouseenter', () => { if (btn.style.borderColor !== '#4F46E5') btn.style.borderColor = '#4F46E5'; });
+            btn.addEventListener('mouseleave', () => { if (btn.style.borderColor !== 'rgb(79, 70, 229)') btn.style.borderColor = '#e2e8f0'; });
+            btn.addEventListener('click', () => {
+                const img = new Image();
+                img.crossOrigin = 'anonymous';
+                img.onload = () => {
+                    state.photoImage = img;
+                    document.querySelectorAll('.photo-preset-btn').forEach(b => ((b as HTMLElement).style.borderColor = '#e2e8f0'));
+                    btn.style.borderColor = '#4F46E5';
+                    $('btn-photo-clear').classList.remove('hidden');
+                    $('photo-label').textContent = 'Загрузить своё';
+                    scheduleUpdate();
+                };
+                img.src = p.src;
+            });
+            container.appendChild(btn);
+        });
+    }
+    renderPhotoPresets();
 
     // ── Frame ─────────────────────────────────────────────
     ($('input-frame') as HTMLInputElement).addEventListener('change', e => {
@@ -806,6 +1034,29 @@ import Layout from '../layouts/Layout.astro';
         scheduleUpdate();
     });
 
+    ($('input-scatter') as HTMLInputElement).addEventListener('change', e => {
+        state.scatter = (e.target as HTMLInputElement).checked;
+        const ctrl = $('scatter-controls');
+        ctrl.classList.toggle('hidden', !state.scatter);
+        ctrl.classList.toggle('grid', state.scatter);
+        scheduleUpdate();
+    });
+    ($('input-scatter-size') as HTMLInputElement).addEventListener('input', e => {
+        state.scatterDensity = parseInt((e.target as HTMLInputElement).value, 10);
+        scheduleUpdate();
+    });
+    document.querySelectorAll<HTMLButtonElement>('.sshape-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            state.scatterShape = btn.dataset.sshape as 'square' | 'circle' | 'star' | 'diamond' | 'hexagon' | 'heart' | 'cross' | 'octagon' | 'triangle';
+            document.querySelectorAll('.sshape-btn').forEach(b => {
+                const active = b.dataset.sshape === state.scatterShape;
+                (b as HTMLElement).style.borderColor = active ? '#4F46E5' : '#e2e8f0';
+                (b as HTMLElement).style.background = active ? 'rgba(79,70,229,0.05)' : '';
+            });
+            scheduleUpdate();
+        });
+    });
+
     // ── Advanced ──────────────────────────────────────────
     ($('input-ecc') as HTMLSelectElement).addEventListener('change', e => {
         state.ecc = (e.target as HTMLSelectElement).value as 'L' | 'M' | 'Q' | 'H';
@@ -817,8 +1068,7 @@ import Layout from '../layouts/Layout.astro';
     });
 
     // ── Drawing helpers ───────────────────────────────────
-    function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number) {
-        ctx.beginPath();
+    function addRoundRectPath(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number) {
         ctx.moveTo(x + r, y);
         ctx.lineTo(x + w - r, y);
         ctx.quadraticCurveTo(x + w, y, x + w, y + r);
@@ -829,7 +1079,36 @@ import Layout from '../layouts/Layout.astro';
         ctx.lineTo(x, y + r);
         ctx.quadraticCurveTo(x, y, x + r, y);
         ctx.closePath();
+    }
+
+    function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number) {
+        ctx.beginPath();
+        addRoundRectPath(ctx, x, y, w, h, r);
         ctx.fill();
+    }
+
+    function addLeafPath(
+        ctx: CanvasRenderingContext2D,
+        bx: number, by: number, bw: number,
+        cellSize: number, isTL: boolean, isTR: boolean,
+        outer: boolean,
+    ) {
+        const r = cellSize * (outer ? 2.2 : 1.4);
+        const small = cellSize * (outer ? 0.5 : 0.35);
+        const tl = isTL ? r : isTR ? small : r;
+        const tr = isTL ? r : isTR ? r : small;
+        const br = isTL ? small : isTR ? r : r;
+        const bl = isTL ? r : isTR ? small : small;
+        ctx.moveTo(bx + tl, by);
+        ctx.lineTo(bx + bw - tr, by);
+        ctx.quadraticCurveTo(bx + bw, by, bx + bw, by + tr);
+        ctx.lineTo(bx + bw, by + bw - br);
+        ctx.quadraticCurveTo(bx + bw, by + bw, bx + bw - br, by + bw);
+        ctx.lineTo(bx + bl, by + bw);
+        ctx.quadraticCurveTo(bx, by + bw, bx, by + bw - bl);
+        ctx.lineTo(bx, by + tl);
+        ctx.quadraticCurveTo(bx, by, bx + tl, by);
+        ctx.closePath();
     }
 
     function strokeRoundRect(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number) {
@@ -862,58 +1141,7 @@ import Layout from '../layouts/Layout.astro';
                 ctx.arc(cx, cy, r * 0.9, 0, Math.PI * 2);
                 ctx.fill();
                 break;
-            case 'diamond':
-                ctx.beginPath();
-                ctx.moveTo(cx, cy - r);
-                ctx.lineTo(cx + r, cy);
-                ctx.lineTo(cx, cy + r);
-                ctx.lineTo(cx - r, cy);
-                ctx.closePath();
-                ctx.fill();
-                break;
-            case 'star': {
-                ctx.beginPath();
-                for (let i = 0; i < 8; i++) {
-                    const rad = i % 2 === 0 ? r : r * 0.38;
-                    const angle = (Math.PI * i) / 4 - Math.PI / 2;
-                    const px = cx + rad * Math.cos(angle);
-                    const py = cy + rad * Math.sin(angle);
-                    if (i === 0) ctx.moveTo(px, py);
-                    else ctx.lineTo(px, py);
-                }
-                ctx.closePath();
-                ctx.fill();
-                break;
-            }
-            case 'heart': {
-                const hs = r * 0.85;
-                ctx.beginPath();
-                ctx.moveTo(cx, cy + hs * 0.9);
-                ctx.bezierCurveTo(cx - hs * 1.5, cy + hs * 0.2, cx - hs, cy - hs, cx, cy - hs * 0.35);
-                ctx.bezierCurveTo(cx + hs, cy - hs, cx + hs * 1.5, cy + hs * 0.2, cx, cy + hs * 0.9);
-                ctx.closePath();
-                ctx.fill();
-                break;
-            }
-            case 'cross': {
-                const arm = r * 0.32;
-                ctx.beginPath();
-                ctx.moveTo(cx - arm, y + gap);
-                ctx.lineTo(cx + arm, y + gap);
-                ctx.lineTo(cx + arm, cy - arm);
-                ctx.lineTo(x + size - gap, cy - arm);
-                ctx.lineTo(x + size - gap, cy + arm);
-                ctx.lineTo(cx + arm, cy + arm);
-                ctx.lineTo(cx + arm, y + size - gap);
-                ctx.lineTo(cx - arm, y + size - gap);
-                ctx.lineTo(cx - arm, cy + arm);
-                ctx.lineTo(x + gap, cy + arm);
-                ctx.lineTo(x + gap, cy - arm);
-                ctx.lineTo(cx - arm, cy - arm);
-                ctx.closePath();
-                ctx.fill();
-                break;
-            }
+            default: ctx.fillRect(x, y, size, size); break;
         }
     }
 
@@ -930,6 +1158,7 @@ import Layout from '../layouts/Layout.astro';
         startRow: number, startCol: number,
         cellSize: number, offX: number, offY: number,
         eye: EyeStyle, bgColor: string,
+        transparentHole = false,
     ) {
         const x = offX + startCol * cellSize;
         const y = offY + startRow * cellSize;
@@ -944,79 +1173,45 @@ import Layout from '../layouts/Layout.astro';
         const isTR = startRow === 0 && startCol !== 0;
         const isBL = startRow !== 0 && startCol === 0;
 
-        const drawOuter = () => {
+        const addOuterPath = () => {
             switch (eye) {
-                case 'square':  ctx.fillRect(x, y, s7, s7); break;
-                case 'rounded': roundRect(ctx, x, y, s7, s7, cellSize * 1.6); break;
+                case 'square': ctx.rect(x, y, s7, s7); break;
+                case 'rounded': addRoundRectPath(ctx, x, y, s7, s7, cellSize * 1.6); break;
                 case 'circle':
-                    ctx.beginPath();
+                    ctx.moveTo(x + s7 / 2 + s7 / 2, y + s7 / 2);
                     ctx.arc(x + s7 / 2, y + s7 / 2, s7 / 2, 0, Math.PI * 2);
-                    ctx.fill();
                     break;
-                case 'leaf': {
-                    const r = cellSize * 2.2;
-                    const small = cellSize * 0.5;
-                    const tl = isTL ? r : isTR ? small : r;
-                    const tr = isTL ? r : isTR ? r : small;
-                    const br = isTL ? small : isTR ? r : r;
-                    const bl = isTL ? r : isTR ? small : small;
-                    ctx.beginPath();
-                    ctx.moveTo(x + tl, y);
-                    ctx.lineTo(x + s7 - tr, y);
-                    ctx.quadraticCurveTo(x + s7, y, x + s7, y + tr);
-                    ctx.lineTo(x + s7, y + s7 - br);
-                    ctx.quadraticCurveTo(x + s7, y + s7, x + s7 - br, y + s7);
-                    ctx.lineTo(x + bl, y + s7);
-                    ctx.quadraticCurveTo(x, y + s7, x, y + s7 - bl);
-                    ctx.lineTo(x, y + tl);
-                    ctx.quadraticCurveTo(x, y, x + tl, y);
-                    ctx.closePath();
-                    ctx.fill();
-                    break;
-                }
+                case 'leaf': addLeafPath(ctx, x, y, s7, cellSize, isTL, isTR, true); break;
                 case 'dot':
-                    ctx.beginPath();
+                    ctx.moveTo(x + s7 / 2 + s7 / 2, y + s7 / 2);
                     ctx.arc(x + s7 / 2, y + s7 / 2, s7 / 2, 0, Math.PI * 2);
-                    ctx.fill();
                     break;
             }
         };
-        const drawInnerHole = () => {
+        const addInnerHolePath = () => {
             switch (eye) {
-                case 'square':  ctx.fillRect(x5, y5, s5, s5); break;
-                case 'rounded': roundRect(ctx, x5, y5, s5, s5, cellSize * 1.0); break;
+                case 'square': ctx.rect(x5, y5, s5, s5); break;
+                case 'rounded': addRoundRectPath(ctx, x5, y5, s5, s5, cellSize * 1.0); break;
                 case 'circle':
-                    ctx.beginPath();
+                    ctx.moveTo(x5 + s5 / 2 + s5 / 2, y5 + s5 / 2);
                     ctx.arc(x5 + s5 / 2, y5 + s5 / 2, s5 / 2, 0, Math.PI * 2);
-                    ctx.fill();
                     break;
-                case 'leaf': {
-                    const r = cellSize * 1.4;
-                    const small = cellSize * 0.35;
-                    const tl = isTL ? r : isTR ? small : r;
-                    const tr = isTL ? r : isTR ? r : small;
-                    const br = isTL ? small : isTR ? r : r;
-                    const bl = isTL ? r : isTR ? small : small;
-                    ctx.beginPath();
-                    ctx.moveTo(x5 + tl, y5);
-                    ctx.lineTo(x5 + s5 - tr, y5);
-                    ctx.quadraticCurveTo(x5 + s5, y5, x5 + s5, y5 + tr);
-                    ctx.lineTo(x5 + s5, y5 + s5 - br);
-                    ctx.quadraticCurveTo(x5 + s5, y5 + s5, x5 + s5 - br, y5 + s5);
-                    ctx.lineTo(x5 + bl, y5 + s5);
-                    ctx.quadraticCurveTo(x5, y5 + s5, x5, y5 + s5 - bl);
-                    ctx.lineTo(x5, y5 + tl);
-                    ctx.quadraticCurveTo(x5, y5, x5 + tl, y5);
-                    ctx.closePath();
-                    ctx.fill();
-                    break;
-                }
+                case 'leaf': addLeafPath(ctx, x5, y5, s5, cellSize, isTL, isTR, false); break;
                 case 'dot':
-                    ctx.beginPath();
+                    ctx.moveTo(x5 + s5 / 2 + s5 / 2, y5 + s5 / 2);
                     ctx.arc(x5 + s5 / 2, y5 + s5 / 2, s5 / 2, 0, Math.PI * 2);
-                    ctx.fill();
                     break;
             }
+        };
+        const drawOuter = () => {
+            ctx.beginPath();
+            addOuterPath();
+            ctx.fill();
+        };
+        const drawInnerHole = () => {
+            ctx.beginPath();
+            addInnerHolePath();
+            ctx.fill();
         };
         const drawCenter = () => {
             switch (eye) {
@@ -1057,9 +1252,17 @@ import Layout from '../layouts/Layout.astro';
         };
 
         const savedFill = ctx.fillStyle;
-        drawOuter();
-        ctx.fillStyle = bgColor;
-        drawInnerHole();
+        if (transparentHole) {
+            ctx.beginPath();
+            addOuterPath();
+            addInnerHolePath();
+            ctx.fill('evenodd');
+        } else {
+            drawOuter();
+            ctx.fillStyle = bgColor;
+            drawInnerHole();
+            ctx.fillStyle = savedFill;
+        }
         ctx.fillStyle = savedFill;
         drawCenter();
     }
@@ -1100,7 +1303,7 @@ import Layout from '../layouts/Layout.astro';
         drawFinderPattern(ctx, 0, 0, cell, offX, offY, eye, '#ffffff');
     }
 
-    const allStyles: DotStyle[] = ['classic', 'rounded', 'dots', 'diamond', 'star', 'heart', 'cross'];
+    const allStyles: DotStyle[] = ['classic', 'rounded'];
     styleCanvases.forEach((c, i) => renderDotPreview(c, allStyles[i]));
 
     const allEyes: EyeStyle[] = ['square', 'rounded', 'circle', 'leaf', 'dot'];
@@ -1191,28 +1394,8 @@ import Layout from '../layouts/Layout.astro';
         return g;
     }
 
-    // ── Center label / logo overlay ───────────────────────
-    function drawCenterLabel(ctx: CanvasRenderingContext2D, canvasSize: number, qrLeft: number, qrTop: number, qrSize: number) {
-        const label = 'qrstars.ru';
-        const fontSize = Math.round(qrSize * 0.048);
-        const cx = qrLeft + qrSize / 2;
-        const cy = qrTop + qrSize / 2;
-
-        ctx.save();
-        ctx.font = `700 ${fontSize}px Inter, sans-serif`;
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.shadowColor = 'rgba(255,255,255,0.95)';
-        ctx.shadowBlur = fontSize * 0.35;
-        ctx.fillStyle = '#1e293b';
-        ctx.fillText(label, cx, cy + 1);
-        ctx.shadowBlur = fontSize * 0.15;
-        ctx.fillText(label, cx, cy + 1);
-        ctx.restore();
-    }
-
     function drawLogo(ctx: CanvasRenderingContext2D, img: HTMLImageElement, qrLeft: number, qrTop: number, qrSize: number, bgColor: string) {
-        const logoSize = qrSize * 0.22;
+        const logoSize = qrSize * (state.logoSize / 100);
         const padding = qrSize * 0.02;
         const boxSize = logoSize + padding * 2;
         const cx = qrLeft + qrSize / 2;
@@ -1221,8 +1404,10 @@ import Layout from '../layouts/Layout.astro';
         const boxY = cy - boxSize / 2;
 
         ctx.save();
-        ctx.fillStyle = bgColor;
-        roundRect(ctx, boxX, boxY, boxSize, boxSize, boxSize * 0.18);
+        if (!state.logoFill) {
+            ctx.fillStyle = bgColor;
+            roundRect(ctx, boxX, boxY, boxSize, boxSize, boxSize * 0.18);
+        }
 
         const iw = img.naturalWidth || img.width;
         const ih = img.naturalHeight || img.height;
@@ -1232,6 +1417,47 @@ import Layout from '../layouts/Layout.astro';
         else dw = logoSize * ratio;
         ctx.drawImage(img, cx - dw / 2, cy - dh / 2, dw, dh);
         ctx.restore();
+    }
+
+    function parseHexColor(hex: string): { r: number; g: number; b: number } {
+        const h = hex.replace('#', '');
+        return {
+            r: parseInt(h.slice(0, 2), 16),
+            g: parseInt(h.slice(2, 4), 16),
+            b: parseInt(h.slice(4, 6), 16),
+        };
+    }
+
+    function rgbaFromHex(hex: string, alpha: number): string {
+        const { r, g, b } = parseHexColor(hex);
+        return `rgba(${r},${g},${b},${alpha.toFixed(3)})`;
+    }
+
+    // ── Photo mode: per-cell overlay strength from background luminance ──
+    function photoLightOverlayAlpha(luminance: number): number {
+        const target = 200;
+        if (luminance >= target) return 0;
+        const needed = (target - luminance) / (255 - luminance);
+        return Math.min(0.38, needed * 0.72);
+    }
+
+    function photoDarkOverlayAlpha(luminance: number): number {
+        const target = 58;
+        if (luminance <= 45) return 0.55;
+        if (luminance <= target) return 0.5;
+        const needed = 1 - target / luminance;
+        return Math.min(0.92, Math.max(0.5, needed));
+    }
+
+    function samplePhotoLuminance(
+        snap: ImageData, qrLeft: number, qrTop: number, qrSize: number,
+        offX: number, offY: number, row: number, col: number, cellSize: number,
+    ): number {
+        const px = Math.min(qrSize - 1, Math.max(0, Math.floor(offX - qrLeft + (col + 0.5) * cellSize)));
+        const py = Math.min(qrSize - 1, Math.max(0, Math.floor(offY - qrTop + (row + 0.5) * cellSize)));
+        const idx = (py * qrSize + px) * 4;
+        const r = snap.data[idx], g = snap.data[idx + 1], b = snap.data[idx + 2];
+        return 0.2126 * r + 0.7152 * g + 0.0722 * b;
     }
 
     // ── Render ────────────────────────────────────────────
@@ -1249,12 +1475,20 @@ import Layout from '../layouts/Layout.astro';
         btnGenerateMobile.classList.add('hidden');
 
         const qrSize = 600;
+        const qrData = QRCode.create(payload, { errorCorrectionLevel: state.ecc });
+        const modules = qrData.modules;
+        const count = modules.size;
+        const margin = state.margin;
+        const cellSize = qrSize / (count + margin * 2);
+
         const hasFrame = state.frame;
         const captionH = hasFrame && state.frameStyle !== 'rounded' ? 80 : 0;
         const ribbonH = hasFrame && state.frameStyle === 'ribbon' ? 80 : 0;
         const framePad = hasFrame && state.frameStyle === 'rounded' ? 36 : 0;
-        const canvasW = qrSize + framePad * 2;
-        const canvasH = qrSize + framePad * 2 + (state.frameStyle === 'bottom' ? captionH : 0) + (state.frameStyle === 'ribbon' ? ribbonH : 0);
+        const cellsOut = state.scatter ? state.scatterDensity : 0;
+        const scatterPad = cellsOut * cellSize;
+        const canvasW = qrSize + framePad * 2 + scatterPad * 2;
+        const canvasH = qrSize + framePad * 2 + scatterPad * 2 + (state.frameStyle === 'bottom' ? captionH : 0) + (state.frameStyle === 'ribbon' ? ribbonH : 0);
 
         canvas.width = canvasW;
         canvas.height = canvasH;
@@ -1270,8 +1504,8 @@ import Layout from '../layouts/Layout.astro';
             ctx.clearRect(0, 0, canvasW, canvasH);
         }
 
-        const qrLeft = framePad;
-        const qrTop = framePad + (state.frameStyle === 'ribbon' ? ribbonH : 0);
+        const qrLeft = framePad + scatterPad;
+        const qrTop = framePad + scatterPad + (state.frameStyle === 'ribbon' ? ribbonH : 0);
 
         // QR background
         if (state.bgTransparent) {
@@ -1280,37 +1514,75 @@ import Layout from '../layouts/Layout.astro';
             ctx.fillStyle = state.bg;
             ctx.fillRect(qrLeft, qrTop, qrSize, qrSize);
         }
-
-        const qrData = QRCode.create(payload, { errorCorrectionLevel: state.ecc });
-        const modules = qrData.modules;
-        const count = modules.size;
-        const margin = state.margin;
-        const cellSize = qrSize / (count + margin * 2);
         const offX = qrLeft + margin * cellSize;
         const offY = qrTop + margin * cellSize;
 
         const fgFill = makeFgFill(ctx, qrLeft, qrTop, qrLeft + qrSize, qrTop + qrSize);
-        ctx.fillStyle = fgFill;
 
-        for (let row = 0; row < count; row++) {
-            for (let col = 0; col < count; col++) {
-                if (modules.data[row * count + col] && !isInFinder(row, col, count)) {
+        if (state.photoImage) {
+            const iw = state.photoImage.naturalWidth || state.photoImage.width;
+            const ih = state.photoImage.naturalHeight || state.photoImage.height;
+            const imgRatio = iw / ih;
+            const photoX = state.scatter ? 0 : qrLeft;
+            const photoY = state.scatter ? 0 : qrTop;
+            const photoW = state.scatter ? canvasW : qrSize;
+            const photoH = state.scatter ? canvasH : qrSize;
+            const photoRatio = photoW / photoH;
+            let sx = 0, sy = 0, sw = iw, sh = ih;
+            if (imgRatio > photoRatio) {
+                sw = ih * photoRatio;
+                sx = (iw - sw) / 2;
+            } else {
+                sh = iw / photoRatio;
+                sy = (ih - sh) / 2;
+            }
+            ctx.drawImage(state.photoImage, sx, sy, sw, sh, photoX, photoY, photoW, photoH);
+
+            const photoSnap = ctx.getImageData(qrLeft, qrTop, qrSize, qrSize);
+            const photoLightColor = state.bgTransparent ? '#ffffff' : state.bg;
+
+            for (let row = 0; row < count; row++) {
+                for (let col = 0; col < count; col++) {
+                    if (modules.data[row * count + col] || isInFinder(row, col, count)) continue;
+                    const lum = samplePhotoLuminance(photoSnap, qrLeft, qrTop, qrSize, offX, offY, row, col, cellSize);
+                    const alpha = photoLightOverlayAlpha(lum);
+                    if (alpha < 0.02) continue;
+                    ctx.fillStyle = rgbaFromHex(photoLightColor, alpha);
+                    ctx.fillRect(offX + col * cellSize, offY + row * cellSize, cellSize, cellSize);
+                }
+            }
+
+            ctx.fillStyle = fgFill;
+            for (let row = 0; row < count; row++) {
+                for (let col = 0; col < count; col++) {
+                    if (!modules.data[row * count + col] || isInFinder(row, col, count)) continue;
+                    const lum = samplePhotoLuminance(photoSnap, qrLeft, qrTop, qrSize, offX, offY, row, col, cellSize);
+                    const alpha = photoDarkOverlayAlpha(lum);
+                    ctx.globalAlpha = alpha;
                     drawDot(ctx, offX + col * cellSize, offY + row * cellSize, cellSize, state.dotStyle);
+                }
+            }
+            ctx.globalAlpha = 1;
+        } else {
+            ctx.fillStyle = fgFill;
+            for (let row = 0; row < count; row++) {
+                for (let col = 0; col < count; col++) {
+                    if (modules.data[row * count + col] && !isInFinder(row, col, count)) {
+                        drawDot(ctx, offX + col * cellSize, offY + row * cellSize, cellSize, state.dotStyle);
+                    }
                 }
             }
         }
 
         const eyeBgForHole = state.bgTransparent ? '#ffffff' : state.bg;
+        const finderHoleTransparent = !!state.photoImage || state.bgTransparent;
         ctx.fillStyle = state.eyeCustom ? state.eyeColor : (typeof fgFill === 'string' ? fgFill : state.grad1);
-        drawFinderPattern(ctx, 0, 0, cellSize, offX, offY, state.eyeStyle, eyeBgForHole);
-        drawFinderPattern(ctx, 0, count - 7, cellSize, offX, offY, state.eyeStyle, eyeBgForHole);
-        drawFinderPattern(ctx, count - 7, 0, cellSize, offX, offY, state.eyeStyle, eyeBgForHole);
+        drawFinderPattern(ctx, 0, 0, cellSize, offX, offY, state.eyeStyle, eyeBgForHole, finderHoleTransparent);
+        drawFinderPattern(ctx, 0, count - 7, cellSize, offX, offY, state.eyeStyle, eyeBgForHole, finderHoleTransparent);
+        drawFinderPattern(ctx, count - 7, 0, cellSize, offX, offY, state.eyeStyle, eyeBgForHole, finderHoleTransparent);
 
-        // Logo or watermark
         if (state.logoImage) {
             drawLogo(ctx, state.logoImage, qrLeft, qrTop, qrSize, state.bgTransparent ? '#ffffff' : state.bg);
-        } else if (state.watermark) {
-            drawCenterLabel(ctx, qrSize, qrLeft, qrTop, qrSize);
         }
 
         // Frame decorations
@@ -1353,26 +1625,490 @@ import Layout from '../layouts/Layout.astro';
             }
         }
 
+        if (state.scatter) {
+            const cellsOut = state.scatterDensity;
+            const totalSize = count + cellsOut * 2;
+            const centerX = (count - 1) / 2;
+            const centerY = (count - 1) / 2;
+            const outerR = totalSize / 2;
+            const innerR = count / 2;
+
+            const rng = (seed: number) => {
+                let x = Math.sin(seed * 127.1 + 311.7) * 43758.5453;
+                return x - Math.floor(x);
+            };
+
+            const isInsideShape = (r: number, c: number): boolean => {
+                const dx = c - centerX - cellsOut;
+                const dy = r - centerY - cellsOut;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                const normDist = dist / outerR;
+                const angle = Math.atan2(dy, dx);
+                switch (state.scatterShape) {
+                    case 'square': return true;
+                    case 'circle': return normDist <= 1;
+                    case 'star': {
+                        const a2 = angle + Math.PI / 2;
+                        const points = 5;
+                        const sa = ((a2 + Math.PI * 2) % (Math.PI * 2)) / (Math.PI * 2 / points);
+                        const sectorAngle = sa % 1;
+                        const outerStarR = 1;
+                        const innerStarR = 0.45;
+                        const t = sectorAngle < 0.5 ? sectorAngle * 2 : (1 - sectorAngle) * 2;
+                        const maxR = outerStarR + (innerStarR - outerStarR) * t;
+                        return normDist <= maxR;
+                    }
+                    case 'diamond': {
+                        return Math.abs(dx) / outerR + Math.abs(dy) / outerR <= 1;
+                    }
+                    case 'hexagon': {
+                        const s3 = Math.sqrt(3);
+                        const nx = Math.abs(dx) / outerR;
+                        const ny = Math.abs(dy) / outerR;
+                        return ny <= 1 && nx <= s3 / 2 && (s3 * ny + nx) <= s3;
+                    }
+                    case 'heart': {
+                        const s = 0.8;
+                        const hx = dx / outerR / s;
+                        const hy = (-dy / outerR + 0.2) / s;
+                        const eq = (hx * hx + hy * hy - 1);
+                        return eq * eq * eq - hx * hx * hy * hy * hy <= 0;
+                    }
+                    case 'cross': {
+                        const nx = Math.abs(dx) / outerR;
+                        const ny = Math.abs(dy) / outerR;
+                        return (nx <= 0.35 && ny <= 1) || (ny <= 0.35 && nx <= 1);
+                    }
+                    case 'octagon': {
+                        const nx = Math.abs(dx) / outerR;
+                        const ny = Math.abs(dy) / outerR;
+                        return nx <= 1 && ny <= 1 && (nx + ny) <= 1 + Math.SQRT2 - 1;
+                    }
+                    case 'triangle': {
+                        const nx = dx / outerR;
+                        const ny = -(dy / outerR) - 0.15;
+                        const side = 2 / Math.sqrt(3);
+                        return ny >= -side && ny <= side && Math.abs(nx) <= (side - ny) * 0.5 / side * 2;
+                    }
+                }
+            };
+
+            const scatterFill = makeFgFill(ctx, offX - cellsOut * cellSize, offY - cellsOut * cellSize, offX + count * cellSize + cellsOut * cellSize, offY + count * cellSize + cellsOut * cellSize);
+            ctx.fillStyle = scatterFill;
+            for (let r = -cellsOut; r < count + cellsOut; r++) {
+                for (let c = -cellsOut; c < count + cellsOut; c++) {
+                    if (r >= 0 && r < count && c >= 0 && c < count) continue;
+                    if (!isInsideShape(r + cellsOut, c + cellsOut)) continue;
+                    if (rng(r * 997 + c + 7) < 0.5) continue;
+                    const x = offX + c * cellSize;
+                    const y = offY + r * cellSize;
+                    if (x < -cellSize || y < -cellSize || x > canvasW + cellSize || y > canvasH + cellSize) continue;
+                    drawDot(ctx, x, y, cellSize, state.dotStyle);
+                }
+            }
+        }
+
         canvas.classList.remove('hidden');
         placeholder.classList.add('hidden');
         previewWrapper.classList.remove('border-dashed');
 
+        // ── Readability check (photo mode) ──
+        const warningEl = $('qr-readability-warning');
+        if (state.photoImage) {
+            const rendered = ctx.getImageData(qrLeft, qrTop, qrSize, qrSize);
+            let darkLum = 0, lightLum = 0, darkN = 0, lightN = 0;
+            for (let row = 0; row < count; row++) {
+                for (let col = 0; col < count; col++) {
+                    if (isInFinder(row, col, count)) continue;
+                    const px = Math.floor((offX - qrLeft + (col + 0.5) * cellSize));
+                    const py = Math.floor((offY - qrTop + (row + 0.5) * cellSize));
+                    const idx = (py * qrSize + px) * 4;
+                    const r = rendered.data[idx], g = rendered.data[idx + 1], b = rendered.data[idx + 2];
+                    const lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+                    if (modules.data[row * count + col]) { darkLum += lum; darkN++; }
+                    else { lightLum += lum; lightN++; }
+                }
+            }
+            const avgDark = darkN ? darkLum / darkN : 0;
+            const avgLight = lightN ? lightLum / lightN : 255;
+            const L1 = Math.max(avgDark, avgLight);
+            const L2 = Math.min(avgDark, avgLight) + 1;
+            const contrastRatio = (L1 + 0.05) / (L2 * (255/255) + 0.05);
+            const contrast = (L1 - L2) / 255;
+            warningEl.classList.toggle('hidden', contrast >= 0.25);
+        } else {
+            warningEl.classList.add('hidden');
+        }
+
         qrCanvasDataUrl = canvas.toDataURL('image/png');
         btnDownloadPng.disabled = false;
         btnDownloadJpg.disabled = false;
+
+        checkReadability();
     }
 
     // ── Throttled auto-update ─────────────────────────────
     let updateTimer: number | null = null;
     function scheduleUpdate() {
+        saveToHash();
         if (!autoUpdate) return;
         if (updateTimer) window.clearTimeout(updateTimer);
         updateTimer = window.setTimeout(generate, 120);
     }
 
+    function saveToHash() {
+        const p = new URLSearchParams();
+        p.set('t', state.type);
+        p.set('ds', state.dotStyle);
+        p.set('ey', state.eyeStyle);
+        p.set('fg', state.fg.replace('#', ''));
+        p.set('bg', state.bg.replace('#', ''));
+        if (state.bgTransparent) p.set('bgt', '1');
+        if (state.gradient) {
+            p.set('g', '1');
+            p.set('g1', state.grad1.replace('#', ''));
+            p.set('g2', state.grad2.replace('#', ''));
+            p.set('gt', state.gradType);
+        }
+        if (state.eyeCustom) {
+            p.set('ec', '1');
+            p.set('ecl', state.eyeColor.replace('#', ''));
+        }
+        p.set('ls', String(state.logoSize));
+        if (!state.logoFill) p.set('lf', '0');
+        if (state.frame) {
+            p.set('fr', '1');
+            p.set('ft', state.frameText);
+            p.set('fst', state.frameStyle);
+        }
+        if (state.scatter) {
+            p.set('sc', '1');
+            p.set('sd', String(state.scatterDensity));
+            p.set('ssh', state.scatterShape);
+        }
+        p.set('ecc', state.ecc);
+        p.set('m', String(state.margin));
+
+        switch (state.type) {
+            case 'url': p.set('d', ($('input-url') as HTMLInputElement).value); break;
+            case 'wifi':
+                p.set('ssid', ($('input-wifi-ssid') as HTMLInputElement).value);
+                p.set('wp', ($('input-wifi-pass') as HTMLInputElement).value);
+                p.set('enc', ($('input-wifi-enc') as HTMLSelectElement).value);
+                break;
+            case 'text': p.set('d', ($('input-text') as HTMLTextAreaElement).value); break;
+            case 'email':
+                p.set('ea', ($('input-email-addr') as HTMLInputElement).value);
+                p.set('esub', ($('input-email-subj') as HTMLInputElement).value);
+                p.set('ebody', ($('input-email-body') as HTMLTextAreaElement).value);
+                break;
+            case 'phone': p.set('d', ($('input-phone') as HTMLInputElement).value); break;
+            case 'vcard':
+                p.set('vfn', ($('input-vcard-fname') as HTMLInputElement).value);
+                p.set('vln', ($('input-vcard-lname') as HTMLInputElement).value);
+                p.set('vph', ($('input-vcard-phone') as HTMLInputElement).value);
+                p.set('vem', ($('input-vcard-email') as HTMLInputElement).value);
+                p.set('vorg', ($('input-vcard-org') as HTMLInputElement).value);
+                p.set('vurl', ($('input-vcard-url') as HTMLInputElement).value);
+                break;
+            case 'sms':
+                p.set('sph', ($('input-sms-phone') as HTMLInputElement).value);
+                p.set('sbody', ($('input-sms-body') as HTMLTextAreaElement).value);
+                break;
+        }
+
+        const hash = '#' + p.toString();
+        if (location.hash !== hash) history.replaceState(null, '', hash);
+    }
+
+    function loadFromHash() {
+        const raw = location.hash.slice(1);
+        if (!raw) return;
+        let params: URLSearchParams;
+        try { params = new URLSearchParams(raw); } catch { return; }
+
+        const type = params.get('t') as QrType | null;
+        if (type && ['url', 'wifi', 'text', 'email', 'phone', 'vcard', 'sms'].includes(type)) {
+            state.type = type;
+            tabs.forEach(t => t.classList.toggle('active-tab', t.dataset.type === type));
+            forms.forEach(f => f.classList.add('hidden'));
+            $(`form-${type}`)?.classList.remove('hidden');
+        }
+
+        const ds = params.get('ds') as DotStyle | null;
+        if (ds && ['classic', 'rounded'].includes(ds)) {
+            state.dotStyle = ds;
+            styleBtns.forEach(b => b.classList.toggle('active-style', b.dataset.style === ds));
+        }
+
+        const ey = params.get('ey') as EyeStyle | null;
+        if (ey && ['square', 'rounded', 'circle', 'leaf', 'dot'].includes(ey)) {
+            state.eyeStyle = ey;
+            eyeBtns.forEach(b => b.classList.toggle('active-eye', b.dataset.eye === ey));
+        }
+
+        const fg = params.get('fg');
+        if (fg && /^[0-9a-fA-F]{6}$/.test(fg)) {
+            state.fg = '#' + fg;
+            ($('input-fg') as HTMLInputElement).value = '#' + fg;
+            ($('input-fg-text') as HTMLInputElement).value = '#' + fg;
+        }
+
+        const bg = params.get('bg');
+        if (bg && /^[0-9a-fA-F]{6}$/.test(bg)) {
+            state.bg = '#' + bg;
+            ($('input-bg') as HTMLInputElement).value = '#' + bg;
+            ($('input-bg-text') as HTMLInputElement).value = '#' + bg;
+        }
+
+        state.bgTransparent = params.get('bgt') === '1';
+        ($('btn-bg-transparent') as HTMLButtonElement).classList.toggle('!bg-primary', state.bgTransparent);
+        ($('btn-bg-transparent') as HTMLButtonElement).classList.toggle('!text-white', state.bgTransparent);
+
+        if (params.get('g') === '1') {
+            state.gradient = true;
+            ($('input-gradient') as HTMLInputElement).checked = true;
+            $('gradient-controls').classList.remove('hidden');
+            $('gradient-controls').classList.add('grid');
+            const g1 = params.get('g1');
+            if (g1 && /^[0-9a-fA-F]{6}$/.test(g1)) { state.grad1 = '#' + g1; ($('input-grad1') as HTMLInputElement).value = '#' + g1; }
+            const g2 = params.get('g2');
+            if (g2 && /^[0-9a-fA-F]{6}$/.test(g2)) { state.grad2 = '#' + g2; ($('input-grad2') as HTMLInputElement).value = '#' + g2; }
+            const gt = params.get('gt') as GradType | null;
+            if (gt && ['linear-tb', 'linear-lr', 'linear-diag', 'radial'].includes(gt)) {
+                state.gradType = gt; ($('input-grad-type') as HTMLSelectElement).value = gt;
+            }
+        } else {
+            state.gradient = false;
+            ($('input-gradient') as HTMLInputElement).checked = false;
+            $('gradient-controls').classList.add('hidden');
+            $('gradient-controls').classList.remove('grid');
+        }
+
+        if (params.get('ec') === '1') {
+            state.eyeCustom = true;
+            ($('input-eye-custom') as HTMLInputElement).checked = true;
+            $('eye-color-controls').classList.remove('hidden');
+            $('eye-color-controls').classList.add('flex');
+            const ecl = params.get('ecl');
+            if (ecl && /^[0-9a-fA-F]{6}$/.test(ecl)) { state.eyeColor = '#' + ecl; ($('input-eye-color') as HTMLInputElement).value = '#' + ecl; }
+        } else {
+            state.eyeCustom = false;
+            ($('input-eye-custom') as HTMLInputElement).checked = false;
+            $('eye-color-controls').classList.add('hidden');
+            $('eye-color-controls').classList.remove('flex');
+        }
+
+        const ls = params.get('ls');
+        if (ls) { state.logoSize = parseInt(ls, 10) || 22; ($('input-logo-size') as HTMLInputElement).value = String(state.logoSize); }
+
+        if (params.get('lf') === '0') { state.logoFill = false; ($('input-logo-fill') as HTMLInputElement).checked = false; }
+
+        if (params.get('fr') === '1') {
+            state.frame = true;
+            ($('input-frame') as HTMLInputElement).checked = true;
+            $('frame-controls').classList.remove('hidden');
+            $('frame-controls').classList.add('grid');
+            const ft = params.get('ft');
+            if (ft !== null) { state.frameText = ft; ($('input-frame-text') as HTMLInputElement).value = ft; }
+            const fst = params.get('fst');
+            if (fst && ['bottom', 'rounded', 'ribbon'].includes(fst)) {
+                state.frameStyle = fst as 'bottom' | 'rounded' | 'ribbon';
+                ($('input-frame-style') as HTMLSelectElement).value = fst;
+            }
+        } else {
+            state.frame = false;
+            ($('input-frame') as HTMLInputElement).checked = false;
+            $('frame-controls').classList.add('hidden');
+            $('frame-controls').classList.remove('grid');
+        }
+
+        if (params.get('sc') === '1') {
+            state.scatter = true;
+            ($('input-scatter') as HTMLInputElement).checked = true;
+            $('scatter-controls').classList.remove('hidden');
+            const sd = params.get('sd');
+            if (sd) { state.scatterDensity = parseInt(sd, 10) || 3; ($('input-scatter-size') as HTMLInputElement).value = String(state.scatterDensity); }
+            const ssh = params.get('ssh');
+            if (ssh && ['square', 'circle', 'star'].includes(ssh)) {
+                state.scatterShape = ssh as 'square' | 'circle' | 'star';
+                document.querySelectorAll('.sshape-btn').forEach(b => {
+                    const active = (b as HTMLButtonElement).dataset.sshape === ssh;
+                    (b as HTMLElement).style.borderColor = active ? '#4F46E5' : '#e2e8f0';
+                    (b as HTMLElement).style.background = active ? 'rgba(79,70,229,0.05)' : '';
+                });
+            }
+        } else {
+            state.scatter = false;
+            ($('input-scatter') as HTMLInputElement).checked = false;
+            $('scatter-controls').classList.add('hidden');
+        }
+
+        const ecc = params.get('ecc');
+        if (ecc && ['L', 'M', 'Q', 'H'].includes(ecc)) { state.ecc = ecc as 'L' | 'M' | 'Q' | 'H'; ($('input-ecc') as HTMLSelectElement).value = ecc; }
+
+        const m = params.get('m');
+        if (m !== null) { state.margin = parseInt(m, 10) || 2; ($('input-margin') as HTMLInputElement).value = String(state.margin); }
+
+        switch (state.type) {
+            case 'url': { const v = params.get('d'); if (v !== null) ($('input-url') as HTMLInputElement).value = v; break; }
+            case 'wifi':
+                { const v = params.get('ssid'); if (v !== null) ($('input-wifi-ssid') as HTMLInputElement).value = v; }
+                { const v = params.get('wp'); if (v !== null) ($('input-wifi-pass') as HTMLInputElement).value = v; }
+                { const v = params.get('enc'); if (v) ($('input-wifi-enc') as HTMLSelectElement).value = v; }
+                break;
+            case 'text': { const v = params.get('d'); if (v !== null) ($('input-text') as HTMLTextAreaElement).value = v; break; }
+            case 'email':
+                { const v = params.get('ea'); if (v !== null) ($('input-email-addr') as HTMLInputElement).value = v; }
+                { const v = params.get('esub'); if (v !== null) ($('input-email-subj') as HTMLInputElement).value = v; }
+                { const v = params.get('ebody'); if (v !== null) ($('input-email-body') as HTMLTextAreaElement).value = v; }
+                break;
+            case 'phone': { const v = params.get('d'); if (v !== null) ($('input-phone') as HTMLInputElement).value = v; break; }
+            case 'vcard':
+                { const v = params.get('vfn'); if (v !== null) ($('input-vcard-fname') as HTMLInputElement).value = v; }
+                { const v = params.get('vln'); if (v !== null) ($('input-vcard-lname') as HTMLInputElement).value = v; }
+                { const v = params.get('vph'); if (v !== null) ($('input-vcard-phone') as HTMLInputElement).value = v; }
+                { const v = params.get('vem'); if (v !== null) ($('input-vcard-email') as HTMLInputElement).value = v; }
+                { const v = params.get('vorg'); if (v !== null) ($('input-vcard-org') as HTMLInputElement).value = v; }
+                { const v = params.get('vurl'); if (v !== null) ($('input-vcard-url') as HTMLInputElement).value = v; }
+                break;
+            case 'sms':
+                { const v = params.get('sph'); if (v !== null) ($('input-sms-phone') as HTMLInputElement).value = v; }
+                { const v = params.get('sbody'); if (v !== null) ($('input-sms-body') as HTMLTextAreaElement).value = v; }
+                break;
+        }
+
+        document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active-preset'));
+    }
+
+    // ── Random QR ─────────────────────────────────────────
+    function randomHexColor(): string {
+        return '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
+    }
+    function randomFrom<T>(arr: readonly T[]): T {
+        return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function randomizeQr() {
+        const dotStyles: DotStyle[] = ['classic', 'rounded'];
+        const eyeStyles: EyeStyle[] = ['square', 'rounded', 'circle', 'leaf', 'dot'];
+        const gradTypes: GradType[] = ['linear-tb', 'linear-lr', 'linear-diag', 'radial'];
+        const frameStyles: ('bottom' | 'rounded' | 'ribbon')[] = ['bottom', 'rounded', 'ribbon'];
+        const scatterShapes: ('square' | 'circle' | 'star' | 'diamond' | 'hexagon' | 'heart' | 'cross' | 'octagon' | 'triangle')[] = ['square', 'circle', 'star', 'diamond', 'hexagon', 'heart', 'cross', 'octagon', 'triangle'];
+        const eccLevels: ('L' | 'M' | 'Q' | 'H')[] = ['L', 'M', 'Q', 'H'];
+        const frameTexts = ['СКАНИРУЙ МЕНЯ', 'СКАНИРУЙ', 'ОТКРОЙ', 'ПОДРОБНЕЕ', 'ЖМИТЕ СЮДА', 'QR-КОД', 'НАВЕДИ КАМЕРУ'];
+
+        const newDot = randomFrom(dotStyles);
+        state.dotStyle = newDot;
+        styleBtns.forEach(b => b.classList.toggle('active-style', b.dataset.style === newDot));
+
+        const newEye = randomFrom(eyeStyles);
+        state.eyeStyle = newEye;
+        eyeBtns.forEach(b => b.classList.toggle('active-eye', b.dataset.eye === newEye));
+
+        const useGradient = Math.random() > 0.4;
+        state.gradient = useGradient;
+        ($('input-gradient') as HTMLInputElement).checked = useGradient;
+        const ctrl = $('gradient-controls');
+        ctrl.classList.toggle('hidden', !useGradient);
+        ctrl.classList.toggle('grid', useGradient);
+        if (useGradient) {
+            state.grad1 = randomHexColor();
+            state.grad2 = randomHexColor();
+            state.gradType = randomFrom(gradTypes);
+            ($('input-grad1') as HTMLInputElement).value = state.grad1;
+            ($('input-grad2') as HTMLInputElement).value = state.grad2;
+            ($('input-grad-type') as HTMLSelectElement).value = state.gradType;
+        } else {
+            state.fg = randomHexColor();
+            ($('input-fg') as HTMLInputElement).value = state.fg;
+            ($('input-fg-text') as HTMLInputElement).value = state.fg;
+        }
+        state.bg = randomHexColor();
+        state.bgTransparent = false;
+        ($('input-bg') as HTMLInputElement).value = state.bg;
+        ($('input-bg-text') as HTMLInputElement).value = state.bg;
+        document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active-preset'));
+
+        const useEyeCustom = Math.random() > 0.5;
+        state.eyeCustom = useEyeCustom;
+        ($('input-eye-custom') as HTMLInputElement).checked = useEyeCustom;
+        const eyeCtrl = $('eye-color-controls');
+        eyeCtrl.classList.toggle('hidden', !useEyeCustom);
+        eyeCtrl.classList.toggle('flex', useEyeCustom);
+        if (useEyeCustom) {
+            state.eyeColor = randomHexColor();
+            ($('input-eye-color') as HTMLInputElement).value = state.eyeColor;
+        }
+
+        const useLogo = Math.random() > 0.6;
+        if (useLogo) {
+            const logoIdx = Math.floor(Math.random() * LOGO_PRESETS.length);
+            const preset = LOGO_PRESETS[logoIdx];
+            document.querySelectorAll('.logo-preset-btn').forEach(b => ((b as HTMLElement).style.borderColor = '#e2e8f0'));
+            loadLogoImage(preset, (img) => {
+                state.logoImage = img;
+                generate();
+            });
+        } else {
+            state.logoImage = null;
+            document.querySelectorAll('.logo-preset-btn').forEach(b => ((b as HTMLElement).style.borderColor = '#e2e8f0'));
+        }
+
+        state.logoSize = Math.floor(Math.random() * 15) + 15;
+        ($('input-logo-size') as HTMLInputElement).value = String(state.logoSize);
+
+        state.frame = Math.random() > 0.6;
+        ($('input-frame') as HTMLInputElement).checked = state.frame;
+        const frameCtrl = $('frame-controls');
+        frameCtrl.classList.toggle('hidden', !state.frame);
+        frameCtrl.classList.toggle('grid', state.frame);
+        if (state.frame) {
+            state.frameText = randomFrom(frameTexts);
+            state.frameStyle = randomFrom(frameStyles);
+            ($('input-frame-text') as HTMLInputElement).value = state.frameText;
+            ($('input-frame-style') as HTMLSelectElement).value = state.frameStyle;
+        }
+
+        state.scatter = Math.random() > 0.7;
+        ($('input-scatter') as HTMLInputElement).checked = state.scatter;
+        $('scatter-controls').classList.toggle('hidden', !state.scatter);
+        if (state.scatter) {
+            state.scatterDensity = Math.floor(Math.random() * 8) + 1;
+            ($('input-scatter-size') as HTMLInputElement).value = String(state.scatterDensity);
+            state.scatterShape = randomFrom(scatterShapes);
+            document.querySelectorAll('.sshape-btn').forEach(b => {
+                const active = (b as HTMLButtonElement).dataset.sshape === state.scatterShape;
+                (b as HTMLElement).style.borderColor = active ? '#4F46E5' : '#e2e8f0';
+                (b as HTMLElement).style.background = active ? 'rgba(79,70,229,0.05)' : '';
+            });
+        }
+
+        state.ecc = randomFrom(eccLevels);
+        ($('input-ecc') as HTMLSelectElement).value = state.ecc;
+
+        state.margin = Math.floor(Math.random() * 5);
+        ($('input-margin') as HTMLInputElement).value = String(state.margin);
+
+        state.photoImage = null;
+        document.querySelectorAll('.photo-preset-btn').forEach(b => b.classList.remove('active-preset'));
+        $('btn-photo-clear').classList.add('hidden');
+
+        generate();
+    }
+
+    $('btn-random').addEventListener('click', randomizeQr);
+
+    async function trackGenerateClick() {
+        await generate();
+        if (lastPayload && typeof window.ymGoal === 'function') {
+            window.ymGoal('qr_generate', { qr_type: state.type });
+        }
+    }
+
     // ── Event listeners ───────────────────────────────────
-    btnGenerate.addEventListener('click', generate);
-    btnGenerateMobile.addEventListener('click', generate);
+    btnGenerate.addEventListener('click', trackGenerateClick);
+    btnGenerateMobile.addEventListener('click', trackGenerateClick);
 
     btnDownloadPng.addEventListener('click', () => {
         if (!qrCanvasDataUrl) return;
@@ -1380,6 +2116,7 @@ import Layout from '../layouts/Layout.astro';
         a.href = qrCanvasDataUrl;
         a.download = `qrstars-qr-${state.type}.png`;
         a.click();
+        if (typeof window.ymGoal === 'function') window.ymGoal('qr_download_png', { qr_type: state.type });
     });
 
     btnDownloadJpg.addEventListener('click', () => {
@@ -1396,7 +2133,73 @@ import Layout from '../layouts/Layout.astro';
         a.href = url;
         a.download = `qrstars-qr-${state.type}.jpg`;
         a.click();
+        if (typeof window.ymGoal === 'function') window.ymGoal('qr_download_jpg', { qr_type: state.type });
     });
+
+    // ── Readability check (real jsQR decode) ─────────────
+    function checkReadability() {
+        const container = $('qr-scan-alerts');
+        container.innerHTML = '';
+        container.classList.add('hidden');
+
+        const srcW = canvas.width;
+        const srcH = canvas.height;
+
+        const hasFrame = state.frame;
+        const captionH = hasFrame && state.frameStyle !== 'rounded' ? 80 : 0;
+        const ribbonH = hasFrame && state.frameStyle === 'ribbon' ? 80 : 0;
+        const framePad = hasFrame && state.frameStyle === 'rounded' ? 36 : 0;
+        const qrSize = 600;
+        const cellsOutChk = state.scatter ? state.scatterDensity : 0;
+        const lastCount = lastPayload ? (QRCode.create(lastPayload, { errorCorrectionLevel: state.ecc }).modules.size) : 25;
+        const lastCellSize = qrSize / (lastCount + state.margin * 2);
+        const scatterPad = cellsOutChk * lastCellSize;
+        const qrLeft = framePad + scatterPad;
+        const qrTop = framePad + scatterPad + (state.frameStyle === 'ribbon' ? ribbonH : 0);
+
+        function decodeAt(w: number, h: number, blurPx: number): boolean {
+            const tmp = document.createElement('canvas');
+            tmp.width = w;
+            tmp.height = h;
+            const tctx = tmp.getContext('2d')!;
+            if (blurPx > 0) tctx.filter = `blur(${blurPx}px)`;
+            tctx.drawImage(canvas, qrLeft, qrTop, qrSize, qrSize, 0, 0, w, h);
+            tctx.filter = 'none';
+            const imgData = tctx.getImageData(0, 0, w, h);
+            return jsQR(imgData.data, w, h) !== null;
+        }
+
+        function trySizes(sizes: number[], blur: number): boolean {
+            for (const s of sizes) {
+                if (decodeAt(s, s, blur)) return true;
+            }
+            return false;
+        }
+
+        const screenOk = trySizes([600, 500, 400, 300], 0);
+        const printOk = trySizes([300, 240, 180], 0.5);
+        const phoneOk = trySizes([240, 180, 140], 1);
+
+        const alerts: { icon: string; text: string }[] = [];
+
+        if (!screenOk) {
+            alerts.push({ icon: 'fa-desktop', text: 'QR-код содержит сложные элементы и может плохо сканироваться — пожалуйста, проверьте его дополнительно.' });
+        } else if (!printOk || !phoneOk) {
+            alerts.push({ icon: 'fa-print', text: 'QR-код содержит сложные элементы и может хуже сканироваться при печати или на старых устройствах — пожалуйста, проверьте его дополнительно.' });
+        }
+
+        if (alerts.length === 0) return;
+
+        container.classList.remove('hidden');
+        for (const a of alerts) {
+            const row = document.createElement('div');
+            row.className = 'flex items-start gap-2 rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-xs text-amber-800 leading-relaxed';
+            row.innerHTML = `<i class="fa-solid ${a.icon} mt-0.5 shrink-0 text-amber-500"></i><span>${a.text}</span>`;
+            container.appendChild(row);
+        }
+    }
+
+    loadFromHash();
 
     // Live regenerate on input change
     document.querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>(
@@ -1409,7 +2212,7 @@ import Layout from '../layouts/Layout.astro';
         el.addEventListener('keydown', e => {
             if (e.key === 'Enter' && el.tagName !== 'TEXTAREA') {
                 e.preventDefault();
-                generate();
+                trackGenerateClick();
             }
         });
     });

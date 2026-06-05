@@ -236,6 +236,7 @@ const qrByPath = Object.fromEntries(
             <button
               type="button"
               data-demo-mode={v.id}
+              data-goal="demo_vertical"
               class:list={['demo-mode-btn', i === 0 && 'active', 'relative flex items-center gap-2 px-3.5 sm:px-5 py-2.5 rounded-xl text-sm font-semibold transition-all']}
             >
               <i class:list={['fa-solid', v.icon, 'text-base']}></i>
@@ -282,42 +283,56 @@ const qrByPath = Object.fromEntries(
             </div>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
-            {v.scenarios.map((scenario) => {
-              const { url, qr } = qrByPath[scenario.path];
-              return (
-                <article
-                  class:list={[
-                    'bg-white rounded-2xl border shadow-sm flex flex-col overflow-hidden transition hover:shadow-md',
-                    scenario.featured
-                      ? `sm:col-span-2 lg:col-span-2 lg:row-span-1 ${v.accentRing} p-1`
-                      : 'border-slate-200',
-                  ]}
-                >
-                  <div
+          <div class="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
+            <!-- Левая колонка: Вкладки -->
+            <div class="w-full lg:w-1/3 flex flex-col gap-3 shrink-0">
+              <div class="flex overflow-x-auto lg:flex-col gap-2 pb-4 lg:pb-0 scrollbar-hide snap-x snap-mandatory">
+                {v.scenarios.map((scenario, sIdx) => (
+                  <button
+                    type="button"
+                    data-scenario-tab={`${v.id}-${sIdx}`}
+                    data-vertical={v.id}
+                    data-accent-ring={v.accentRing}
+                    aria-selected={sIdx === 0 ? "true" : "false"}
                     class:list={[
-                      'flex flex-col h-full',
-                      scenario.featured ? 'p-6 md:p-8 md:flex-row md:gap-8 md:items-center' : 'p-5',
+                      'scenario-tab-btn snap-start shrink-0 lg:shrink text-left px-5 py-4 rounded-2xl border transition-all w-[260px] lg:w-full',
+                      sIdx === 0 
+                        ? `bg-white shadow-md border-transparent ring-1 ring-slate-900/5 ${v.accentRing}` 
+                        : 'bg-transparent border-slate-200 hover:bg-white hover:border-slate-300'
                     ]}
                   >
-                    <div
-                      class:list={[
-                        'shrink-0 flex flex-col items-center',
-                        scenario.featured ? 'md:w-48' : 'mb-4',
-                      ]}
-                    >
-                      <div class="relative inline-block p-2 bg-slate-50 rounded-xl border border-slate-100">
+                    <div class="font-bold text-slate-900 text-sm sm:text-base mb-1">{scenario.name}</div>
+                    <div class="text-xs text-slate-500 line-clamp-1">{scenario.badge}</div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <!-- Правая колонка: Детали сценария -->
+            <div class="w-full lg:w-2/3 bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-8 lg:p-10 relative overflow-hidden">
+              {v.scenarios.map((scenario, sIdx) => {
+                const { url, qr } = qrByPath[scenario.path];
+                return (
+                  <div
+                    data-scenario-content={`${v.id}-${sIdx}`}
+                    class:list={[
+                      'scenario-content flex-col md:flex-row gap-8 lg:gap-12 items-center',
+                      sIdx === 0 ? 'flex' : 'hidden'
+                    ]}
+                  >
+                    <div class="shrink-0 flex flex-col items-center">
+                      <div class="relative inline-block p-3 bg-slate-50 rounded-2xl border border-slate-100 shadow-inner">
                         <img
                           src={qr}
-                          width={scenario.featured ? 200 : 140}
-                          height={scenario.featured ? 200 : 140}
+                          width="180"
+                          height="180"
                           alt={`QR: ${scenario.name}`}
-                          class="rounded-lg block"
+                          class="rounded-xl block"
                           loading="lazy"
                         />
                         <div
                           class:list={[
-                            'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-lg flex items-center justify-center text-white font-extrabold text-[10px] shadow ring-2 ring-white pointer-events-none',
+                            'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-xl flex items-center justify-center text-white font-extrabold text-[12px] shadow-lg ring-4 ring-white pointer-events-none',
                             v.qrBadgeBg,
                           ]}
                           aria-hidden="true"
@@ -325,31 +340,24 @@ const qrByPath = Object.fromEntries(
                           QR
                         </div>
                       </div>
-                      <p class="mt-2 text-[10px] font-semibold uppercase tracking-wide text-slate-400">app.qrstars.ru</p>
+                      <p class="mt-3 text-[10px] font-bold uppercase tracking-widest text-slate-400">app.qrstars.ru</p>
                     </div>
 
-                    <div class="flex-1 flex flex-col min-w-0">
+                    <div class="flex-1 flex flex-col min-w-0 w-full text-center md:text-left">
                       <span
                         class:list={[
-                          'inline-flex self-start items-center font-semibold rounded-full border mb-3',
-                          scenario.featured
-                            ? `text-xs px-3 py-1 ${v.accentBadge}`
-                            : 'text-[11px] px-2.5 py-0.5 bg-slate-100 text-slate-600 border-slate-200',
+                          'inline-flex md:self-start self-center items-center font-bold rounded-full border mb-4 text-xs px-3 py-1',
+                          scenario.featured ? v.accentBadge : 'bg-slate-100 text-slate-600 border-slate-200'
                         ]}
                       >
                         {scenario.badge}
                       </span>
-                      <h3
-                        class:list={[
-                          'font-bold text-slate-900 mb-2',
-                          scenario.featured ? 'text-xl md:text-2xl' : 'text-lg',
-                        ]}
-                      >
+                      <h3 class="font-bold text-2xl lg:text-3xl text-slate-900 mb-3 leading-tight">
                         {scenario.name}
                       </h3>
 
                       {scenario.external && (
-                        <p class="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 mb-3 leading-relaxed">
+                        <p class="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 mb-4 leading-relaxed text-left">
                           <i class="fa-solid fa-triangle-exclamation mr-1"></i>
                           После сканирования откроется внешняя ссылка (Яндекс.Карты), не страница QrStars.
                         </p>
@@ -359,11 +367,12 @@ const qrByPath = Object.fromEntries(
                         href={url}
                         target="_blank"
                         rel="noopener noreferrer"
+                        data-goal="demo_open"
                         class:list={[
-                          'inline-flex items-center justify-center gap-2 rounded-xl font-bold transition mt-auto w-full',
+                          'inline-flex items-center justify-center gap-2 rounded-xl font-bold transition mt-2 w-full md:w-auto text-base px-8 py-4 shadow-lg',
                           scenario.featured
-                            ? `text-white px-6 py-3.5 text-base shadow-lg ${v.accentBtn}`
-                            : 'bg-slate-900 text-white px-5 py-3 text-sm hover:bg-slate-800',
+                            ? `text-white ${v.accentBtn}`
+                            : 'bg-slate-900 text-white hover:bg-slate-800'
                         ]}
                       >
                         {scenario.button}
@@ -371,15 +380,15 @@ const qrByPath = Object.fromEntries(
                       </a>
 
                       {scenario.showDisclaimer && (
-                        <p class="text-xs text-slate-400 mt-3 leading-relaxed">
+                        <p class="text-[11px] text-slate-400 mt-4 leading-relaxed md:max-w-md">
                           * Демонстрационный режим: оценки и отзывы не сохраняются в базу данных и не отправляются в Telegram.
                         </p>
                       )}
                     </div>
                   </div>
-                </article>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         </div>
       );
@@ -395,6 +404,13 @@ const qrByPath = Object.fromEntries(
     background: white;
     color: rgb(15 23 42);
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 </style>
 
@@ -442,6 +458,43 @@ const qrByPath = Object.fromEntries(
         modeBtns.forEach((b) => b.classList.remove('active'));
         btn.classList.add('active');
         if (mode) showMode(mode);
+      });
+    });
+
+    const tabBtns = document.querySelectorAll<HTMLButtonElement>('.scenario-tab-btn');
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tabId = btn.dataset.scenarioTab;
+        const verticalId = btn.dataset.vertical;
+        if (!tabId || !verticalId) return;
+        
+        // Update Tabs
+        document.querySelectorAll<HTMLButtonElement>(`.scenario-tab-btn[data-vertical="${verticalId}"]`).forEach(b => {
+          const accentRing = b.dataset.accentRing || '';
+          const ringClasses = accentRing.split(' ');
+          
+          if (b === btn) {
+            b.setAttribute('aria-selected', 'true');
+            b.classList.remove('bg-transparent', 'border-slate-200', 'hover:bg-white', 'hover:border-slate-300');
+            b.classList.add('bg-white', 'shadow-md', 'border-transparent', 'ring-1', 'ring-slate-900/5', ...ringClasses);
+            b.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          } else {
+            b.setAttribute('aria-selected', 'false');
+            b.classList.add('bg-transparent', 'border-slate-200', 'hover:bg-white', 'hover:border-slate-300');
+            b.classList.remove('bg-white', 'shadow-md', 'border-transparent', 'ring-1', 'ring-slate-900/5', ...ringClasses);
+          }
+        });
+
+        // Update Contents
+        document.querySelectorAll<HTMLElement>(`.scenario-content[data-scenario-content^="${verticalId}-"]`).forEach(c => {
+          if (c.dataset.scenarioContent === tabId) {
+            c.classList.remove('hidden');
+            c.classList.add('flex');
+          } else {
+            c.classList.add('hidden');
+            c.classList.remove('flex');
+          }
+        });
       });
     });
 

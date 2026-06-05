@@ -22,14 +22,14 @@ const APP_URL = 'https://app.qrstars.ru';
         {links.map((link) => (
           <a href={link.href} class="text-slate-600 hover:text-primary transition font-medium text-[15px]">{link.label}</a>
         ))}
-        <a href="/free-qr-generator.html" class="text-emerald-600 hover:text-emerald-700 transition font-bold text-[15px]">
+        <a href="/free-qr-generator.html" data-goal="qr_generator_link" data-goal-params='{"source":"nav"}' class="text-emerald-600 hover:text-emerald-700 transition font-bold text-[15px]">
           Бесплатный генератор
         </a>
       </div>
 
       <div class="hidden lg:flex items-center gap-3">
-        <a href={APP_URL} class="text-slate-600 hover:text-primary transition font-medium text-[15px]">Войти</a>
-        <a href={APP_URL} class="bg-primary text-white px-5 py-2 rounded-full font-semibold hover:bg-indigo-700 transition shadow-md shadow-indigo-500/20">
+        <a href={APP_URL} data-goal="nav_login" class="text-slate-600 hover:text-primary transition font-medium text-[15px]">Войти</a>
+        <a href={APP_URL} data-goal="nav_register" class="bg-primary text-white px-5 py-2 rounded-full font-semibold hover:bg-indigo-700 transition shadow-md shadow-indigo-500/20">
           Начать бесплатно
         </a>
       </div>
@@ -51,14 +51,14 @@ const APP_URL = 'https://app.qrstars.ru';
       {links.map((link) => (
         <a href={link.href} class="block px-3 py-2.5 rounded-lg text-slate-700 font-medium hover:bg-slate-50 transition">{link.label}</a>
       ))}
-      <a href="/free-qr-generator.html" class="block px-3 py-2.5 rounded-lg text-emerald-600 font-bold hover:bg-emerald-50 transition">
+      <a href="/free-qr-generator.html" data-goal="qr_generator_link" data-goal-params='{"source":"nav_mobile"}' class="block px-3 py-2.5 rounded-lg text-emerald-600 font-bold hover:bg-emerald-50 transition">
         Бесплатный генератор QR
       </a>
       <div class="pt-3 mt-2 border-t border-slate-100 space-y-2">
-        <a href={APP_URL} class="block text-center px-4 py-2.5 rounded-xl border border-slate-200 text-slate-700 font-semibold hover:bg-slate-50 transition">
+        <a href={APP_URL} data-goal="nav_login" class="block text-center px-4 py-2.5 rounded-xl border border-slate-200 text-slate-700 font-semibold hover:bg-slate-50 transition">
           Войти
         </a>
-        <a href={APP_URL} class="block text-center px-4 py-2.5 rounded-xl bg-primary text-white font-bold hover:bg-indigo-700 transition">
+        <a href={APP_URL} data-goal="nav_register" class="block text-center px-4 py-2.5 rounded-xl bg-primary text-white font-bold hover:bg-indigo-700 transition">
           Начать бесплатно
         </a>
       </div>
