@@ -1,5 +1,8 @@
 const ATTRIBUTION_QUERY_KEYS = ['yclid', 'ymclid'] as const;
 
+/** Manual QA on landing/app: use utm_campaign=internal_test — do not mix with menu_search / reviews_search. */
+export const INTERNAL_TEST_UTM_CAMPAIGN = 'internal_test';
+
 /** Append utm_* and attribution query params from the landing page URL to outbound app links. */
 export function appendAttributionParams(baseUrl: string, searchParams: URLSearchParams): string {
   try {
