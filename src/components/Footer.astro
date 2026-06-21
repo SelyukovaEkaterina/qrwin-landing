@@ -1,5 +1,8 @@
 ---
 import { LEGAL_LINKS } from '../lib/legal';
+import { appendAttributionParams } from '../lib/utm';
+
+const APP_URL = appendAttributionParams('https://app.qrstars.ru', Astro.url.searchParams);
 
 const seoLinks = [
   { href: '/qr-kod-dlya-otzyvov.html', label: 'QR для отзывов' },
@@ -7,18 +10,26 @@ const seoLinks = [
   { href: '/dinamicheskiy-qr-kod.html', label: 'Динамический QR' },
   { href: '/sozdat-qr-kod.html', label: 'Создать QR-код' },
 ];
+
+const industryLinks = [
+  { href: '/otraslevye-resheniya.html', label: 'Все отрасли' },
+  { href: '/qr-kod-dlya-restorana.html', label: 'Рестораны и кафе' },
+  { href: '/qr-kod-dlya-salona-krasoty.html', label: 'Салоны красоты' },
+  { href: '/qr-kod-dlya-stomatologii.html', label: 'Стоматологии' },
+  { href: '/qr-kod-dlya-avtoservisa.html', label: 'Автосервисы' },
+];
 ---
 
 <footer class="bg-white py-12 border-t border-slate-200 mt-auto">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 md:grid-cols-5 gap-8 mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-6 gap-8 mb-8">
       <div class="col-span-1 md:col-span-2">
         <div class="flex items-center gap-2 mb-4">
           <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold">QR</div>
           <span class="font-bold text-xl tracking-tight">QrStars</span>
         </div>
         <p class="text-slate-500 text-sm max-w-sm mb-4">
-          Умные QR-коды для локального бизнеса: отзывы на Яндекс Картах и 2GIS, электронное меню, визитки сотрудников, Wi-Fi и аналитика — в одном кабинете.
+          Умные QR-коды для локального бизнеса и офлайн-рекламы: отзывы на Яндекс Картах и 2GIS, электронное меню, динамические редиректы, визитки, Wi-Fi и аналитика — в одном кабинете.
         </p>
         <a href="mailto:support@qrstars.ru" class="inline-flex items-center gap-2 text-slate-500 text-sm hover:text-primary transition">
           <i class="fa-solid fa-envelope"></i> support@qrstars.ru
@@ -29,6 +40,7 @@ const seoLinks = [
         <ul class="space-y-2 text-sm text-slate-500">
           <li><a href="/free-qr-generator.html" data-goal="qr_generator_link" data-goal-params='{"source":"footer"}' class="hover:text-emerald-600 transition font-semibold text-emerald-600">Бесплатный QR-генератор</a></li>
           <li><a href="/smart-reviews.html" class="hover:text-primary transition">Умные отзывы</a></li>
+          <li><a href="/dynamic-qr.html" class="hover:text-primary transition">Динамические QR</a></li>
           <li><a href="/qr-business-cards.html" class="hover:text-primary transition">QR-визитки</a></li>
           <li><a href="/qr-menu.html" class="hover:text-primary transition">QR-меню</a></li>
           <li><a href="/file-sharing.html" class="hover:text-primary transition">QR-файлы</a></li>
@@ -48,19 +60,33 @@ const seoLinks = [
         </ul>
       </div>
       <div>
+        <h4 class="font-bold text-slate-800 mb-4">Отраслевые решения</h4>
+        <ul class="space-y-2 text-sm text-slate-500">
+          {industryLinks.map((link) => (
+            <li>
+              <a href={link.href} class="hover:text-primary transition">{link.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
         <h4 class="font-bold text-slate-800 mb-4">Платформа</h4>
         <ul class="space-y-2 text-sm text-slate-500">
           <li><a href="/blog.html" class="hover:text-primary transition">Блог</a></li>
           <li><a href="/#buy" class="hover:text-primary transition">Тарифы</a></li>
-          <li><a href="https://app.qrstars.ru" class="hover:text-primary transition">Вход в кабинет</a></li>
+          <li><a href={APP_URL} class="hover:text-primary transition">Вход в кабинет</a></li>
         </ul>
       </div>
     </div>
     <div class="border-t border-slate-100 pt-8 flex flex-col md:flex-row justify-between items-center text-slate-400 text-sm">
       <p>© 2026 QrStars.ru. Все права защищены.</p>
-      <div class="flex gap-4 mt-4 md:mt-0">
+      <div class="flex flex-wrap gap-x-4 gap-y-2 mt-4 md:mt-0 justify-center md:justify-end">
+        <a href={LEGAL_LINKS.offer} class="hover:text-primary transition">Публичная оферта</a>
+        <a href={LEGAL_LINKS.terms} class="hover:text-primary transition">Пользовательское соглашение</a>
         <a href={LEGAL_LINKS.privacy} class="hover:text-primary transition">Политика конфиденциальности</a>
-        <a href={LEGAL_LINKS.consent} class="hover:text-primary transition">Согласие на передачу ПД</a>
+        <a href={LEGAL_LINKS.consent} class="hover:text-primary transition">Согласие на ПД</a>
+        <a href={LEGAL_LINKS.payment} class="hover:text-primary transition">Оплата и возврат</a>
+        <a href={LEGAL_LINKS.unsubscribe} class="hover:text-primary transition">Отмена подписки</a>
       </div>
     </div>
   </div>

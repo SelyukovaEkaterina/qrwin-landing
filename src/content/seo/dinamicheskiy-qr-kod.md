@@ -23,6 +23,9 @@ faq:
   - q: "Какие сервисы динамических QR-кодов лучше?"
     a: "Для русскоязычного бизнеса QrStars выгоден: отзывы, Яндекс, 2GIS, меню и визитки в одной экосистеме."
 related:
+  - { href: "/otraslevye-resheniya.html", label: "Отраслевые решения" }
+  - { slug: "qr-kod-dlya-restorana", label: "Динамический QR для ресторана" }
+  - { slug: "qr-kod-dlya-avtoservisa", label: "Динамический QR для автосервиса" }
   - { slug: "generator-qr-kodov", label: "Генератор QR" }
   - { slug: "qr-kod-dlya-biznesa", label: "QR для бизнеса" }
   - { href: "/blog/dinamicheskiy-qr-kod.html", label: "Подробный гайд в блоге" }
@@ -52,6 +55,8 @@ related:
 3. **Мероприятие** — до ивента — регистрация, после — опрос.
 4. **Сеть точек** — один шаблон, разные ссылки по филиалам.
 5. **A/B-тест** — смотрите, какая посадочная даёт больше конверсии.
+
+В отраслевых сценариях динамический QR особенно полезен для [ресторанов](/qr-kod-dlya-restorana.html), [салонов](/qr-kod-dlya-salona-krasoty.html), [клиник](/qr-kod-dlya-stomatologii.html) и [автосервисов](/qr-kod-dlya-avtoservisa.html): меняется ссылка, акция, прайс или меню, а напечатанный код остаётся прежним.
 
 ## Как создать динамический QR-код за 1 минуту
 

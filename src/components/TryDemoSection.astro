@@ -1,7 +1,8 @@
 ---
 import { generateBrandedQrDataUrl } from '../lib/brandedQr';
 
-const APP_BASE = 'https://app.qrstars.ru';
+import { appendAttributionParams } from '../lib/utm';
+const APP_BASE = appendAttributionParams('https://app.qrstars.ru', Astro.url.searchParams);
 
 interface DemoScenario {
   name: string;

@@ -7,6 +7,12 @@ interface Props {
   ctaHref?: string;
   ctaSecondaryText?: string;
   ctaSecondaryHref?: string;
+  ctaGoal?: string;
+  ctaGoalParams?: string;
+  ctaExternal?: boolean;
+  ctaSecondaryGoal?: string;
+  ctaSecondaryGoalParams?: string;
+  ctaSecondaryExternal?: boolean;
 }
 
 const {
@@ -17,6 +23,12 @@ const {
   ctaHref = '/#features',
   ctaSecondaryText,
   ctaSecondaryHref,
+  ctaGoal,
+  ctaGoalParams,
+  ctaExternal = false,
+  ctaSecondaryGoal,
+  ctaSecondaryGoalParams,
+  ctaSecondaryExternal = false,
 } = Astro.props;
 ---
 
@@ -35,6 +47,10 @@ const {
       <div class="flex flex-col sm:flex-row gap-4">
         <a
           href={ctaHref}
+          {...(ctaGoal ? { 'data-goal': ctaGoal } : {})}
+          {...(ctaGoalParams ? { 'data-goal-params': ctaGoalParams } : {})}
+          target={ctaExternal ? '_blank' : undefined}
+          rel={ctaExternal ? 'noopener noreferrer' : undefined}
           class="inline-flex items-center justify-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-indigo-700 transition shadow-lg shadow-indigo-500/30"
         >
           {ctaText}
@@ -43,6 +59,10 @@ const {
         {ctaSecondaryText && ctaSecondaryHref && (
           <a
             href={ctaSecondaryHref}
+            {...(ctaSecondaryGoal ? { 'data-goal': ctaSecondaryGoal } : {})}
+            {...(ctaSecondaryGoalParams ? { 'data-goal-params': ctaSecondaryGoalParams } : {})}
+            target={ctaSecondaryExternal ? '_blank' : undefined}
+            rel={ctaSecondaryExternal ? 'noopener noreferrer' : undefined}
             class="inline-flex items-center justify-center gap-2 bg-white text-slate-800 border border-slate-200 px-8 py-4 rounded-xl font-bold text-lg hover:bg-slate-50 transition shadow-sm"
           >
             {ctaSecondaryText}

@@ -5,4 +5,4 @@ Allow: /
 Disallow: /politika-konfidencialnosti.html
 Disallow: /soglasie-pd.html
 
-Sitemap: https://qrstars.ru/sitemap.xml
+Sitemap: https://qrstars.ru/sitemap-index.xml

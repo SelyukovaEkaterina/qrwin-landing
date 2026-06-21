@@ -6,7 +6,9 @@ badge: "✨ Быстро и бесплатно"
 intro: "Хотите <strong>создать qr код</strong> без дизайнера и программиста? QrStars — сервис, где вы <strong>создадите qr код онлайн</strong> за минуту: по ссылке, с логотипом, для бизнеса или личного использования."
 fullTitle: true
 ctaText: "Создать QR-код сейчас"
-ctaHref: "/#features"
+ctaHref: "/free-qr-generator.html"
+ctaSecondaryText: "Динамический QR в кабинете"
+ctaSecondaryHref: "https://app.qrstars.ru/register?utm_source=qrstars&utm_medium=seo&utm_campaign=generator&utm_content=sozdat-qr-kod"
 faq:
   - q: "Как создать QR-код бесплатно?"
     a: "Откройте QrStars, выберите тип кода, введите данные (ссылка, WiFi, контакты), оформите дизайн и скачайте PNG — базовый тариф бесплатный."

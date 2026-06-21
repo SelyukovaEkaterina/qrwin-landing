@@ -5,8 +5,10 @@ h1: "QR-код для Яндекс Карт (отзывы)"
 badge: "🗺️ Яндекс Карты"
 intro: "<strong>QR-код для яндекс карт</strong> ведёт гостя прямо на страницу отзыва — без поиска в приложении. Увеличьте рейтинг кафе, салона или клиники с QrStars."
 fullTitle: true
-ctaText: "QR для Яндекс Карт"
-ctaHref: "/smart-reviews.html"
+ctaText: "Создать кабинет FREE"
+ctaHref: "https://app.qrstars.ru/register?utm_source=qrstars&utm_medium=seo&utm_campaign=reviews_landing&utm_content=yandex-kart"
+ctaSecondaryText: "Как это работает"
+ctaSecondaryHref: "/smart-reviews.html"
 faq:
   - q: "Как сделать QR-код для отзыва на Яндекс Картах?"
     a: "Скопируйте ссылку на организацию в Яндекс Бизнесе, вставьте в QrStars или используйте шаблон «Отзывы» с авто-подстановкой."
@@ -52,4 +54,4 @@ related:
 
 Подробное руководство: [блог](/blog/qr-kod-dlya-otzyvov-yandeks-karty.html).
 
-[Создайте QR для Яндекс Карт](/smart-reviews.html) — рейтинг растёт, негатив под контролем.
+[Создайте QR для Яндекс Карт](https://app.qrstars.ru/register?utm_source=qrstars&utm_medium=seo&utm_campaign=reviews_landing&utm_content=yandex-kart) — рейтинг растёт, негатив под контролем.

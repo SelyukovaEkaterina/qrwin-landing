@@ -12,6 +12,7 @@ interface Props {
   ogImage?: string;
   /** Schema.org type for structured data. 'WebSite' on homepage, 'WebPage' elsewhere */
   pageType?: 'WebSite' | 'WebPage';
+  yandexVerification?: string;
 }
 
 const {
@@ -21,6 +22,7 @@ const {
   canonical,
   // Замените og-default.jpg на реальную OG-картинку 1200×630 px
   ogImage = 'https://qrstars.ru/og-default.jpg',
+  yandexVerification,
 } = Astro.props;
 
 const pageTitle = fullTitle ? title : `${title} | QrStars`;
@@ -36,7 +38,7 @@ const websiteSchema = {
       url: 'https://qrstars.ru',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://qrstars.ru/favicon.ico',
+        url: 'https://qrstars.ru/favicon.svg',
       },
       sameAs: [],
     },
@@ -58,10 +60,13 @@ const websiteSchema = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-120.png" type="image/png" sizes="120x120" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/favicon-120.png" sizes="120x120" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    {yandexVerification && <meta name="yandex-verification" content={yandexVerification} />}
     <link rel="canonical" href={canonicalUrl} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ru_RU" />

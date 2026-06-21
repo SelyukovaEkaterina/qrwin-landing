@@ -4,6 +4,9 @@ interface Props {
   text?: string;
   ctaText?: string;
   ctaHref?: string;
+  ctaGoal?: string;
+  ctaGoalParams?: string;
+  ctaExternal?: boolean;
 }
 
 const {
@@ -11,6 +14,9 @@ const {
   text = 'Попробуйте QrStars — динамические QR-коды с логотипом, аналитикой и готовыми шаблонами для бизнеса.',
   ctaText = 'Создать QR-код',
   ctaHref = '/#features',
+  ctaGoal,
+  ctaGoalParams,
+  ctaExternal = false,
 } = Astro.props;
 ---
 
@@ -20,6 +26,10 @@ const {
     <p class="text-indigo-100 mb-8 text-lg">{text}</p>
     <a
       href={ctaHref}
+      {...(ctaGoal ? { 'data-goal': ctaGoal } : {})}
+      {...(ctaGoalParams ? { 'data-goal-params': ctaGoalParams } : {})}
+      target={ctaExternal ? '_blank' : undefined}
+      rel={ctaExternal ? 'noopener noreferrer' : undefined}
       class="inline-flex items-center gap-2 bg-white text-primary px-8 py-4 rounded-xl font-bold text-lg hover:bg-slate-50 transition shadow-xl"
     >
       {ctaText}

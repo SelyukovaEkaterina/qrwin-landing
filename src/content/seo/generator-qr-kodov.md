@@ -6,7 +6,9 @@ badge: "🔲 Онлайн-генератор"
 intro: "<strong>Генератор QR-кодов</strong> QrStars — на русском языке, с логотипом, динамическими ссылками и аналитикой. Сгенерируйте куаркод по ссылке, для отзывов, меню или WiFi — бесплатно и без регистрации в базовом тарифе."
 fullTitle: true
 ctaText: "Сгенерировать QR-код"
-ctaHref: "/#features"
+ctaHref: "/free-qr-generator.html"
+ctaSecondaryText: "Динамический QR в кабинете"
+ctaSecondaryHref: "https://app.qrstars.ru/register?utm_source=qrstars&utm_medium=seo&utm_campaign=generator&utm_content=generator-qr-kodov"
 faq:
   - q: "Генератор QR-кодов QrStars бесплатный?"
     a: "Да, базовый функционал — создание статического и динамического QR, скачивание PNG — доступен бесплатно. Расширенная аналитика и модули для бизнеса — в подписке Pro."

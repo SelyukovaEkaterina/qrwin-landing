@@ -55,4 +55,23 @@
     var link = e.target && e.target.closest('a[href*="free-qr-generator"]');
     if (link) window.ymGoal('qr_generator_link');
   }, true);
+
+  // Pass _ym_uid and yclid to app.qrstars.ru
+  document.addEventListener('click', function(e) {
+    var a = e.target && e.target.closest('a[href*="app.qrstars.ru"]');
+    if (!a) return;
+    try {
+      var url = new URL(a.href, location.origin);
+      var m = document.cookie.match(/(?:^|;\s*)_ym_uid=([^;]+)/);
+      if (m && m[1] && !url.searchParams.has('_ym_uid')) {
+        url.searchParams.set('_ym_uid', decodeURIComponent(m[1]).trim());
+      }
+      var qs = new URLSearchParams(location.search);
+      ['yclid', 'ymclid'].forEach(function(k) {
+        var v = qs.get(k);
+        if (v && !url.searchParams.has(k)) url.searchParams.set(k, v);
+      });
+      a.href = url.toString();
+    } catch (_) {}
+  }, true);
 </script>

@@ -5,10 +5,10 @@ h1: "Создать QR-код для отзывов"
 badge: "⭐ Отзывы и репутация"
 intro: "Один <strong>QR-код для отзывов</strong> на столе или кассе направляет довольных гостей на Яндекс Карты, 2GIS и Google Maps — а негатив перехватывается до публикации. Сделайте куаркод за минуту в QrStars."
 fullTitle: true
-ctaText: "Создать QR для отзывов"
-ctaHref: "/smart-reviews.html"
-ctaSecondaryText: "Скачать PDF-макет"
-ctaSecondaryHref: "https://app.qrstars.ru"
+ctaText: "Создать кабинет FREE"
+ctaHref: "https://app.qrstars.ru/register?utm_source=qrstars&utm_medium=seo&utm_campaign=reviews_landing&utm_content=otzyvov"
+ctaSecondaryText: "Как это работает"
+ctaSecondaryHref: "/smart-reviews.html"
 howItWorks:
   - icon: "fa-solid fa-star"
     title: "Выберите площадки"
@@ -40,6 +40,11 @@ faq:
   - q: "Нужна ли табличка с QR или достаточно наклейки?"
     a: "Подойдёт и наклейка на столе, и тейбл-тент у кассы. QrStars даёт готовый PDF-макет или можно заказать акриловую NFC-табличку."
 related:
+  - { href: "/otraslevye-resheniya.html", label: "Отраслевые решения" }
+  - { slug: "qr-kod-dlya-restorana", label: "Отзывы для ресторана" }
+  - { slug: "qr-kod-dlya-salona-krasoty", label: "Отзывы для салона" }
+  - { slug: "qr-kod-dlya-stomatologii", label: "Отзывы для клиники" }
+  - { slug: "qr-kod-dlya-avtoservisa", label: "Отзывы для автосервиса" }
   - { slug: "qr-kod-dlya-yandeks-kart", label: "QR для Яндекс Карт" }
   - { slug: "qr-kod-dlya-2gis", label: "QR для 2GIS" }
   - { slug: "dinamicheskiy-qr-kod", label: "Динамический QR-код" }
@@ -76,6 +81,8 @@ related:
 | Визитка администратора | Для B2B и записи |
 | NFC-табличка | Скан без камеры — приложил телефон |
 
+Для разных ниш лучше работают разные точки размещения: у ресторанов это столы и чеки, у салонов — зеркала и визитки мастеров, у клиник — ресепшен и памятки пациентам, у автосервисов — заказ-наряды и стойка приёмки. Смотрите подборку [отраслевых решений](/otraslevye-resheniya.html).
+
 ## Динамический vs статический QR для отзывов
 
 **Статический** куаркод подходит для разовой акции, но если вы смените адрес карточки или добавите 2GIS — придётся перепечатывать. **Динамический** [QR-код](/dinamicheskiy-qr-kod.html) обновляется в кабинете: экономия на полиграфии и гибкость для сети точек.
@@ -87,4 +94,4 @@ related:
 - **Аналитика сканирований** — видно, с какого стола больше откликов.
 - Русскоязычный интерфейс и поддержка малого бизнеса.
 
-Сделайте QR за минуту, а не за час — [попробуйте бесплатно](/smart-reviews.html).
+Сделайте QR за минуту, а не за час — [попробуйте бесплатно](https://app.qrstars.ru/register?utm_source=qrstars&utm_medium=seo&utm_campaign=reviews_landing&utm_content=otzyvov).

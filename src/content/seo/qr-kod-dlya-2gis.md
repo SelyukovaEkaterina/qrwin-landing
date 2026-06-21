@@ -5,8 +5,10 @@ h1: "QR-код для отзывов 2GIS"
 badge: "📍 2GIS"
 intro: "<strong>2гис qr код для отзыва</strong> помогает собирать оценки там, где ваши клиенты реально ищут адреса. QrStars объединяет 2GIS с [Яндекс Картами](/qr-kod-dlya-yandeks-kart.html) в одном сканировании."
 fullTitle: true
-ctaText: "Создать QR для 2GIS"
-ctaHref: "/smart-reviews.html"
+ctaText: "Создать кабинет FREE"
+ctaHref: "https://app.qrstars.ru/register?utm_source=qrstars&utm_medium=seo&utm_campaign=reviews_landing&utm_content=2gis"
+ctaSecondaryText: "Как это работает"
+ctaSecondaryHref: "/smart-reviews.html"
 faq:
   - q: "Как сделать QR-код для отзывов 2GIS?"
     a: "Найдите карточку в 2GIS, скопируйте ссылку, добавьте в шаблон «Отзывы» QrStars вместе с другими площадками."
@@ -48,4 +50,4 @@ related:
 
 См. также [общий гайд по отзывам](/qr-kod-dlya-otzyvov.html).
 
-[Создайте QR для 2GIS](/smart-reviews.html) — рейтинг на картах под контролем.
+[Создайте QR для 2GIS](https://app.qrstars.ru/register?utm_source=qrstars&utm_medium=seo&utm_campaign=reviews_landing&utm_content=2gis) — рейтинг на картах под контролем.

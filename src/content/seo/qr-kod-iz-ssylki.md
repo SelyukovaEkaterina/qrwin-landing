@@ -6,7 +6,9 @@ badge: "🔗 По URL"
 intro: "Нужен <strong>qr код из ссылки</strong>? Вставьте URL — получите готовый куаркод для печати, соцсетей и рекламы. <strong>Qr код для ссылки</strong> с логотипом и динамическим редиректом."
 fullTitle: true
 ctaText: "Создать QR из ссылки"
-ctaHref: "/#features"
+ctaHref: "/free-qr-generator.html"
+ctaSecondaryText: "Динамический QR в кабинете"
+ctaSecondaryHref: "https://app.qrstars.ru/register?utm_source=qrstars&utm_medium=seo&utm_campaign=generator&utm_content=qr-kod-iz-ssylki"
 faq:
   - q: "Как создать QR-код для ссылки?"
     a: "Скопируйте URL, вставьте в конструктор QrStars, настройте дизайн и скачайте PNG."

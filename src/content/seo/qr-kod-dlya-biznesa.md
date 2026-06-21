@@ -19,6 +19,11 @@ faq:
   - q: "Сколько стоит для бизнеса?"
     a: "Базовые коды бесплатно; Pro — меню, аналитика, умные отзывы."
 related:
+  - { href: "/otraslevye-resheniya.html", label: "Отраслевые решения" }
+  - { slug: "qr-kod-dlya-restorana", label: "QR для ресторана" }
+  - { slug: "qr-kod-dlya-salona-krasoty", label: "QR для салона красоты" }
+  - { slug: "qr-kod-dlya-stomatologii", label: "QR для стоматологии" }
+  - { slug: "qr-kod-dlya-avtoservisa", label: "QR для автосервиса" }
   - { slug: "qr-kod-dlya-otzyvov", label: "QR для отзывов" }
   - { slug: "dinamicheskiy-qr-kod", label: "Динамический QR" }
   - { slug: "qr-menu", label: "QR-меню" }
@@ -39,11 +44,15 @@ related:
 
 ## QR-код для ресторана и кафе
 
-**Qr код для ресторана** и **qr код для меню** — ключевые запросы. Электронное меню экономит полиграфию; [динамический QR](/dinamicheskiy-qr-kod.html) позволяет менять блюда без перепечатки наклеек.
+**Qr код для ресторана** и **qr код для меню** — ключевые запросы. Электронное меню экономит полиграфию; [динамический QR](/dinamicheskiy-qr-kod.html) позволяет менять блюда без перепечатки наклеек. Подробнее — на странице [QR-код для ресторана](/qr-kod-dlya-restorana.html).
 
 ## QR-код для салона и клиники
 
-Запись, [отзывы на ПроДокторов](/qr-kod-dlya-otzyvov.html), портфолио мастера на [визитке](/qr-business-cards.html).
+Запись, [отзывы на ПроДокторов](/qr-kod-dlya-otzyvov.html), портфолио мастера на [визитке](/qr-business-cards.html). Для готовых сценариев смотрите [QR для салона красоты](/qr-kod-dlya-salona-krasoty.html) и [QR для стоматологии](/qr-kod-dlya-stomatologii.html).
+
+## QR-код для автосервиса
+
+Автосервисы используют QR на стойке приёмки, заказ-нарядах, визитках мастеров и рекламных баннерах. Подробный сценарий: [QR-код для автосервиса](/qr-kod-dlya-avtoservisa.html).
 
 ## Почему QrStars для бизнеса
 
