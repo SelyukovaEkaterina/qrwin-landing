@@ -9,6 +9,13 @@ import QrExamples from '../components/seo/QrExamples.astro';
 import DemoQrScan from '../components/DemoQrScan.astro';
 import SeoCta from '../components/seo/SeoCta.astro';
 import RelatedPages from '../components/seo/RelatedPages.astro';
+import StickyRegisterCta from '../components/seo/StickyRegisterCta.astro';
+import {
+  appendAttributionParams,
+  isAppUrl,
+  REVIEWS_LANDING_SLUGS,
+  MENU_LANDING_SLUGS,
+} from '../lib/utm';
 
 export async function getStaticPaths() {
   const seoPages = await getCollection('seo');
@@ -22,6 +29,22 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 const d = entry.data;
 
+const rawCtaHref = d.ctaHref;
+const ctaHref = isAppUrl(rawCtaHref) ? appendAttributionParams(rawCtaHref, Astro.url.searchParams) : rawCtaHref;
+const ctaExternal = isAppUrl(rawCtaHref);
+const ctaGoal = d.ctaGoal ?? (ctaExternal ? 'hero_start' : undefined);
+
+const rawSecondaryHref = d.ctaSecondaryHref;
+const ctaSecondaryHref =
+  rawSecondaryHref && isAppUrl(rawSecondaryHref)
+    ? appendAttributionParams(rawSecondaryHref, Astro.url.searchParams)
+    : rawSecondaryHref;
+const ctaSecondaryExternal = Boolean(rawSecondaryHref && isAppUrl(rawSecondaryHref));
+const ctaSecondaryGoal =
+  d.ctaSecondaryGoal ?? (ctaSecondaryExternal ? 'qr_dynamic_cta' : undefined);
+
+const showStickyCta = d.stickyCta ?? (REVIEWS_LANDING_SLUGS.has(entry.slug) || MENU_LANDING_SLUGS.has(entry.slug));
+
 const pageCanonical = `https://qrstars.ru/${entry.slug}.html`;
 
 const breadcrumbSchema = {
@@ -31,6 +54,29 @@ const breadcrumbSchema = {
     { '@type': 'ListItem', position: 1, name: 'Главная', item: 'https://qrstars.ru/' },
     { '@type': 'ListItem', position: 2, name: d.h1, item: pageCanonical },
   ],
+};
+
+const softwareApplicationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'QrStars',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  url: pageCanonical,
+  description: d.description,
+  inLanguage: 'ru-RU',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'RUB',
+    availability: 'https://schema.org/InStock',
+    url: pageCanonical,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'QrStars',
+    url: 'https://qrstars.ru',
+  },
 };
 
 const defaultSteps = [
@@ -56,14 +102,19 @@ const defaultIndustries = [
   canonical={pageCanonical}
 >
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(softwareApplicationSchema)} />
   <SeoHero
     badge={d.badge}
     h1={d.h1}
     intro={d.intro}
     ctaText={d.ctaText}
-    ctaHref={d.ctaHref}
+    ctaHref={ctaHref}
     ctaSecondaryText={d.ctaSecondaryText}
-    ctaSecondaryHref={d.ctaSecondaryHref}
+    ctaSecondaryHref={ctaSecondaryHref}
+    ctaGoal={ctaGoal}
+    ctaExternal={ctaExternal}
+    ctaSecondaryGoal={ctaSecondaryGoal}
+    ctaSecondaryExternal={ctaSecondaryExternal}
   />
 
   {d.demoScanUrl && (
@@ -88,5 +139,8 @@ const defaultIndustries = [
   {!d.demoScanUrl && <QrExamples />}
   <Faq items={d.faq} />
   {d.related && <RelatedPages links={d.related} />}
-  <SeoCta ctaText={d.ctaText} ctaHref={d.ctaHref} />
+  <SeoCta ctaText={d.ctaText} ctaHref={ctaHref} ctaGoal={ctaGoal} ctaExternal={ctaExternal} />
+  {showStickyCta && ctaExternal && (
+    <StickyRegisterCta href={ctaHref} />
+  )}
 </Layout>

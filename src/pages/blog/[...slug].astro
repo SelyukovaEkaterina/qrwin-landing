@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import SeoCta from '../../components/seo/SeoCta.astro';
+import { appendAttributionParams, isAppUrl } from '../../lib/utm';
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('blog');
@@ -15,6 +16,11 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 const d = entry.data;
 const displayTitle = d.h1 ?? d.title.replace(/\s*\|\s*QrStars\s*$/i, '');
+
+const rawCtaHref = d.ctaHref ?? '/#features';
+const ctaHref = isAppUrl(rawCtaHref) ? appendAttributionParams(rawCtaHref, Astro.url.searchParams) : rawCtaHref;
+const ctaExternal = isAppUrl(rawCtaHref);
+const ctaGoal = ctaExternal ? 'hero_start' : undefined;
 
 const canonicalUrl = `https://qrstars.ru/blog/${entry.slug}.html`;
 
@@ -37,7 +43,7 @@ const articleSchema = {
     name: 'QrStars',
     logo: {
       '@type': 'ImageObject',
-      url: 'https://qrstars.ru/favicon.ico',
+      url: 'https://qrstars.ru/favicon.svg',
     },
   },
   mainEntityOfPage: {
@@ -91,7 +97,9 @@ const breadcrumbSchema = {
   </article>
   <SeoCta
     ctaText={d.ctaText ?? 'Создать QR-код бесплатно'}
-    ctaHref={d.ctaHref ?? '/#features'}
+    ctaHref={ctaHref}
+    ctaGoal={ctaGoal}
+    ctaExternal={ctaExternal}
     title="Готовы попробовать?"
     text="Создайте QR-код в QrStars за 30 секунд — динамический, с логотипом и аналитикой."
   />

@@ -6,7 +6,7 @@ tags: ["qr-код", "меню", "ресторан", "кафе", "horeca"]
 h1: "QR-код для меню: цифровое меню для ресторана и кафе"
 fullTitle: true
 ctaText: "Создать QR-код для меню"
-ctaHref: "/qr-menu.html"
+ctaHref: "https://app.qrstars.ru/register?utm_source=qrstars&utm_medium=seo&utm_campaign=menu_search&utm_content=blog-menu"
 image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=2000&auto=format&fit=crop"
 ---
 
